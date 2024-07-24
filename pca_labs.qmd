@@ -1,7 +1,7 @@
 ---
-title: exemple cours
+title: Principal Component Analysis -- Labs
 author: Marie-Pierre Etienne
-date: '2023/03/01 (updated: `r Sys.Date()`)'
+date: '2024/07/24 (updated: `r Sys.Date()`)'
 institute: https://github.com/marieetienne
 csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
 output:
@@ -16,10 +16,10 @@ output:
       beforeInit: '../courses_tools/resources/collapseoutput.js'
     includes:
       after_body: '../courses_tools/resources/insert-logo.html'
-fontsize: 10pt
+fontsize: 11pt
 params:
   child_path: ''
-  setup_path: ../courses_tools/resources/
+  setup_path: courses_tools/resources/
 ---
 
 
@@ -44,11 +44,12 @@ BibOptions(check.entries = FALSE,
            style = "markdown",
            hyperlink = FALSE,
            dashed = FALSE)
-# myBib <- ReadBib("./lm.bib", check = FALSE)
+myBib <- ReadBib("./topics.bib", check = FALSE)
 ```
 
 name: intro
-# Introduction - test
+# Introduction
+
 
 ---
 

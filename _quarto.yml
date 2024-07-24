@@ -1,0 +1,46 @@
+project:
+  type: website
+
+website:
+  title: "The Topics In Statistics Companion website !"
+  navbar:
+    left:
+      - icon: github
+        href: https://github.com/MarieEtienne/TopicsInStatistics.git
+        aria-label: GitHub
+      - text: "References"
+        href: references.qmd
+
+        
+    right:
+      - text: Lecture Notes
+        menu:
+        - text: Basic Linear Algebra for Data Science
+          href: linearalgebra4DS.qmd
+        - text: Principal Component Analysis
+          href: pca.qmd
+        - text: Linear Regression
+          href: regression.qmd
+          
+      - text: Labs
+        menu:
+        - text: PCA Labs
+          href: pca_labs.qmd        
+        - text: Regression labs
+          href: regression_labs.qmd
+
+      - text: Lecture Notes
+        menu:
+        - text: Overshoot Day
+          href: data/overshoot.xlsx
+
+format:
+  html:
+    theme: flatly
+    linkcolor: "#c0392b"
+    fontcolor: "#057174"
+    css: styles.css
+    toc: true
+
+
+    

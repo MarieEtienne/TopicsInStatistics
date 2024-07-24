@@ -1,7 +1,7 @@
 ---
-title: exemple cours
+title: Linear Algebra For Data Science
 author: Marie-Pierre Etienne
-date: '2023/03/01 (updated: `r Sys.Date()`)'
+date: '2024/07/24 (updated: `r Sys.Date()`)'
 institute: https://github.com/marieetienne
 csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
 output:
@@ -16,10 +16,10 @@ output:
       beforeInit: '../courses_tools/resources/collapseoutput.js'
     includes:
       after_body: '../courses_tools/resources/insert-logo.html'
-fontsize: 10pt
+fontsize: 11pt
 params:
   child_path: ''
-  setup_path: ../courses_tools/resources/
+  setup_path: courses_tools/resources/
 ---
 
 
@@ -44,11 +44,46 @@ BibOptions(check.entries = FALSE,
            style = "markdown",
            hyperlink = FALSE,
            dashed = FALSE)
-# myBib <- ReadBib("./lm.bib", check = FALSE)
+myBib <- ReadBib("./topics.bib", check = FALSE)
 ```
 
 name: intro
+
 # Introduction - test
+
+Based on `r Citet(myBib, "yoshida2021linear")` 
+
+## What is Linear ALgebra
+
+## Why is Linear Algebra important in Statistics
+
+# Vector and vector space
+
+## Vectors
+
+## Vector operations
+
+## Some exercises
+
+# Linear application
+
+## Linear equation 
+
+## System of linear equations
+
+## Matrix operation
+
+# Linear Algebra and Geometry
+
+## Geometrical point of view
+
+## Dot Product, norm and angles
+
+## Othogonality
+
+## Invariance : Eigen Vector, eigen values
+
+## Change of basis 
 
 ---
 

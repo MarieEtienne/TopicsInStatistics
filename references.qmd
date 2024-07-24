@@ -1,0 +1,45 @@
+---
+title: "References"
+format: html
+toc: true
+date: last-modified
+date-format: "[Last Updated on] MMMM, YYYY"
+---
+
+
+
+
+```{r setup, include=FALSE, eval = TRUE}
+with_sol <- TRUE ## in order to control the output
+with_course <- TRUE
+library('flipbookr')
+library(RefManageR)
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r xaringanExtra-share-again, echo=FALSE}
+xaringanExtra::use_share_again()
+```
+
+```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "alphabetic",
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = FALSE)
+myBib <- ReadBib("./topics.bib", check = FALSE)
+```
+
+# References
+
+
+---
+
+```{r ggplot_back, echo = FALSE, eval = TRUE}
+ggplot <- function(...) ggplot2::ggplot(...) 
+```
+
+
+
