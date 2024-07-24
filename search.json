@@ -1,9 +1,142 @@
 [
   {
+    "objectID": "linearalgebra4DS.html",
+    "href": "linearalgebra4DS.html",
+    "title": "Linear Algebra For Data Science",
+    "section": "",
+    "text": "name: intro"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#what-is-linear-algebra",
+    "href": "linearalgebra4DS.html#what-is-linear-algebra",
+    "title": "Linear Algebra For Data Science",
+    "section": "What is Linear ALgebra",
+    "text": "What is Linear ALgebra"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#why-is-linear-algebra-important-in-statistics",
+    "href": "linearalgebra4DS.html#why-is-linear-algebra-important-in-statistics",
+    "title": "Linear Algebra For Data Science",
+    "section": "Why is Linear Algebra important in Statistics",
+    "text": "Why is Linear Algebra important in Statistics"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#vectors",
+    "href": "linearalgebra4DS.html#vectors",
+    "title": "Linear Algebra For Data Science",
+    "section": "Vectors",
+    "text": "Vectors"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#vector-operations",
+    "href": "linearalgebra4DS.html#vector-operations",
+    "title": "Linear Algebra For Data Science",
+    "section": "Vector operations",
+    "text": "Vector operations"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#some-exercises",
+    "href": "linearalgebra4DS.html#some-exercises",
+    "title": "Linear Algebra For Data Science",
+    "section": "Some exercises",
+    "text": "Some exercises"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#linear-equation",
+    "href": "linearalgebra4DS.html#linear-equation",
+    "title": "Linear Algebra For Data Science",
+    "section": "Linear equation",
+    "text": "Linear equation"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#system-of-linear-equations",
+    "href": "linearalgebra4DS.html#system-of-linear-equations",
+    "title": "Linear Algebra For Data Science",
+    "section": "System of linear equations",
+    "text": "System of linear equations"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#matrix-operation",
+    "href": "linearalgebra4DS.html#matrix-operation",
+    "title": "Linear Algebra For Data Science",
+    "section": "Matrix operation",
+    "text": "Matrix operation"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#geometrical-point-of-view",
+    "href": "linearalgebra4DS.html#geometrical-point-of-view",
+    "title": "Linear Algebra For Data Science",
+    "section": "Geometrical point of view",
+    "text": "Geometrical point of view"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#dot-product-norm-and-angles",
+    "href": "linearalgebra4DS.html#dot-product-norm-and-angles",
+    "title": "Linear Algebra For Data Science",
+    "section": "Dot Product, norm and angles",
+    "text": "Dot Product, norm and angles"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#othogonality",
+    "href": "linearalgebra4DS.html#othogonality",
+    "title": "Linear Algebra For Data Science",
+    "section": "Othogonality",
+    "text": "Othogonality"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#invariance-eigen-vector-eigen-values",
+    "href": "linearalgebra4DS.html#invariance-eigen-vector-eigen-values",
+    "title": "Linear Algebra For Data Science",
+    "section": "Invariance : Eigen Vector, eigen values",
+    "text": "Invariance : Eigen Vector, eigen values"
+  },
+  {
+    "objectID": "linearalgebra4DS.html#change-of-basis",
+    "href": "linearalgebra4DS.html#change-of-basis",
+    "title": "Linear Algebra For Data Science",
+    "section": "Change of basis",
+    "text": "Change of basis"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "References"
+  },
+  {
+    "objectID": "regression_labs.html",
+    "href": "regression_labs.html",
+    "title": "Linear Regression – Labs",
+    "section": "",
+    "text": "name: intro # Introduction"
+  },
+  {
+    "objectID": "regression.html",
+    "href": "regression.html",
+    "title": "Linear Regression",
+    "section": "",
+    "text": "name: intro # Introduction"
+  },
+  {
+    "objectID": "pca.html",
+    "href": "pca.html",
+    "title": "Principal Component Analysis",
+    "section": "",
+    "text": "name: intro # Introduction"
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Topics In Statistics - Smart Data",
     "section": "",
     "text": "This refresher course is intended to help you brush up on essential linear algebra tools and some key statistical concepts?\nCourse Overview\nThis course is specifically tailored for those who are stepping into data science. While this isn’t a math course, it will provide crucial reminders of linear algebra tools indispensable for statistics and their link with two key methods in statistics. We will also have labs to use this method on practical example.\nWhat You Will Learn\n\nLinear Algebra Essentials:\n\nVectors and matrices: Definitions, operations, and properties\nSystems of linear equations\nMatrix decomposition and eigenvalues\n\nPrincipal Component Analysis (PCA):\n\nUnderstanding the concept and purpose of PCA\nSteps involved in performing PCA\nApplications of PCA in data reduction and visualization\n\nLinear Regression:\n\nIntroduction to regression analysis\nBuilding and interpreting multiple regression models\nEvaluating model performance\n\n\nCourse Format\nThis course is conducted in English and combines lectures, practical examples, and hands-on exercises to reinforce learning. Whether you’re a beginner or someone looking to refresh these topics, the structured approach and close link made between the linear algebra concept and their use in statistics will help you grasp and apply these concepts effectively.\nHow to use this website\nYou can find the lecture notes on the top menu on the right, as well as the Rmarkdown and/or Jupyter notebook used during the labs.\nPlease, if you have any remarks regarding the material on this website (typos, lack of clarity or anything else) please contact me.\nEnjoy!"
+  },
+  {
+    "objectID": "pca_labs.html",
+    "href": "pca_labs.html",
+    "title": "Principal Component Analysis – Labs",
+    "section": "",
+    "text": "name: intro # Introduction"
   }
 ]
