@@ -1,0 +1,118 @@
+---
+title: Topics
+author: Marie-Pierre Etienne
+date: '2024/07/24 (updated: `r Sys.Date()`)'
+institute: https://github.com/marieetienne
+execute: 
+  freeze: auto
+---
+
+
+
+```{r setup, include=FALSE, eval = TRUE}
+with_sol <- TRUE ## in order to control the output
+with_course <- TRUE
+library('flipbookr')
+library(RefManageR)
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r xaringanExtra-share-again, echo=FALSE}
+xaringanExtra::use_share_again()
+```
+
+```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
+BibOptions(check.entries = FALSE,
+           bib.style = "authoryear",
+           cite.style = "alphabetic",
+           style = "markdown",
+           hyperlink = FALSE,
+           dashed = FALSE)
+myBib <- ReadBib("./topics.bib", check = FALSE)
+```
+
+
+# Introduction 
+
+## Linear ALgebra : What and why
+
+::: {.callout-note icon=false}
+### Definition
+
+Linear algebra is the branch of mathematics concerning linear equations such as $a_1 x_1 + \cdots  a_n x_n = b,$ 
+and linear maps such as $(x_{1},\ldots ,x_{n})\mapsto a_{1}x_{1}+\cdots +a_{n}x_{n},$
+and their representations in vector spaces and through matrices.
+:::
+
+### Link between Data science and Linear Algebra
+Data are organized in rectangular array, understood as matrices, and the mathematical concept associated with matrices are used to manipulate data.
+
+
+### Palmer penguins example
+
+```{r}
+## install.packages('palmerpenguins")
+library("palmerpenguins")
+## remove_na for now
+penguins_nona <- na.omit(penguins)
+dim(penguins_nona)
+penguins_nona[1:3,]
+```
+
+One row describes one specific penguin, while each column corresponds to one specific attribute of the penguin. Focusing on quantitative variables, we get rectangular array with `r nrow(penguins_nona)` rows, and `r sum(sapply(penguins_nona[1,], is.numeric))` columns.
+
+```{r}
+#| echo: true
+penguins_nona[,sapply(penguins_nona[1,], is.numeric)]
+```
+
+Therefore, this dataset might be considered as a matrix and the linear algebra mathematical tools will be proven useful to handle dataset.
+
+
+# Linear algebra - basic objects
+
+# Vector and vector space
+
+
+
+Based on `r Citet(myBib, "yoshida2021linear")` 
+
+## What is Linear ALgebra
+
+
+
+## Vectors
+
+## Vector operations
+
+## Some exercises
+
+# Linear application
+
+## Linear equation 
+
+## System of linear equations
+
+## Matrix operation
+
+# Linear Algebra and Geometry
+
+## Geometrical point of view
+
+## Dot Product, norm and angles
+
+## Othogonality
+
+## Invariance : Eigen Vector, eigen values
+
+## Change of basis 
+
+---
+
+```{r ggplot_back, echo = FALSE, eval = TRUE}
+ggplot <- function(...) ggplot2::ggplot(...) 
+```
+
+
+

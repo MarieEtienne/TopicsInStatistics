@@ -4,6 +4,8 @@ format: html
 toc: true
 date: last-modified
 date-format: "[Last Updated on] MMMM, YYYY"
+execute: 
+  freeze: auto
 ---
 
 

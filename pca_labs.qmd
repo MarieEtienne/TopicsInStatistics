@@ -20,6 +20,8 @@ fontsize: 11pt
 params:
   child_path: ''
   setup_path: courses_tools/resources/
+execute: 
+  freeze: auto
 ---
 
 

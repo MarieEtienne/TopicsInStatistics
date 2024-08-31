@@ -1,5 +1,7 @@
 project:
   type: website
+  
+  
 
 website:
   title: "The Topics In Statistics Companion website !"

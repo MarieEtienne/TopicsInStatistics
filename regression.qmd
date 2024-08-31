@@ -19,6 +19,8 @@ output:
 fontsize: 11pt
 params:
   child_path: ''
+execute: 
+  freeze: auto
 ---
 
 

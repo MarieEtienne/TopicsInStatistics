@@ -1,10 +1,12 @@
 ---
 title: "Topics In Statistics - Smart Data"
-subtitle: "A good start with some mathematics and stats refreshers"
+subtitle: "A good start with some mathematics and statitics refreshers"
 format: html
 toc: true
 date: last-modified
 date-format: "[Last Updated on] MMMM, YYYY"
+execute: 
+  freeze: auto
 ---
 
 ```{r setup, include=FALSE}
@@ -12,12 +14,12 @@ knitr::opts_chunk$set(echo = FALSE, cache = TRUE)
 library(tidyverse)
 ```
 
-This refresher course is intended to help you brush up on essential linear algebra tools and some key statistical concepts?
+This refresher course is intended to help you brush up on essential linear algebra tools and some key statistical concepts.
 
 
 **Course Overview**
 
-This course is specifically tailored for those who are stepping into data science. While this isn't a math course, it will provide crucial reminders of linear algebra tools indispensable for statistics and their link with two key methods in statistics. We will also have labs to use this method on practical example.
+This course is specifically tailored for those who are stepping into data science, it is intended to present or refresh two key tools in Data Science : Principal Component Analysis (PCA) and Regression analysis. These two mathematical conepts in Data science are built on basic Linear algebra ideas. While not designed as a math course, this course will provide crucial reminders of linear algebra indispensable for statistics and how they are used in PCA and Regression.  We will also have labs to use this method on practical example.
 
 
 **What You Will Learn**
