@@ -27,7 +27,6 @@ params:
 ```{r setup, include=FALSE, eval = TRUE}
 with_sol <- TRUE ## in order to control the output
 with_course <- TRUE
-library('flipbookr')
 library(RefManageR)
 library(tidyverse)
 library(ggplot2)

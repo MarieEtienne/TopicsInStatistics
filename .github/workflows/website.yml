@@ -15,7 +15,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Install R packages
         run: |
-          Rscript -e "install.packages(c('FactoMineR'))"
+          Rscript -e "install.packages(c('FactoMineR', 'RefManageR', 'wesanderson', 'palmerpenguins', 'plotly'))"
+          Rscript -e "install.packages(c('reticulate', 'ggpubr', 'GGally', 'xaringanExtra', 'flipbookr'))"
+      - name: Additional Python packages
+        run: |
+          pip install numpy scipy 
       - name: Generate slides
         run: "quarto render"
       - name: GitHub Pages action

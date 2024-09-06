@@ -1,8 +1,8 @@
 ---
-title: Linear Algebra For Data Science
+title: Linear Algebra Survival Kit For Data Science
 author: Marie-Pierre Etienne
 date: '2024/07/24 (updated: `r Sys.Date()`)'
-institute: https://github.com/marieetienne
+institute: https://marieetienne.github.io/TopicsInStatistics/
 csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
 output:
   xaringan::moon_reader:
@@ -27,7 +27,6 @@ params:
 ```{r setup, include=FALSE, eval = TRUE}
 with_sol <- TRUE ## in order to control the output
 with_course <- TRUE
-library('flipbookr')
 library(RefManageR)
 library(tidyverse)
 library(ggplot2)
@@ -48,9 +47,28 @@ myBib <- ReadBib("./topics.bib", check = FALSE)
 ```
 
 name: intro
-# Introduction - test
+# Introduction 
 
 ## What is Linear ALgebra
+
+::: {.callout-note icon=false}
+### Definition
+
+Linear algebra is the branch of mathematics concerning linear equations such as:
+    $$a_1 x_1 + \cdots  a_n x_n = b,$$
+
+and linear maps such as:
+$$(x_{1},\ldots ,x_{n})\mapsto a_{1}x_{1}+\cdots +a_{n}x_{n},$$
+
+and their representations in vector spaces and through matrices.
+:::
+
+
+
+Linear algebra is central to almost all areas of mathematics. For instance, linear algebra is fundamental in modern presentations of geometry, including for defining basic objects such as lines, planes and rotations. Also, functional analysis, a branch of mathematical analysis, may be viewed as the application of linear algebra to function spaces.
+
+Linear algebra is also used in most sciences and fields of engineering, because it allows modeling many natural phenomena, and computing efficiently with such models. For nonlinear systems, which cannot be modeled with linear algebra, it is often used for dealing with first-order approximations, using the fact that the differential of a multivariate function at a point is the linear map that best approximates the function near that point. 
+
 
 ## Why is Linear Algebra important in Statistics
 

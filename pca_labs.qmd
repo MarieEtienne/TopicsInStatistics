@@ -2,7 +2,7 @@
 title: Principal Component Analysis -- Labs
 author: Marie-Pierre Etienne
 date: '2024/07/24 (updated: `r Sys.Date()`)'
-institute: https://github.com/marieetienne
+institute: https://marieetienne.github.io/TopicsInStatistics/
 csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
 output:
   xaringan::moon_reader:
@@ -29,7 +29,6 @@ execute:
 ```{r setup, include=FALSE, eval = TRUE}
 with_sol <- TRUE ## in order to control the output
 with_course <- TRUE
-library('flipbookr')
 library(RefManageR)
 library(tidyverse)
 library(ggplot2)
@@ -49,8 +48,6 @@ BibOptions(check.entries = FALSE,
 myBib <- ReadBib("./topics.bib", check = FALSE)
 ```
 
-name: intro
-# Introduction
 
 
 ---

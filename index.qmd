@@ -4,7 +4,7 @@ subtitle: "A good start with some mathematics and statitics refreshers"
 format: html
 toc: true
 date: last-modified
-date-format: "[Last Updated on] MMMM, YYYY"
+date-format: "[Last Updated on] September, 2024"
 execute: 
   freeze: auto
 ---
@@ -24,7 +24,7 @@ This course is specifically tailored for those who are stepping into data scienc
 
 **What You Will Learn**
 
-1. **Linear Algebra Essentials**:
+1. **Linear Surival Kit**:
    - Vectors and matrices: Definitions, operations, and properties
    - Systems of linear equations
    - Matrix decomposition and eigenvalues
@@ -47,7 +47,7 @@ This course is conducted in English and combines lectures, practical examples, a
 
 **How to use this website**
 
-You can find the lecture notes on the top menu on the right, as well as the Rmarkdown and/or Jupyter notebook used during the labs.
+You can find the lecture notes on the top menu on the right, as well as the Rmarkdown and/or Jupyter notebook used during the labs. The website will be updated during the course.
 
 
 Please, if you have any remarks regarding the material on this website (typos, lack of clarity or anything else) please contact me.

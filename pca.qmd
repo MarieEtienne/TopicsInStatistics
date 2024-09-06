@@ -2,7 +2,7 @@
 title: Principal Component Analysis
 author: Marie-Pierre Etienne
 date: '2024/07/24 (updated: `r Sys.Date()`)'
-institute: https://github.com/marieetienne
+institute: https://marieetienne.github.io/TopicsInStatistics/
 execute: 
   freeze: false
 editor: 
@@ -22,7 +22,6 @@ format:
 
 
 ```{r setup, include=FALSE, eval = TRUE}
-library('flipbookr')
 library(RefManageR)
 library(tidyverse) ## to benefit from the tydiverse coding system
 library(reticulate) ## to use python from R
@@ -439,8 +438,10 @@ I & = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
 
 * $X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD
 
-$$X^\intercal  X = P D P^\intercal.$$
-* $I= tr(X^\intercal X) = tr(P D P^\intercal) = tr(P^\intercal P D ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
+$$X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q^\intercal D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
+
+
+* $I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(P^\intercal P D ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
 where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
 
@@ -450,8 +451,30 @@ where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
 ## Identifying $U_1$
 
-let $I_{\Delta_{U^\intercal}}$ the inertia of the set of data point projected on the line containing $G$ with direction $U$ ($U$ being an unitary vector) 
+Consider $I_{\Delta_{U}}$  the inertia with respect to $\Delta_{U}$ affine subspace containing $G$ with directed bu the unitary vector $U$. 
 
-$x_i \dot U = x_i^\intercal \dot U$
+$I_{\Delta_{U}}$ is the cost of the projection on $\Delta_{U}$, i.e the loss information. 
+
+**Minimizing $I_{\Delta_{U}}$** equals **maximizing $I_{\Delta_{U^T}}$**, i.e the dispersion of the projected set of data points. 
+
+### Projection on U
+
+$d(X_{i,}, U^\intercal)^2= \left ( x_i \dot U^\intercal \right )^2 = \left ( X_i^\intercal U \right )^2 = cos(\theta)^2 \norm{x_i}^2 ,$
+
+So that 
+\begin{align}
+I_{\Delta_{U^\intercal}} & = \sum_{i=1}^n  d(X_{i,}, U^\intercal)^2 \cr
+                         & = \norm{X U} \cr
+                         & = U^\intercal X^\intercal X  U\cr
+                         & = U^\intercal Q D^2  Q^\intercal   U\cr
+\end{align}
+
+But   $U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})$  Is the coordinate of the unitary vector $U$ on the basis defined by the eigen vector of $X$: $\omega_1 q_1 +  = \omega_d q_d,$ such that $\sum_k \omega_k^2=1$
+
+
+
+$I_{\Delta_{U^\intercal}} = \sum_{k=1}^d \omega_k \sigma^2_k.$
+
+Maximizing $I_{\Delta_{U^\intercal}}$, as $\sigma^2_k$ are in decreasing order, consists in choosing $\omega_1=1$ 
 
 

@@ -21,17 +21,17 @@ website:
           href: linearalgebra4DS.qmd
         - text: Principal Component Analysis
           href: pca.qmd
-        - text: Linear Regression
-          href: regression.qmd
-          
+      #   - text: Linear Regression
+      #     href: regression.qmd
+      #     
       - text: Labs
         menu:
         - text: PCA Labs
-          href: pca_labs.qmd        
-        - text: Regression labs
-          href: regression_labs.qmd
+      #     href: pca_labs.qmd        
+      #   - text: Regression labs
+      #     href: regression_labs.qmd
 
-      - text: Lecture Notes
+      - text: Dataset
         menu:
         - text: Overshoot Day
           href: data/overshoot.xlsx
