@@ -1,10 +1,23 @@
 ---
-title: Topics
+title: Topics in Statistics - Presentation
 author: Marie-Pierre Etienne
 date: '2024/07/24 (updated: `r Sys.Date()`)'
 institute: https://github.com/marieetienne
 execute: 
-  freeze: auto
+  freeze: false
+editor: 
+  markdown: 
+    wrap: 72
+css: mpe_pres_revealjs.css
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    width: 1050
+    margin: 0.05
+    slide-number: true
+    show-slide-number: print
+    menu:
+      useTextContentForMissingTitles: false
 ---
 
 
@@ -33,82 +46,40 @@ myBib <- ReadBib("./topics.bib", check = FALSE)
 ```
 
 
-# Introduction 
 
-## Linear ALgebra : What and why
+## Courses Objective
 
-::: {.callout-note icon=false}
-### Definition
+* Reactivate Basic Linear algebra useful in  data Science
 
-Linear algebra is the branch of mathematics concerning linear equations such as $a_1 x_1 + \cdots  a_n x_n = b,$ 
-and linear maps such as $(x_{1},\ldots ,x_{n})\mapsto a_{1}x_{1}+\cdots +a_{n}x_{n},$
-and their representations in vector spaces and through matrices.
-:::
+* Provide basic Data Science tools for representing and analyzing gentle multivariate quantitative Dataset
 
-### Link between Data science and Linear Algebra
-Data are organized in rectangular array, understood as matrices, and the mathematical concept associated with matrices are used to manipulate data.
+* Implementing simple R and Python Data analysis
 
 
-### Palmer penguins example
+## Organization
 
-```{r}
-## install.packages('palmerpenguins")
-library("palmerpenguins")
-## remove_na for now
-penguins_nona <- na.omit(penguins)
-dim(penguins_nona)
-penguins_nona[1:3,]
-```
+* Lecture 1: Linear algebra Survival Kit
+* Lecture 2: Principal Component Analysis
+* Lecture 3: Regression
 
-One row describes one specific penguin, while each column corresponds to one specific attribute of the penguin. Focusing on quantitative variables, we get rectangular array with `r nrow(penguins_nona)` rows, and `r sum(sapply(penguins_nona[1,], is.numeric))` columns.
-
-```{r}
-#| echo: true
-penguins_nona[,sapply(penguins_nona[1,], is.numeric)]
-```
-
-Therefore, this dataset might be considered as a matrix and the linear algebra mathematical tools will be proven useful to handle dataset.
+* Lab1: Principal Component analysis with R
+* Lab2: Regression with Python 
 
 
-# Linear algebra - basic objects
+## Planning
 
-# Vector and vector space
-
-
-
-Based on `r Citet(myBib, "yoshida2021linear")` 
-
-## What is Linear ALgebra
+* Friday, September 6 - Lecture 1 and 2
+* Monday, September 9 - Lecture 2 and lab 1
+* Thursday, September 12 - Lecture 3  
+* Friday, September 6 - Lab 2
 
 
+## Material 
 
-## Vectors
 
-## Vector operations
+* Lecture and lab material are available on [the course website ](https://marieetienne.github.io/TopicsInStatistics/)
 
-## Some exercises
-
-# Linear application
-
-## Linear equation 
-
-## System of linear equations
-
-## Matrix operation
-
-# Linear Algebra and Geometry
-
-## Geometrical point of view
-
-## Dot Product, norm and angles
-
-## Othogonality
-
-## Invariance : Eigen Vector, eigen values
-
-## Change of basis 
-
----
+* The corresponding Github repository is available from the website by clicking on the Github icon ![](img/github.png){width="6%"}
 
 ```{r ggplot_back, echo = FALSE, eval = TRUE}
 ggplot <- function(...) ggplot2::ggplot(...) 

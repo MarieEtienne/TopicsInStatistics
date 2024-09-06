@@ -3,40 +3,31 @@ title: Principal Component Analysis
 author: Marie-Pierre Etienne
 date: '2024/07/24 (updated: `r Sys.Date()`)'
 institute: https://github.com/marieetienne
-csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
-output:
-  xaringan::moon_reader:
-    css: [  'metropolis',  'mpe_pres.css']
-    lib_dir: libs
-    nature:
-      ratio: 16:10
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      beforeInit: '../courses_tools/resources/collapseoutput.js'
-    includes:
-      after_body: '../courses_tools/resources/insert-logo.html'
-fontsize: 11pt
-params:
-  child_path: ''
 execute: 
-  freeze: auto
-
+  freeze: false
+editor: 
+  markdown: 
+    wrap: 72
+css: mpe_pres_revealjs.css
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    width: 1050
+    margin: 0.05
+    slide-number: true
+    show-slide-number: print
+    menu:
+      useTextContentForMissingTitles: false
 ---
 
 
-
 ```{r setup, include=FALSE, eval = TRUE}
-with_sol <- TRUE ## in order to control the output
-with_course <- TRUE
 library('flipbookr')
 library(RefManageR)
-library(tidyverse)
-library(ggplot2)
-```
-
-```{r xaringanExtra-share-again, echo=FALSE}
-xaringanExtra::use_share_again()
+library(tidyverse) ## to benefit from the tydiverse coding system
+library(reticulate) ## to use python from R
+library(wesanderson)
+library(plotly)
 ```
 
 ```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
@@ -47,17 +38,420 @@ BibOptions(check.entries = FALSE,
            hyperlink = FALSE,
            dashed = FALSE)
 myBib <- ReadBib("./topics.bib", check = FALSE)
+theme_set(theme_minimal())
+options(ggplot2.discrete.colour=   scale_color_manual(values = wesanderson::wes_palette(name = "Darjeeling1")) )
+couleur <-  wesanderson::wes_palette(name = "Darjeeling1")
 ```
 
-name: intro
+
+::: hidden
+$$
+\newcommand\R{{\mathbb{R}}}
+\newcommand\norm[1]{\lVert#1\rVert}
+$$
+\definecolor{wongBlue}{RGB}{0, 114, 178}
+
+:::
+
+
+```{r datapackage, eval = TRUE, echo = FALSE, warning = FALSE}
+library(plotly)
+ggplot <- function(...) ggplot2::ggplot(...) + scale_fill_manual(values = wesanderson::wes_palette(name = "Darjeeling1")) + scale_color_manual(values = wesanderson::wes_palette(name = "Darjeeling1")) +  scale_fill_manual(values = wesanderson::wes_palette(name = "Darjeeling1")) + theme_minimal()
+#remotes::install_github('MarieEtienne/coursesdata', force = TRUE)
+doubs.env <- read.csv ('https://raw.githubusercontent.com/zdealveindy/anadat-r/master/data/DoubsEnv.csv', row.names = 1) %>% as_tibble()
+
+data(penguins, package = 'palmerpenguins')
+penguins <- penguins %>% na.omit()
+
+```
 # Introduction
 
 
----
 
-```{r ggplot_back, echo = FALSE, eval = TRUE}
-ggplot <- function(...) ggplot2::ggplot(...) 
+## The Example of Doubs River Characteristics
+
+We measured the physico-chemical characteristics at 30 different sites along the [Doubs River](https://en.wikipedia.org/wiki/Doubs_(river)) .
+
+:::: {.columns}
+
+::: {.column width="53%" }
+
+The first 4 rows (out of 30) of the `doubs.env` dataset
+```{r extrait_doubs, echo = FALSE, eval = TRUE}
+doubs.env %>% print(n=4)
 ```
 
+[How can we best visualize these data to reveal the relationships between variables and identify similarities between sites?]{.question} 
+
+:::
+
+::: {.column width="45%" .smaller}
+
+* das: distance to the source ($km$),
+* alt: altitude ($m$),
+* pen: slope (elevation change per 1000m),
+* deb: flow rate ($m^3.s^{-1}$),
+* pH: water pH,
+* dur: calcium concentration ($mg.L^{-1}$),
+* pho: phosphate concentration ($mg.L^{-1}$),
+* nit: nitrate concentration ($mg.L^{-1}$),
+* amn: ammonium concentration ($mg.L^{-1}$),
+* oxy: dissolved oxygen concentration ($mg.L^{-1}$),
+* dbo: Biological Oxygen Demand ($mg.L^{-1}$).
+
+:::
+
+::::
+
+
+
+
+## The Example of Penguin Morphology
+
+We measured the morphological characteristics of various penguins:
+
+:::: {.columns}
+
+::: {.column width="53%" }
+
+The first 6 rows (out of 333) of the `penguins` dataset
+
+
+```{r extrait_penguins}
+#| echo: false
+#| eval: true
+ penguins %>% 
+ select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g) %>%  print(n=6)
+```
+
+[How can we best visualize these data to reveal the relationships between variables and identify similarities between individuals?]{.question}
+
+:::
+
+::: {.column width="45%" }
+
+* bill_length_mm: bill length,
+* bill_depth_mm: bill depth,
+* flipper_length_mm: flipper length,
+* body_mass_g: body mass.
+
+:::
+
+::::
+
+#  Introduction
+
+
+## Formalization
+
+* For each individual $i$, we measured $p$ different variables.
+* For each variable $k$,  we measured $n$ individuals.
+
+
+The data are arranged in a table with $n$ rows and $p$ columns.
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+
+```{r tab_pres, eval =TRUE, out.width = "80%"}
+knitr::include_graphics('img/acp_data_pres.png')
+```
+
+:::
+
+::: {.column width="45%"}
+We denote $x_{ik}$ as the value measured for variable $k$ on individual $i$,
+
+and
+
+* $x_{\bullet k} = \frac{1}{n} \sum_{i=1}^n x_{ik}$ as the mean value of variable $k$,
+* $s_k  = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_{ik}-x_{\bullet k})^2}$ as the standard deviation of variable $k$.
+
+:::
+
+::::
+
+## The Same Question in Various Fields
+
+* Sensory analysis: score of descriptor $k$ for product $i$
+* Economics: value of indicator $k$ for year $i$
+* Genomics: gene expression $k$ for patient/sample $i$
+* Marketing: satisfaction index $k$ for brand $i$
+  
+etc...
+
+We have $p$ variables measured on $n$ individuals, and we want to visualize these data to understand the relationships between variables and the proximity between individuals.
+
+
+
+## Seeing is Understanding: How to Represent the Information Contained in This Table?
+
+
+### Idea 1: Represent the relationships between variables 2 by 2
+
+```{r ggpairs, eval = TRUE, echo = FALSE, fig.show='asis', out.height = "80%", out.width = "80%"}
+penguins %>% select(bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g) %>% GGally::ggpairs()
+```
+
+
+## Seeing is Understanding: How to Represent the Information Contained in This Table?
+
+### Idea 1: Represent the relationships between variables 2 by 2
+
+```{r gg_prog, eval = TRUE, echo = FALSE, fig.show='asis', out.height = "80%", out.width = "80%"}
+penguins  %>% ggplot() + aes(x= body_mass_g, y = flipper_length_mm)  + geom_point() + xlab("Body Mass") + ylab("Flipper Length")
+```
+
+
+
+We lose information on the other axes.
+
+
+
+## Seeing is Understanding: How to Represent the Information Contained in This Table?
+
+### Idea 1: Represent the relationships between variables 2 by 2
+
+
+```{r gen_data,eval = TRUE, out.width = "100%"}
+scene = list(camera = list(eye = list(x = -2, y = 0, z = 0)),
+             center = list(x= mean(penguins$bill_depth_mm, y = mean(penguins$body_mass_g), z = mean(penguins$flipper_length_mm) )))
+fig <- plot_ly(penguins, x = ~ bill_depth_mm, y = ~ -body_mass_g, z = ~flipper_length_mm, width = 500, height = 500) %>% 
+  add_markers(size = 12)  %>% 
+  layout(title = "3D Scatter plot", scene = scene)
+fig
+```
+
+
+## Seeing is Understanding: How to Represent the Information Contained in This Table?
+
+[Objective:]{.rouge}
+
+* Represent without losing too much information
+* Ideally, individuals far apart in the initial cloud remain far apart in the representation.
+
+
+
+[What We Need:]{.rouge}
+
+* Quantify the information loss in the representation
+* Build the representation that loses the least amount of information
+
+
+
+[Precautions:]{.rouge}
+
+* Potentially, Make variables expressed in different units comparable
+
+# Distance and Inertia
+
+## Distance between individuals
+
+Let $X_{i,.}^\intercal \in \R^d$ be the descriptions of individual $i$. To quantify the distance between indivuals we might used the Euclidian distance in $\R^d,$
+
+$$d(i, j)^2 = \sum_{k=1}^d (x_{ik} - x_{jk})^2 = \norm{X_{i,.}^\intercal - X_{i,.}^\intercal}^2 = \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right)^\intercal  \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right). $$
+
+This could be [misleading when dealing with different variables with different scale]{.rouge}. 
+
+### Example in the penguins dataset
+
+Body mass varies form `r min(penguins$body_mass_g)` to `r max(penguins$body_mass_g)`, while flipper length varies from `r min(penguins$flipper_length_mm)` to `r max(penguins$flipper_length_mm)`. 
+
+Variable Body mass will contribute more to the distance between individuals.
+
+## Specify a different metric
+
+
+:::: {.callout-note icon="false"}
+### Definition
+A metric in $\R^d$, $M$ is a definite positive symmetric $\R^{d\times d}$ matrix which can be used to define distance between individuals
+
+
+$$d_M(i, j)^2  = \norm{X_{i,.}^\intercal - X_{i,.}^\intercal}^2_M = \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right)^\intercal  M \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right).$$
+::::
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+* If $M=I_d$, 
+
+$d_M$ is the classical Euclidian distance
+
+* Get rid of the units used for the variables and attribute the same weight to all variables by choosing
+
+
+$M = \begin{pmatrix}
+\frac{1}{s_1^2} & &0 & \cr
+ & \frac{1}{s_2^2}  & & \cr
+ &0 & \ddots & \cr
+&&& \frac{1}{s_d^2} \cr
+\end{pmatrix} = D_{1/s^2}$ 
+
+:::
+
+::: {.column width="45%"}
+
+with $s_k^2=\sum_{i=1}^n (x_{ik} - x_{.k})^2,$ $x_{.k} =\frac{1}{n}\sum_{i=1}^n x_{ik}$
+
+
+:::: {.callout-note icon="false"}
+### Remarks
+
+The distance defined with $D_{1/s^2}$ is the same than the distance defined on centred and scaled variables with the identity matrix.
+::::
+
+In the following, we will assume that $X$ is the matrix of centred and scaled variables.
+
+:::
+
+::::
+
+
+## Dispersion measure: Inertia with respect to a point 
+
+
+:::: {.callout-note icon="false"}
+### Definition
+Inertia (denomination derived from moments of inertia in Physics) *with respect to a point $a \in R^{d},$* according to metric $M$:
+$$I_a = \sum_{i=1}^n \norm{X_{i,.}^\intercal - a}_M^2$$
+
+::::
+
+* Inertia around the centroïd $G$ (center of gravity of the cloud) plays a central role in Principal Component Analysis:
+
+$G = (x_{.,1}, \cdots, x_{.,d})^\intercal$ and $I_G = min_{a\in \R^d} I_a$
+
+
+###  Remarks
+Assume, we deal with centred sacled variables:
+
+$I_G = \sum_{i=1}^n \norm{X_{i,.}^\intercal - G}^2 = \sum_{i=1}^n \class{rouge}{\sum_{k=1}^d} (x_{ik} - x_{.,k})^2 = \class{rouge}{\sum_{k=1}^d} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2.$
+
+As the variables are scaled, $\sum_{i=1}^n  (x_{ik} - x_{.,k})^2 = n s^2_k = n.$ and $I_G=nd.$
+
+
+[Total inertia with scaled centred variables is $nd$]{.rouge}
+
+
+
+
+## Dispersion measure: Inertia with respect to a affine subspace 
+
+:::: {.callout-note icon="false"}
+### Definition
+Inertia *with respect to an affine subspace $S$* according to metric $M$: $I_S = \sum_{i=1}^n d_M(X_{i,.}, S)^2$
+
+::::
+
+
+Huygens theorem states that if $S^G$ stands for  the affine subspace containing $G$ and parallel to $S$ then
+$$I_S = I_{S^G} + d_M^2(a, G),$$
+where $a$ is the orthogonal projection of $G$ on $S$.
+
+[The affine subspace $S$ which minimizes inertia is $S^G$.]{.rouge}
+
+
+
+
+
+## Inertia Decomposition
+
+Since, variables are centred $G=\mathbb{0}$,  $I=\sum_{i=1}^n d(X_{i,.},0)^2.$
+
+Let $S$ be an affine subspace and $U=S^\intercal,$ $X^S_{i,.}$  (recip. $X^S_{i,.})$) the orthogonal projection on $S$ (recip. on $U$).
+
+As $d(X_{i,.},0)^2 = d(X^S_{i,.},0)^2 + d(X^U_{i,.},0)^2$, $I=I_S + I_{S^\intercal}$
+
+:::: {.columns}
+
+::: {.column width="55%" }
+
+```{r}
+
+df <- data.frame(x=2, y= 2)
+f <- data.frame(x=1,y=2)
+proj <- as.matrix(df) %*% t(as.matrix(f)) / as.matrix(f) %*% t(as.matrix(f)) |> as.numeric()
+df_proj <- proj*f
+df_projorth <- df - df_proj
+
+
+ggplot() +
+  geom_point(data = df, aes(x=x, y=y), col = couleur[1]) +
+  geom_abline(intercept  = 0,  slope = 2) +
+  geom_abline(intercept  = 0,  slope = -0.5, col = couleur[2]) +
+  xlim(c(-2, 3)) +
+  ylim(c(-2, 4)) +
+  geom_point(data = df_proj, aes(x=x, y=y), col = couleur[1], size= 2) +
+  coord_fixed() +
+  geom_segment(aes(x=df$x[1], xend = df_proj$x[1], y=df$y[1], yend = df_proj$y[1] ), col = couleur[1], linetype = 2) +
+  geom_segment(aes(x=df$x[1], xend = 0, y=df$y[1], yend = 0 ), col = couleur[1], linetype = 2) +
+  geom_segment(aes(x=df$x[1], xend = df_projorth$x[1], y=df$y[1], yend = df_projorth$y[1] ), col = couleur[2], linetype = 2) +
+  annotate( "text", label = expression(X[1,.]), x=2, y=1.7, col = couleur[1], size = 8) +
+  annotate( "text", label = "G", x=-0.4, y=-0.3, col = couleur[1], size = 8)  +
+  annotate( "text", label = "S", x=2.5, y=3.9, size = 8)  +
+  annotate( "text", label = "U", x=2.5, y=-1, size = 8)  
+  
+```
+:::
+
+
+::: {.column width="40%" }
+
+### Interpretation
+
+$I_S$ is the dispersion of the dataset **lost by projection on $S$**, 
+
+while $I_{S^\intercal}$ is the **dispersion of the dataset projected on $S$**.
+
+
+
+### PCA  
+
+Identifying $(U_1, U_d)$ a sequence of orthogonal unitary vectors such that $I_{U_1}\leq I_{U_2}\leq \cdots \leq I_{U_d}$.
+
+The projection on $U_1$ is the best projection of the dataset in one dimension, $U_1$ define the first Principal Component.
+
+
+:::
+
+::::
+
+
+## Inertia: useful representation
+
+Let $x_i= X_{i,.}^\intercal$, (recall that $X_{i,}$ is a row vector and $x_i$ is the corresponding column vector).
+
+\begin{align}
+I & = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
+& = \sum_{i}^n x_i^\intercal x_i \cr
+& = tr(\sum_{i}^n x_i^\intercal x_i) \cr
+& = tr(\sum_{i}^n x_i x_i^\intercal ) \cr
+& = tr(X^\intercal  X) \cr
+\end{align}
+
+
+### Remarks 
+
+* $X^\intercal  X$ is the covariance matrix of the $d$ variables,
+
+* $X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD
+
+$$X^\intercal  X = P D P^\intercal.$$
+* $I= tr(X^\intercal X) = tr(P D P^\intercal) = tr(P^\intercal P D ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
+where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
+
+
+
+
+# Principal Components Construction 
+
+## Identifying $U_1$
+
+let $I_{\Delta_{U^\intercal}}$ the inertia of the set of data point projected on the line containing $G$ with direction $U$ ($U$ being an unitary vector) 
+
+$x_i \dot U = x_i^\intercal \dot U$
 
 
