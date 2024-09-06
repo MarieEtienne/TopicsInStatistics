@@ -1,448 +1,1129 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
-
-<meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-
-<meta name="author" content="Marie-Pierre Etienne">
-<meta name="dcterms.date" content="2024-07-24">
-
-<title>The Topics In Statistics Companion website ! - Principal Component Analysis</title>
-<style>
-code{white-space: pre-wrap;}
-span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
-div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-ul.task-list{list-style: none;}
-ul.task-list li input[type="checkbox"] {
-  width: 0.8em;
-  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
-  vertical-align: middle;
-}
-</style>
-
-
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<html lang="en"><head>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 20,
-  "language": {
-    "search-no-results-text": "No results",
-    "search-matching-documents-text": "matching documents",
-    "search-copy-link-title": "Copy link to search",
-    "search-hide-matches-text": "Hide additional matches",
-    "search-more-match-text": "more match in this document",
-    "search-more-matches-text": "more matches in this document",
-    "search-clear-button-title": "Clear",
-    "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit",
-    "search-label": "Search"
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.4.555">
+
+  <meta name="author" content="Marie-Pierre Etienne">
+  <meta name="dcterms.date" content="2024-07-24">
+  <title>The Topics In Statistics Companion website ! - Principal Component Analysis</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="mpe_pres_revealjs.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
   }
-}</script>
-<script src="site_libs/clipboard-2.0.6/clipboard.min.js"></script>
-<link href="site_libs/shareon-1.4.1/shareon.min.css" rel="stylesheet">
-<script src="site_libs/shareon-1.4.1/shareon.min.js"></script>
-<link href="site_libs/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet">
-<script src="site_libs/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
 
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
 
-<link rel="stylesheet" href="styles.css">
-</head>
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
 
-<body class="nav-fixed">
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
 
-<div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
-      <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
-    <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">The Topics In Statistics Companion website !</span>
-    </a>
-  </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-  <span class="navbar-toggler-icon"></span>
-</button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav navbar-nav-scroll me-auto">
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/MarieEtienne/TopicsInStatistics.git" rel="" target=""><i class="bi bi-github" role="img" aria-label="GitHub">
-</i> 
- <span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./references.html" rel="" target="">
- <span class="menu-text">References</span></a>
-  </li>  
-</ul>
-            <ul class="navbar-nav navbar-nav-scroll ms-auto">
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Lecture Notes</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-lecture-notes">    
-        <li>
-    <a class="dropdown-item" href="./linearalgebra4DS.html" rel="" target="">
- <span class="dropdown-text">Basic Linear Algebra for Data Science</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./pca.html" rel="" target="">
- <span class="dropdown-text">Principal Component Analysis</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./regression.html" rel="" target="">
- <span class="dropdown-text">Linear Regression</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-labs" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Labs</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-labs">    
-        <li>
-    <a class="dropdown-item" href="./pca_labs.html" rel="" target="">
- <span class="dropdown-text">PCA Labs</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./regression_labs.html" rel="" target="">
- <span class="dropdown-text">Regression labs</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-lecture-notes-1" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
- <span class="menu-text">Lecture Notes</span>
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-lecture-notes-1">    
-        <li>
-    <a class="dropdown-item" href="./data/overshoot.xlsx" rel="" target="">
- <span class="dropdown-text">Overshoot Day</span></a>
-  </li>  
-    </ul>
-  </li>
-</ul>
-            <div class="quarto-navbar-tools">
-</div>
-          </div> <!-- /navcollapse -->
-      </div> <!-- /container-fluid -->
-    </nav>
-</header>
-<!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
-<!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    </div>
-<!-- main -->
-<main class="content" id="quarto-document-content">
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Principal Component Analysis</h1>
-</div>
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
 
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
 
-<div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Author</div>
-  <div class="quarto-title-meta-heading">Affiliation</div>
-  
-    <div class="quarto-title-meta-contents">
-    <p class="author">Marie-Pierre Etienne </p>
-  </div>
-    <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            https://github.com/marieetienne
-          </p>
-      </div>
-    </div>
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
 
-<div class="quarto-title-meta">
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
 
-      
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">July 24, 2024</p>
-    </div>
-  </div>
-  
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
     
-  </div>
-  
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
 
-</header>
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
 
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <script src="site_libs/plotly-binding-4.10.4/plotly.js"></script>
+  <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="site_libs/crosstalk-1.2.1/css/crosstalk.min.css" rel="stylesheet">
+  <script src="site_libs/crosstalk-1.2.1/js/crosstalk.min.js"></script>
+  <link href="site_libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="site_libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Principal Component Analysis</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Marie-Pierre Etienne 
+</div>
+        <p class="quarto-title-affiliation">
+            https://marieetienne.github.io/TopicsInStatistics/
+          </p>
+    </div>
+</div>
+
+  <p class="date">2024-07-24</p>
+</section>
+<section class="slide level2">
+
+<div class="hidden">
+<p><span class="math display">\[
+\newcommand\R{{\mathbb{R}}}
+\newcommand\norm[1]{\lVert#1\rVert}
+\]</span> </p>
+</div>
+</section>
+<section>
+<section id="introduction" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="the-example-of-doubs-river-characteristics" class="slide level2">
+<h2>The Example of Doubs River Characteristics</h2>
+<p>We measured the physico-chemical characteristics at 30 different sites along the <a href="https://en.wikipedia.org/wiki/Doubs_(river)">Doubs River</a> .</p>
+<div class="columns">
+<div class="column" style="width:53%;">
+<p>The first 4 rows (out of 30) of the <code>doubs.env</code> dataset</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 30 × 11
+    das   alt   pen   deb    pH   dur   pho   nit   amm   oxy   dbo
+  &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1   0.3   934  48    0.84   7.9    45  0.01  0.2   0     12.2   2.7
+2   2.2   932   3    1      8      40  0.02  0.2   0.1   10.3   1.9
+3  10.2   914   3.7  1.8    8.3    52  0.05  0.22  0.05  10.5   3.5
+4  18.5   854   3.2  2.53   8      72  0.1   0.21  0     11     1.3
+# ℹ 26 more rows</code></pre>
+</div>
+</div>
+<p><span class="question">How can we best visualize these data to reveal the relationships between variables and identify similarities between sites?</span></p>
+</div><div class="column smaller" style="width:45%;">
+<ul>
+<li>das: distance to the source (<span class="math inline">\(km\)</span>),</li>
+<li>alt: altitude (<span class="math inline">\(m\)</span>),</li>
+<li>pen: slope (elevation change per 1000m),</li>
+<li>deb: flow rate (<span class="math inline">\(m^3.s^{-1}\)</span>),</li>
+<li>pH: water pH,</li>
+<li>dur: calcium concentration (<span class="math inline">\(mg.L^{-1}\)</span>),</li>
+<li>pho: phosphate concentration (<span class="math inline">\(mg.L^{-1}\)</span>),</li>
+<li>nit: nitrate concentration (<span class="math inline">\(mg.L^{-1}\)</span>),</li>
+<li>amn: ammonium concentration (<span class="math inline">\(mg.L^{-1}\)</span>),</li>
+<li>oxy: dissolved oxygen concentration (<span class="math inline">\(mg.L^{-1}\)</span>),</li>
+<li>dbo: Biological Oxygen Demand (<span class="math inline">\(mg.L^{-1}\)</span>).</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-example-of-penguin-morphology" class="slide level2">
+<h2>The Example of Penguin Morphology</h2>
+<p>We measured the morphological characteristics of various penguins:</p>
+<div class="columns">
+<div class="column" style="width:53%;">
+<p>The first 6 rows (out of 333) of the <code>penguins</code> dataset</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 333 × 4
+  bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+           &lt;dbl&gt;         &lt;dbl&gt;             &lt;int&gt;       &lt;int&gt;
+1           39.1          18.7               181        3750
+2           39.5          17.4               186        3800
+3           40.3          18                 195        3250
+4           36.7          19.3               193        3450
+5           39.3          20.6               190        3650
+6           38.9          17.8               181        3625
+# ℹ 327 more rows</code></pre>
+</div>
+</div>
+<p><span class="question">How can we best visualize these data to reveal the relationships between variables and identify similarities between individuals?</span></p>
+</div><div class="column" style="width:45%;">
+<ul>
+<li>bill_length_mm: bill length,</li>
+<li>bill_depth_mm: bill depth,</li>
+<li>flipper_length_mm: flipper length,</li>
+<li>body_mass_g: body mass.</li>
+</ul>
+</div>
+</div>
+</section></section>
+<section>
+<section id="introduction-1" class="title-slide slide level1 center">
+<h1>Introduction</h1>
+
+</section>
+<section id="formalization" class="slide level2">
+<h2>Formalization</h2>
+<ul>
+<li>For each individual <span class="math inline">\(i\)</span>, we measured <span class="math inline">\(p\)</span> different variables.</li>
+<li>For each variable <span class="math inline">\(k\)</span>, we measured <span class="math inline">\(n\)</span> individuals.</li>
+</ul>
+<p>The data are arranged in a table with <span class="math inline">\(n\)</span> rows and <span class="math inline">\(p\)</span> columns.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
 <div class="cell">
 <div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="img/acp_data_pres.png" style="width:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:45%;">
+<p>We denote <span class="math inline">\(x_{ik}\)</span> as the value measured for variable <span class="math inline">\(k\)</span> on individual <span class="math inline">\(i\)</span>,</p>
+<p>and</p>
+<ul>
+<li><span class="math inline">\(x_{\bullet k} = \frac{1}{n} \sum_{i=1}^n x_{ik}\)</span> as the mean value of variable <span class="math inline">\(k\)</span>,</li>
+<li><span class="math inline">\(s_k  = \sqrt{\frac{1}{n} \sum_{i=1}^n (x_{ik}-x_{\bullet k})^2}\)</span> as the standard deviation of variable <span class="math inline">\(k\)</span>.</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="the-same-question-in-various-fields" class="slide level2">
+<h2>The Same Question in Various Fields</h2>
+<ul>
+<li>Sensory analysis: score of descriptor <span class="math inline">\(k\)</span> for product <span class="math inline">\(i\)</span></li>
+<li>Economics: value of indicator <span class="math inline">\(k\)</span> for year <span class="math inline">\(i\)</span></li>
+<li>Genomics: gene expression <span class="math inline">\(k\)</span> for patient/sample <span class="math inline">\(i\)</span></li>
+<li>Marketing: satisfaction index <span class="math inline">\(k\)</span> for brand <span class="math inline">\(i\)</span></li>
+</ul>
+<p>etc…</p>
+<p>We have <span class="math inline">\(p\)</span> variables measured on <span class="math inline">\(n\)</span> individuals, and we want to visualize these data to understand the relationships between variables and the proximity between individuals.</p>
+</section>
+<section id="seeing-is-understanding-how-to-represent-the-information-contained-in-this-table" class="slide level2">
+<h2>Seeing is Understanding: How to Represent the Information Contained in This Table?</h2>
+<h3 id="idea-1-represent-the-relationships-between-variables-2-by-2">Idea 1: Represent the relationships between variables 2 by 2</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="pca_files/figure-revealjs/ggpairs-1.png" style="width:80.0%;height:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="seeing-is-understanding-how-to-represent-the-information-contained-in-this-table-1" class="slide level2">
+<h2>Seeing is Understanding: How to Represent the Information Contained in This Table?</h2>
+<h3 id="idea-1-represent-the-relationships-between-variables-2-by-2-1">Idea 1: Represent the relationships between variables 2 by 2</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="pca_files/figure-revealjs/gg_prog-1.png" style="width:80.0%;height:80.0%"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>We lose information on the other axes.</p>
+</section>
+<section id="seeing-is-understanding-how-to-represent-the-information-contained-in-this-table-2" class="slide level2">
+<h2>Seeing is Understanding: How to Represent the Information Contained in This Table?</h2>
+<h3 id="idea-1-represent-the-relationships-between-variables-2-by-2-2">Idea 1: Represent the relationships between variables 2 by 2</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-8c78eacab42425522359" style="width:500px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8c78eacab42425522359">{"x":{"visdat":{"3f4d306a5a":["function () ","plotlyVisDat"]},"cur_data":"3f4d306a5a","attrs":{"3f4d306a5a":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","size":12,"inherit":true}},"layout":{"width":500,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter plot","scene":{"camera":{"eye":{"x":-2,"y":0,"z":0}},"center":{"x":17.164864864864864},"xaxis":{"title":"bill_depth_mm"},"yaxis":{"title":"-body_mass_g"},"zaxis":{"title":"flipper_length_mm"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[18.699999999999999,17.399999999999999,18,19.300000000000001,20.600000000000001,17.800000000000001,19.600000000000001,17.600000000000001,21.199999999999999,21.100000000000001,17.800000000000001,19,20.699999999999999,18.399999999999999,21.5,18.300000000000001,18.699999999999999,19.199999999999999,18.100000000000001,17.199999999999999,18.899999999999999,18.600000000000001,17.899999999999999,18.600000000000001,18.899999999999999,16.699999999999999,18.100000000000001,17.800000000000001,18.899999999999999,17,21.100000000000001,20,18.5,19.300000000000001,19.100000000000001,18,18.399999999999999,18.5,19.699999999999999,16.899999999999999,18.800000000000001,19,17.899999999999999,21.199999999999999,17.699999999999999,18.899999999999999,17.899999999999999,19.5,18.100000000000001,18.600000000000001,17.5,18.800000000000001,16.600000000000001,19.100000000000001,16.899999999999999,21.100000000000001,17,18.199999999999999,17.100000000000001,18,16.199999999999999,19.100000000000001,16.600000000000001,19.399999999999999,19,18.399999999999999,17.199999999999999,18.899999999999999,17.5,18.5,16.800000000000001,19.399999999999999,16.100000000000001,19.100000000000001,17.199999999999999,17.600000000000001,18.800000000000001,19.399999999999999,17.800000000000001,20.300000000000001,19.5,18.600000000000001,19.199999999999999,18.800000000000001,18,18.100000000000001,17.100000000000001,18.100000000000001,17.300000000000001,18.899999999999999,18.600000000000001,18.5,16.100000000000001,18.5,17.899999999999999,20,16,20,18.600000000000001,18.899999999999999,17.199999999999999,20,17,19,16.5,20.300000000000001,17.699999999999999,19.5,20.699999999999999,18.300000000000001,17,20.5,17,18.600000000000001,17.199999999999999,19.800000000000001,17,18.5,15.9,19,17.600000000000001,18.300000000000001,17.100000000000001,18,17.899999999999999,19.199999999999999,18.5,18.5,17.600000000000001,17.5,17.5,20.100000000000001,16.5,17.899999999999999,17.100000000000001,17.199999999999999,15.5,17,16.800000000000001,18.699999999999999,18.600000000000001,18.399999999999999,17.800000000000001,18.100000000000001,17.100000000000001,18.5,13.199999999999999,16.300000000000001,14.1,15.199999999999999,14.5,13.5,14.6,15.300000000000001,13.4,15.4,13.699999999999999,16.100000000000001,13.699999999999999,14.6,14.6,15.699999999999999,13.5,15.199999999999999,14.5,15.1,14.300000000000001,14.5,14.5,15.800000000000001,13.1,15.1,15,14.300000000000001,15.300000000000001,15.300000000000001,14.199999999999999,14.5,17,14.800000000000001,16.300000000000001,13.699999999999999,17.300000000000001,13.6,15.699999999999999,13.699999999999999,16,13.699999999999999,15,15.9,13.9,13.9,15.9,13.300000000000001,15.800000000000001,14.199999999999999,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.300000000000001,13.800000000000001,14.9,13.9,15.699999999999999,14.199999999999999,16.800000000000001,16.199999999999999,14.199999999999999,15,15,15.6,15.6,14.800000000000001,15,16,14.199999999999999,16.300000000000001,13.800000000000001,16.399999999999999,14.5,15.6,14.6,15.9,13.800000000000001,17.300000000000001,14.4,14.199999999999999,14,17,15,17.100000000000001,14.5,16.100000000000001,14.699999999999999,15.699999999999999,15.800000000000001,14.6,14.4,16.5,15,17,15.5,15,16.100000000000001,14.699999999999999,15.800000000000001,14,15.1,15.199999999999999,15.9,15.199999999999999,16.300000000000001,14.1,16,16.199999999999999,13.699999999999999,14.300000000000001,15.699999999999999,14.800000000000001,16.100000000000001,17.899999999999999,19.5,19.199999999999999,18.699999999999999,19.800000000000001,17.800000000000001,18.199999999999999,18.199999999999999,18.899999999999999,19.899999999999999,17.800000000000001,20.300000000000001,17.300000000000001,18.100000000000001,17.100000000000001,19.600000000000001,20,17.800000000000001,18.600000000000001,18.199999999999999,17.300000000000001,17.5,16.600000000000001,19.399999999999999,17.899999999999999,19,18.399999999999999,19,17.800000000000001,20,16.600000000000001,20.800000000000001,16.699999999999999,18.800000000000001,18.600000000000001,16.800000000000001,18.300000000000001,20.699999999999999,16.600000000000001,19.899999999999999,19.5,17.5,19.100000000000001,17,17.899999999999999,18.5,17.899999999999999,19.600000000000001,18.699999999999999,17.300000000000001,16.399999999999999,19,17.300000000000001,19.699999999999999,17.300000000000001,18.800000000000001,16.600000000000001,19.899999999999999,18.800000000000001,19.399999999999999,19.5,16.5,17,19.800000000000001,18.100000000000001,18.199999999999999,19,18.699999999999999],"y":[-3750,-3800,-3250,-3450,-3650,-3625,-4675,-3200,-3800,-4400,-3700,-3450,-4500,-3325,-4200,-3400,-3600,-3800,-3950,-3800,-3800,-3550,-3200,-3150,-3950,-3250,-3900,-3300,-3900,-3325,-4150,-3950,-3550,-3300,-4650,-3150,-3900,-3100,-4400,-3000,-4600,-3425,-3450,-4150,-3500,-4300,-3450,-4050,-2900,-3700,-3550,-3800,-2850,-3750,-3150,-4400,-3600,-4050,-2850,-3950,-3350,-4100,-3050,-4450,-3600,-3900,-3550,-4150,-3700,-4250,-3700,-3900,-3550,-4000,-3200,-4700,-3800,-4200,-3350,-3550,-3800,-3500,-3950,-3600,-3550,-4300,-3400,-4450,-3300,-4300,-3700,-4350,-2900,-4100,-3725,-4725,-3075,-4250,-2925,-3550,-3750,-3900,-3175,-4775,-3825,-4600,-3200,-4275,-3900,-4075,-2900,-3775,-3350,-3325,-3150,-3500,-3450,-3875,-3050,-4000,-3275,-4300,-3050,-4000,-3325,-3500,-3500,-4475,-3425,-3900,-3175,-3975,-3400,-4250,-3400,-3475,-3050,-3725,-3000,-3650,-4250,-3475,-3450,-3750,-3700,-4000,-4500,-5700,-4450,-5700,-5400,-4550,-4800,-5200,-4400,-5150,-4650,-5550,-4650,-5850,-4200,-5850,-4150,-6300,-4800,-5350,-5700,-5000,-4400,-5050,-5000,-5100,-5650,-4600,-5550,-5250,-4700,-5050,-6050,-5150,-5400,-4950,-5250,-4350,-5350,-3950,-5700,-4300,-4750,-5550,-4900,-4200,-5400,-5100,-5300,-4850,-5300,-4400,-5000,-4900,-5050,-4300,-5000,-4450,-5550,-4200,-5300,-4400,-5650,-4700,-5700,-5800,-4700,-5550,-4750,-5000,-5100,-5200,-4700,-5800,-4600,-6000,-4750,-5950,-4625,-5450,-4725,-5350,-4750,-5600,-4600,-5300,-4875,-5550,-4950,-5400,-4750,-5650,-4850,-5200,-4925,-4875,-4625,-5250,-4850,-5600,-4975,-5500,-5500,-4700,-5500,-4575,-5500,-5000,-5950,-4650,-5500,-4375,-5850,-6000,-4925,-4850,-5750,-5200,-5400,-3500,-3900,-3650,-3525,-3725,-3950,-3250,-3750,-4150,-3700,-3800,-3775,-3700,-4050,-3575,-4050,-3300,-3700,-3450,-4400,-3600,-3400,-2900,-3800,-3300,-4150,-3400,-3800,-3700,-4550,-3200,-4300,-3350,-4100,-3600,-3900,-3850,-4800,-2700,-4500,-3950,-3650,-3550,-3500,-3675,-4450,-3400,-4300,-3250,-3675,-3325,-3950,-3600,-4050,-3350,-3450,-3250,-4050,-3800,-3525,-3950,-3650,-3650,-4000,-3400,-3775,-4100,-3775],"z":[181,186,195,193,190,181,195,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201,211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,215,210,219,208,209,216,229,213,230,217,230,222,214,215,222,212,213,192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(31,119,180,1)"}},"textfont":{"size":55},"error_y":{"color":"rgba(31,119,180,1)","width":55},"error_x":{"color":"rgba(31,119,180,1)","width":55},"line":{"color":"rgba(31,119,180,1)","width":55},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="seeing-is-understanding-how-to-represent-the-information-contained-in-this-table-3" class="slide level2">
+<h2>Seeing is Understanding: How to Represent the Information Contained in This Table?</h2>
+<p><span class="rouge">Objective:</span></p>
+<ul>
+<li>Represent without losing too much information</li>
+<li>Ideally, individuals far apart in the initial cloud remain far apart in the representation.</li>
+</ul>
+<p><span class="rouge">What We Need:</span></p>
+<ul>
+<li>Quantify the information loss in the representation</li>
+<li>Build the representation that loses the least amount of information</li>
+</ul>
+<p><span class="rouge">Precautions:</span></p>
+<ul>
+<li>Potentially, Make variables expressed in different units comparable</li>
+</ul>
+</section></section>
+<section>
+<section id="distance-and-inertia" class="title-slide slide level1 center">
+<h1>Distance and Inertia</h1>
+
+</section>
+<section id="distance-between-individuals" class="slide level2">
+<h2>Distance between individuals</h2>
+<p>Let <span class="math inline">\(X_{i,.}^\intercal \in \R^d\)</span> be the descriptions of individual <span class="math inline">\(i\)</span>. To quantify the distance between indivuals we might used the Euclidian distance in <span class="math inline">\(\R^d,\)</span></p>
+<p><span class="math display">\[d(i, j)^2 = \sum_{k=1}^d (x_{ik} - x_{jk})^2 = \norm{X_{i,.}^\intercal - X_{i,.}^\intercal}^2 = \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right)^\intercal  \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right). \]</span></p>
+<p>This could be <span class="rouge">misleading when dealing with different variables with different scale</span>.</p>
+<h3 id="example-in-the-penguins-dataset">Example in the penguins dataset</h3>
+<p>Body mass varies form 2700 to 6300, while flipper length varies from 172 to 231.</p>
+<p>Variable Body mass will contribute more to the distance between individuals.</p>
+</section>
+<section id="specify-a-different-metric" class="slide level2">
+<h2>Specify a different metric</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definition</strong></p>
+</div>
+<div class="callout-content">
+<p>A metric in <span class="math inline">\(\R^d\)</span>, <span class="math inline">\(M\)</span> is a definite positive symmetric <span class="math inline">\(\R^{d\times d}\)</span> matrix which can be used to define distance between individuals</p>
+<p><span class="math display">\[d_M(i, j)^2  = \norm{X_{i,.}^\intercal - X_{i,.}^\intercal}^2_M = \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right)^\intercal  M \left({X_{i,.}^\intercal - X_{i,.}^\intercal}\right).\]</span></p>
+</div>
+</div>
+</div>
+<div class="columns">
+<div class="column" style="width:45%;">
+<ul>
+<li>If <span class="math inline">\(M=I_d\)</span>,</li>
+</ul>
+<p><span class="math inline">\(d_M\)</span> is the classical Euclidian distance</p>
+<ul>
+<li>Get rid of the units used for the variables and attribute the same weight to all variables by choosing</li>
+</ul>
+<p><span class="math inline">\(M = \begin{pmatrix}
+\frac{1}{s_1^2} &amp; &amp;0 &amp; \cr
+&amp; \frac{1}{s_2^2}  &amp; &amp; \cr
+&amp;0 &amp; \ddots &amp; \cr
+&amp;&amp;&amp; \frac{1}{s_d^2} \cr
+\end{pmatrix} = D_{1/s^2}\)</span></p>
+</div><div class="column" style="width:45%;">
+<p>with <span class="math inline">\(s_k^2=\sum_{i=1}^n (x_{ik} - x_{.k})^2,\)</span> <span class="math inline">\(x_{.k} =\frac{1}{n}\sum_{i=1}^n x_{ik}\)</span></p>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Remarks</strong></p>
+</div>
+<div class="callout-content">
+<p>The distance defined with <span class="math inline">\(D_{1/s^2}\)</span> is the same than the distance defined on centred and scaled variables with the identity matrix.</p>
+</div>
+</div>
+</div>
+<p>In the following, we will assume that <span class="math inline">\(X\)</span> is the matrix of centred and scaled variables.</p>
+</div>
+</div>
+</section>
+<section id="dispersion-measure-inertia-with-respect-to-a-point" class="slide level2">
+<h2>Dispersion measure: Inertia with respect to a point</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definition</strong></p>
+</div>
+<div class="callout-content">
+<p>Inertia (denomination derived from moments of inertia in Physics) <em>with respect to a point <span class="math inline">\(a \in R^{d},\)</span></em> according to metric <span class="math inline">\(M\)</span>: <span class="math display">\[I_a = \sum_{i=1}^n \norm{X_{i,.}^\intercal - a}_M^2\]</span></p>
+</div>
+</div>
+</div>
+<ul>
+<li>Inertia around the centroïd <span class="math inline">\(G\)</span> (center of gravity of the cloud) plays a central role in Principal Component Analysis:</li>
+</ul>
+<p><span class="math inline">\(G = (x_{.,1}, \cdots, x_{.,d})^\intercal\)</span> and <span class="math inline">\(I_G = min_{a\in \R^d} I_a\)</span></p>
+<h3 id="remarks-1">Remarks</h3>
+<p>Assume, we deal with centred sacled variables:</p>
+<p><span class="math inline">\(I_G = \sum_{i=1}^n \norm{X_{i,.}^\intercal - G}^2 = \sum_{i=1}^n \class{rouge}{\sum_{k=1}^d} (x_{ik} - x_{.,k})^2 = \class{rouge}{\sum_{k=1}^d} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2.\)</span></p>
+<p>As the variables are scaled, <span class="math inline">\(\sum_{i=1}^n  (x_{ik} - x_{.,k})^2 = n s^2_k = n.\)</span> and <span class="math inline">\(I_G=nd.\)</span></p>
+<p><span class="rouge">Total inertia with scaled centred variables is <span class="math inline">\(nd\)</span></span></p>
+</section>
+<section id="dispersion-measure-inertia-with-respect-to-a-affine-subspace" class="slide level2">
+<h2>Dispersion measure: Inertia with respect to a affine subspace</h2>
+<div class="callout callout-note no-icon callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<p><strong>Definition</strong></p>
+</div>
+<div class="callout-content">
+<p>Inertia <em>with respect to an affine subspace <span class="math inline">\(S\)</span></em> according to metric <span class="math inline">\(M\)</span>: <span class="math inline">\(I_S = \sum_{i=1}^n d_M(X_{i,.}, S)^2\)</span></p>
+</div>
+</div>
+</div>
+<p>Huygens theorem states that if <span class="math inline">\(S^G\)</span> stands for the affine subspace containing <span class="math inline">\(G\)</span> and parallel to <span class="math inline">\(S\)</span> then <span class="math display">\[I_S = I_{S^G} + d_M^2(a, G),\]</span> where <span class="math inline">\(a\)</span> is the orthogonal projection of <span class="math inline">\(G\)</span> on <span class="math inline">\(S\)</span>.</p>
+<p><span class="rouge">The affine subspace <span class="math inline">\(S\)</span> which minimizes inertia is <span class="math inline">\(S^G\)</span>.</span></p>
+</section>
+<section id="inertia-decomposition" class="slide level2">
+<h2>Inertia Decomposition</h2>
+<p>Since, variables are centred <span class="math inline">\(G=\mathbb{0}\)</span>, <span class="math inline">\(I=\sum_{i=1}^n d(X_{i,.},0)^2.\)</span></p>
+<p>Let <span class="math inline">\(S\)</span> be an affine subspace and <span class="math inline">\(U=S^\intercal,\)</span> <span class="math inline">\(X^S_{i,.}\)</span> (recip. <span class="math inline">\(X^S_{i,.})\)</span>) the orthogonal projection on <span class="math inline">\(S\)</span> (recip. on <span class="math inline">\(U\)</span>).</p>
+<p>As <span class="math inline">\(d(X_{i,.},0)^2 = d(X^S_{i,.},0)^2 + d(X^U_{i,.},0)^2\)</span>, <span class="math inline">\(I=I_S + I_{S^\intercal}\)</span></p>
+<div class="columns">
+<div class="column" style="width:55%;">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="pca_files/figure-revealjs/unnamed-chunk-1-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:40%;">
+<h3 id="interpretation">Interpretation</h3>
+<p><span class="math inline">\(I_S\)</span> is the dispersion of the dataset <strong>lost by projection on <span class="math inline">\(S\)</span></strong>,</p>
+<p>while <span class="math inline">\(I_{S^\intercal}\)</span> is the <strong>dispersion of the dataset projected on <span class="math inline">\(S\)</span></strong>.</p>
+<h3 id="pca">PCA</h3>
+<p>Identifying <span class="math inline">\((U_1, U_d)\)</span> a sequence of orthogonal unitary vectors such that <span class="math inline">\(I_{U_1}\leq I_{U_2}\leq \cdots \leq I_{U_d}\)</span>.</p>
+<p>The projection on <span class="math inline">\(U_1\)</span> is the best projection of the dataset in one dimension, <span class="math inline">\(U_1\)</span> define the first Principal Component.</p>
+</div>
+</div>
+</section>
+<section id="inertia-useful-representation" class="slide level2">
+<h2>Inertia: useful representation</h2>
+<p>Let <span class="math inline">\(x_i= X_{i,.}^\intercal\)</span>, (recall that <span class="math inline">\(X_{i,}\)</span> is a row vector and <span class="math inline">\(x_i\)</span> is the corresponding column vector).</p>
+<p><span class="math display">\[\begin{align}
+I &amp; = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
+&amp; = \sum_{i}^n x_i^\intercal x_i \cr
+&amp; = tr(\sum_{i}^n x_i^\intercal x_i) \cr
+&amp; = tr(\sum_{i}^n x_i x_i^\intercal ) \cr
+&amp; = tr(X^\intercal  X) \cr
+\end{align}\]</span></p>
+<h3 id="remarks-2">Remarks</h3>
+<ul>
+<li><p><span class="math inline">\(X^\intercal  X\)</span> is the covariance matrix of the <span class="math inline">\(d\)</span> variables,</p></li>
+<li><p><span class="math inline">\(X^\intercal  X\)</span> is a symmetric <span class="math inline">\(\R^{d\times d}\)</span> matrix, and the corresponding SVD</p></li>
+</ul>
+<p><span class="math display">\[X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q^\intercal D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.\]</span></p>
+<ul>
+<li><span class="math inline">\(I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(P^\intercal P D ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,\)</span><br>
+where <span class="math inline">\(\sigma^2_k\)</span> stands for the k<span class="math inline">\(^{th}\)</span> eigen value.</li>
+</ul>
+</section></section>
+<section>
+<section id="principal-components-construction" class="title-slide slide level1 center">
+<h1>Principal Components Construction</h1>
+
+</section>
+<section id="identifying-u_1" class="slide level2">
+<h2>Identifying <span class="math inline">\(U_1\)</span></h2>
+<p>Consider <span class="math inline">\(I_{\Delta_{U}}\)</span> the inertia with respect to <span class="math inline">\(\Delta_{U}\)</span> affine subspace containing <span class="math inline">\(G\)</span> with directed bu the unitary vector <span class="math inline">\(U\)</span>.</p>
+<p><span class="math inline">\(I_{\Delta_{U}}\)</span> is the cost of the projection on <span class="math inline">\(\Delta_{U}\)</span>, i.e the loss information.</p>
+<p><strong>Minimizing <span class="math inline">\(I_{\Delta_{U}}\)</span></strong> equals <strong>maximizing <span class="math inline">\(I_{\Delta_{U^T}}\)</span></strong>, i.e the dispersion of the projected set of data points.</p>
+<h3 id="projection-on-u">Projection on U</h3>
+<p><span class="math inline">\(d(X_{i,}, U^\intercal)^2= \left ( x_i \dot U^\intercal \right )^2 = \left ( X_i^\intercal U \right )^2 = cos(\theta)^2 \norm{x_i}^2 ,\)</span></p>
+<p>So that <span class="math display">\[\begin{align}
+I_{\Delta_{U^\intercal}} &amp; = \sum_{i=1}^n  d(X_{i,}, U^\intercal)^2 \cr
+                         &amp; = \norm{X U} \cr
+                         &amp; = U^\intercal X^\intercal X  U\cr
+                         &amp; = U^\intercal Q D^2  Q^\intercal   U\cr
+\end{align}\]</span></p>
+<p>But <span class="math inline">\(U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})\)</span> Is the coordinate of the unitary vector <span class="math inline">\(U\)</span> on the basis defined by the eigen vector of <span class="math inline">\(X\)</span>: <span class="math inline">\(\omega_1 q_1 +  = \omega_d q_d,\)</span> such that <span class="math inline">\(\sum_k \omega_k^2=1\)</span></p>
+<p><span class="math inline">\(I_{\Delta_{U^\intercal}} = \sum_{k=1}^d \omega_k \sigma^2_k.\)</span></p>
+<p>Maximizing <span class="math inline">\(I_{\Delta_{U^\intercal}}\)</span>, as <span class="math inline">\(\sigma^2_k\)</span> are in decreasing order, consists in choosing <span class="math inline">\(\omega_1=1\)</span></p>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
 
 </div>
 </div>
-<p>name: intro # Introduction</p>
-<hr>
+</section></section>
+    </div>
+  </div>
 
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
 
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
-</main> <!-- /main -->
-<script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
-      }
-    }
-    return false;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
-      }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  });
-  function tippyHover(el, contentFn) {
-    const config = {
-      allowHTML: true,
-      content: contentFn,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start'
-    };
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      return note.innerHTML;
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":false,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'print',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 5.0e-2,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
       });
-    }
-  }
-});
-</script>
-</div> <!-- /content -->
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
 
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
 
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
 
 </body></html>
