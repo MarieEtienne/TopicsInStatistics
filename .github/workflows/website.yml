@@ -13,6 +13,19 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+    # A essayer pour le cache    
+    # - name: Cache R packages
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: ~/.R/library
+    #     key: ${{ runner.os }}-r-packages-${{ hashFiles('r-packages.txt') }}
+    #     restore-keys: |
+    #       ${{ runner.os }}-r-packages-
+    # 
+    # - name: Install R packages
+    #   run: |
+    #     Rscript -e 'packages <- scan("r-packages.txt", what = character()); install.packages(packages, repos = "https://cran.rstudio.com")'
+
       - name: Install R packages
         run: |
           Rscript -e "install.packages(c('Factoshiny', 'RefManageR', 'wesanderson', 'palmerpenguins', 'plotly'))"
