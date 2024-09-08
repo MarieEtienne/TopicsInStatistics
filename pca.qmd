@@ -1,7 +1,7 @@
 ---
 title: Principal Component Analysis
 author: Marie-Pierre Etienne
-date: '2024/07/24 (updated: `r Sys.Date()`)'
+date: "Last updated on `r format(Sys.time(), '%d %B, %Y')`"
 institute: https://marieetienne.github.io/TopicsInStatistics/
 execute: 
   freeze: false
@@ -325,7 +325,7 @@ $G = (x_{.,1}, \cdots, x_{.,d})^\intercal$ and $I_G = min_{a\in \R^d} I_a$
 
 
 ###  Remarks
-Assume, we deal with centred sacled variables:
+Assume, we deal with centred scaled variables:
 
 $I_G = \sum_{i=1}^n \norm{X_{i,.}^\intercal - G}^2 = \sum_{i=1}^n \class{rouge}{\sum_{k=1}^d} (x_{ik} - x_{.,k})^2 = \class{rouge}{\sum_{k=1}^d} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2.$
 
@@ -432,19 +432,29 @@ I & = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
 \end{align}
 
 
+
+:::: {.columns}
+
+::: {.column width="45%" }
+
 ### Remarks 
 
 * $X^\intercal  X$ is the covariance matrix of the $d$ variables,
 
 * $X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD
 
-$$X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q^\intercal D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
+$$X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
 
+:::
 
-* $I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(P^\intercal P D ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
+::: {.column width="45%" }
+
+* $I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(Q^\intercal Q D  ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
 where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
+:::
 
+::::
 
 
 # Principal Components Construction 
@@ -457,19 +467,19 @@ $I_{\Delta_{U}}$ is the cost of the projection on $\Delta_{U}$, i.e the loss inf
 
 **Minimizing $I_{\Delta_{U}}$** equals **maximizing $I_{\Delta_{U^T}}$**, i.e the dispersion of the projected set of data points. 
 
-### Projection on U
+### Projection on $U$
 
 $d(X_{i,}, U^\intercal)^2= \left ( x_i \dot U^\intercal \right )^2 = \left ( X_i^\intercal U \right )^2 = cos(\theta)^2 \norm{x_i}^2 ,$
 
 So that 
 \begin{align}
 I_{\Delta_{U^\intercal}} & = \sum_{i=1}^n  d(X_{i,}, U^\intercal)^2 \cr
-                         & = \norm{X U} \cr
+                         & = \norm{X U}^2 \cr
                          & = U^\intercal X^\intercal X  U\cr
                          & = U^\intercal Q D^2  Q^\intercal   U\cr
 \end{align}
 
-But   $U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})$  Is the coordinate of the unitary vector $U$ on the basis defined by the eigen vector of $X$: $\omega_1 q_1 +  = \omega_d q_d,$ such that $\sum_k \omega_k^2=1$
+But   $U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})\end{pmatrix}$  Is the coordinate of the unitary vector $U$ on the basis defined by the eigen vector of $X$: $\omega_1 q_1 +  \cdots +  \omega_d q_d,$ such that $\sum_k \omega_k^2=1$
 
 
 
@@ -477,4 +487,313 @@ $I_{\Delta_{U^\intercal}} = \sum_{k=1}^d \omega_k \sigma^2_k.$
 
 Maximizing $I_{\Delta_{U^\intercal}}$, as $\sigma^2_k$ are in decreasing order, consists in choosing $\omega_1=1$ 
 
+
+## Principal Components
+
+Consider the sequence of eigen vectors in $Q$, they 
+
+* form an orthonormal basis,
+* are ordered according their corresponding eigen values.
+
+From a mathematical point of view, PCA consist in using this new basis.
+
+### Consequences
+
+* Define $d$ new variables $C_1, \cdots, C_d,$ which are Linear combination of initial variables, i.e 
+$C_j = \sum_{k= 1}^d q_{jk} V_k$
+
+* Quantify the quantity of information captured by each variable,
+
+* Being able to quantify the quality of representation for one individual or one variable
+
+
+## Practical considerations
+
+:::: {.columns}
+
+::: {.column width="45%" }
+
+### Normalizing inertia 
+
+Total Inertia of the scaled dataset depends on the number of individual. 
+
+It is common to define a scaled Inertia to get rid of$n$.
+
+$$I^{s} = \frac{1}{n} I,$$
+
+We also define the Covariance matrix $\Sigma$
+
+$$\Sigma = \frac{1}{n} X^\intercal X,$$
+and we considered the SVD for $\frac{1}{\sqrt{n}} X.$
+
+[This is generally the implemented version.]{.rouge}
+
+
+
+
+
+
+:::
+
+::: {.column width="45%" }
+
+
+### SVD of $X^\intercal X$ instead of $X$
+
+As we are mainly interesting in $Q$, $d\times d$ matrix (not $P$ the $n\times n$ matrix) and the square of the eigen values, it is more efficient to consider the SVD of $\Sigma$ directly.
+
+
+
+### Geometrically
+
+* The matrix $Q^\intercal$ transform the original canonical basis $(e_1, \cdots, e_d)$ of $\R^d$ in the new ACP basis $(v_1, \cdots, v_d)$; .
+
+* In the new basis variable $k$, 
+
+$$ \sum_{j=1}^d \sqrt{\sigma_j^2} q_{kj} v_j = \begin{pmatrix} \sigma_1 q_{1j}, \cdots, \sigma_d q_{dj} \end{pmatrix}^\intercal$$
+
+:::
+
+::::
+
+## Palmer Penguins example
+
+```{r key_ingredients}
+#| echo: true
+
+## the core scale function normalizes by n-1 instead of n
+scale2 <- function(x, na.rm = FALSE) (x - mean(x, na.rm = na.rm)) / ( sqrt((length(x)-1) / length(x)) *sd(x, na.rm) )
+
+X <- penguins |> 
+  mutate(year = as.factor(year))|>  ## year willnot be considered as numerical variable
+  select(where(is.numeric)) |>      ## select all numeric columns
+  mutate_all(list(scale2))          ## and scale them
+
+n <- nrow(X) # number of individuals
+
+X_mat <- X |>  as.matrix()          ## the data point matrix 
+X_norm_mat <- 1/sqrt(n) * X_mat     ## the version considered to get rid of the number of individuals
+
+X_mat_trace <- sum( diag(t(X_mat)%*% X_mat) )  # n d 
+X_norm_mat_trace <- sum( diag( t( X_norm_mat)%*% X_norm_mat ) )  # d
+
+penguins_svd <- svd( t(X_mat)%*% X_mat )
+penguins_norm_svd <- svd( t(X_norm_mat)%*% X_norm_mat )
+
+## eigenvalues
+penguins_eigenvalue <- penguins_svd$d
+sum(penguins_eigenvalue)
+penguins_norm_eigenvalue <- penguins_norm_svd$d
+sum(penguins_norm_eigenvalue)
+```
+
+:::
+
+::::
+
+## Palmer Penguins example
+
+
+```{r representation}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+penguins_Q <- penguins_svd$u
+penguins_norm_Q <- penguins_norm_svd$u
+
+## From orginal variable to new basis
+## t(Q) %*% t(X[1,]) for 1st individual
+## t(Q) %*% t(X) for all individuals, or in order to keep individual in lines
+## X %*% Q 
+
+coord_newbasis <- X_mat %*% (penguins_Q) 
+coord_norm_newbasis <- X_norm_mat %*% (penguins_Q) 
+
+coord_newbasis <- coord_newbasis |> 
+  as_tibble() |> 
+  rename(Dim1 = V1, Dim2 = V2, Dim3 = V3, Dim4 = V4)
+
+ggplot(coord_newbasis) + aes(x= Dim1, y = Dim2) + geom_point()
+#ggplot(coord_newbasis) + aes(x= Dim1, y = Dim2) + geom_point()
+dist(X[1:5,])
+dist(coord_newbasis[1:5,])
+#dist(coord_norm_newbasis[1:5,]) * sqrt(n)
+X_C <- as.matrix(coord_newbasis)
+```
+
+
+## Global quality of the representation 
+
+Let $C_{12}$ designs the plan defined by $C_1$ and $C_2$ and let $X^{C}$ be the coordinates of the individuals in the new basis.
+
+The information preserved by projection is 
+\begin{align}
+I_{C_{12}^\perp} & = \sum_{i=1}^n \left ( \left(x^{C}_{i1)}\right)^2 + \left(x^{C}_{i2}\right)^2 \right) \cr
+                  & = tr\left( \left(X^{C}_{,1:2}\right)^\intercal X^{C}_{,1:2}\right)\cr
+                  & =  \lambda_1^2 + \lambda^2_2\cr
+                  & = n (\sigma_1^2 + \sigma^2_2)\cr
+\end{align}
+
+```{r overall_penguins quality}
+#| echo: true
+#| results: hold
+
+cat("On plan 12: ", sum(penguins_eigenvalue[1:2]), ".\n")
+cat("Working with the correlation matrix (/n), sum of eigenvalues is ", sum(penguins_norm_eigenvalue[1:2]), ". \n This has to be multiply by the size of the dataset to get inertia:", sum(penguins_norm_eigenvalue[1:2]) * n, "\n")
+
+cat("This is easier to appreciate when expressed  as a propotion of total inertia:",  round(sum(penguins_norm_eigenvalue[1:2])/sum(penguins_norm_eigenvalue)*100,2),"%. \n")
+```
+
+
+## Representing jointly initial variables and principal components
+
+To understand the links between original and new variables, or between original variables themselve.
+
+```{r}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+new_var_coord <- diag(sqrt(penguins_norm_eigenvalue))%*%t(penguins_norm_Q)
+
+## for graphical purpose
+new_var_coord_df <- t(new_var_coord) |> as_tibble() |> rename(C1=V1, C2= V2, C3 =V3, C4 = V4)
+circle_df <- data.frame(theta = seq(0, 2*pi, length.out = 501)) |> 
+  mutate(x = cos(theta), y  = sin(theta))
+
+ggplot(new_var_coord_df) + geom_point(aes(x=C1, y=C2)) + coord_fixed() + xlim(c(-1,1)) + ylim(c(-1,1)) + 
+  geom_segment(aes(x=rep(0,4), y = rep(0,4), xend=C1, yend = C2),  arrow = arrow(length = unit(0.5, "cm"))) +
+  geom_path(data = circle_df, aes(x=x, y=y)) +
+  annotate("text", label = colnames(X), x = new_var_coord_df$C1  + 0.05, y = new_var_coord_df$C2- 0.05)
+  
+```
+
+
+## Quality fo the representation of the variables
+
+* The quality of the projection on a component $j$ depends on the angle $\theta_{ij}$ between the original variable and $C^j$.
+
+$$cos(\theta_{ij})^2 = \frac{(C_j^T X^i)^2}{\norm{X^i}\norm{X^i}} =  \sigma^2_j q_{ij}^2$$
+
+
+* The quality of the projection on a the plan $(C^1C^2)$ depends on the angle $\theta_{i,1-2}$ between the original variable  and the projection plan.
+
+
+$$ cos(\theta_{i,1-2})^2 = \sum_{j=1}^2 \frac{(C_j^T X^i)^2}{\norm{X^i}\norm{C^j}} =  \sum_{j=1}^2 \sigma^2_j  q_{ij}^2$$
+
+
+```{r}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+## quality of the representation for variable 1 on teh different axis
+new_var_coord[,1]^2 
+
+## quality of the projection on plan C1-C2
+sum((new_var_coord[,1]^2 )[1:2])
+
+```
+
+
+
+
+## Visualizing individuals
+
+* $X$ is the matrix of individuals on the original basis, $XQ$ is the matrix of individual in the new basis (no information lost)
+
+* To visualizing the dataset, we can project on the two first dimensions of the new basis
+
+```{r projection}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+XQ <- X_mat %*% penguins_norm_Q
+
+XQ_df <- XQ |> 
+  as_tibble() |> 
+  rename(C1 = V1, C2 = V2, C3 = V3, C4 = V4)
+
+ggplot(XQ_df) + geom_point(aes(x=C1, y=C2)) 
+
+```
+
+
+## Interpretation
+
+### Quality of representation of individual $i$ on the plan
+
+* The angle between the original individual vector $i$ and component $j$:
+
+$$cos(\theta_{ij})^2 = \frac{( X_i Q^j)^2}{\norm{X_i}^2} $$
+
+### Contribution to the axe $C_i$
+
+The total inertia on component $1$ is $\sigma^2_i = \sum_{i=1}^n (XQ)_{i1}^2$.
+
+Individual $i$ contributes for $(XQ)_{i1}^2/\sigma^2_i$
+
+
+## Practically speaking
+
+It is way simpler !!!
+
+You can have a look at the book `r Citet(myBib, "husson2011exploratory")` and visit [François Husson MOOC](https://husson.github.io/MOOC_GB/index.html), author of the ` FactoMineR` package.
+
+
+
+:::: {.columns}
+
+::: {.column width="45%" }
+
+```{r Factominer}
+#| echo: true
+#| eval: false
+# install.packages('FactoMineR')
+# install.packages('FactoShiny')
+library(FactoMineR)
+
+penguins_pca <- PCA(X, ncp = ncol(X), graph = FALSE)
+
+penguins_pca$eig
+
+penguins_pca$var
+
+penguins_pca$ind
+
+plot(penguins_pca, axis = c(1,2), choix = "ind")
+
+plot(penguins_pca, axis = c(1,2), choix = "var")
+
+
+
+```
+
+:::
+
+::: {.column width="45%" }
+
+
+```{r shiny}
+#| echo: true
+#| eval: false
+#| 
+library(Factoshiny)
+PCAshiny(penguins)
+```
+
+:::
+
+::::
+
+## The Doubs River example
+
+```{r}
+#|echo: true
+#|eval: false
+
+PCAshiny(doubs.env)
+```
 
