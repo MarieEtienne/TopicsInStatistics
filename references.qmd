@@ -16,7 +16,6 @@ with_sol <- TRUE ## in order to control the output
 with_course <- TRUE
 library(RefManageR)
 library(tidyverse)
-library(ggplot2)
 ```
 
 ```{r xaringanExtra-share-again, echo=FALSE}
@@ -33,10 +32,27 @@ BibOptions(check.entries = FALSE,
 myBib <- ReadBib("./topics.bib", check = FALSE)
 ```
 
-# References
+::: {.hidden}
+
+```{r}
+liste <- 
+  readLines('topics.bib') |> 
+  as_tibble() |> 
+  filter(stringr::str_detect(value, pattern = '@')) |> 
+  mutate(key = stringr::str_remove(value, pattern = '@[:alnum:]+\\{')) |> 
+  mutate(key = stringr::str_remove(key, pattern = ',')) |> 
+  pull()
+  
+NoCite(bib = myBib, liste)
+
+```
+
+:::
 
 
----
+```{r refs, echo=FALSE, results="asis", eval = TRUE, cache = FALSE}
+PrintBibliography(myBib)
+```
 
 ```{r ggplot_back, echo = FALSE, eval = TRUE}
 ggplot <- function(...) ggplot2::ggplot(...) 
