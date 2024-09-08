@@ -16,7 +16,7 @@ jobs:
       - name: Install R packages
         run: |
           Rscript -e "install.packages(c('FactoMineR', 'RefManageR', 'wesanderson', 'palmerpenguins', 'plotly'))"
-          Rscript -e "install.packages(c('reticulate', 'ggpubr', 'GGally', 'xaringanExtra', 'flipbookr'))"
+          Rscript -e "install.packages(c('reticulate', 'ggpubr', 'GGally', 'xaringanExtra', 'flipbookr', 'ggrepel))"
       - name: Additional Python packages
         run: |
           pip install numpy scipy 
