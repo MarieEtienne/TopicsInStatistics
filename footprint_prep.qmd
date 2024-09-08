@@ -1,0 +1,76 @@
+---
+title: "Footprint Data preparation"
+author: Marie-Pierre Etienne
+date: '2024/08/25 (updated: `r Sys.Date()`)'
+institute: https://marieetienne.github.io/TopicsInStatistics/
+output:
+  xaringan::moon_reader:
+    css: [  'metropolis',  'mpe_pres_revealjs.css']
+    lib_dir: libs
+    nature:
+      ratio: 16:10
+      highlightStyle: github
+fontsize: 12pt
+execute: 
+  freeze: auto
+---
+
+
+
+
+```{r setup, include=FALSE, eval = TRUE}
+library(RefManageR)
+library(tidyverse) ## to benefit from the tidyverse coding system
+library(reticulate) ## to use python from R
+library(wesanderson)
+```
+
+This document presents the data preparation of the original Overshoot day data available on the website \url{https://www.footprintnetwork.org/licenses/public-data-package-free/}
+It contains ecological footprint and biocapacity results for 184 countries.
+
+Incomplete data will be omitted and the name of the different variables will be formatted in a more readable manner.
+
+ 
+```{r, message=FALSE, include=FALSE}
+#|message: false
+#|echo: true
+#|
+library(tidyverse)
+library(readxl)
+theme_set(theme_minimal())
+
+countries <- read_excel("data/NFA 2022 Public Data Package 1.1.xlsx", 
+    sheet = "Country Results 2022 Ed (2018)", 
+    range = cell_rows(22:206))
+
+colnames(countries)[10:15] <- gsub("Footprint\\.\\.\\.[0-9][0-9]","prod",colnames(countries)[10:15])
+colnames(countries)[17:22] <- gsub("Footprint\\.\\.\\.[0-9][0-9]","cons",colnames(countries)[17:22])
+colnames(countries)[24:27] <- paste(colnames(countries)[24:27], "bioc")
+colnames(countries)[colnames(countries)=="Total Ecological Footprint (Consumption)"] = "total_cons"
+colnames(countries)[colnames(countries)=="Total Ecological Footprint (Production)"] = "total_prod"
+colnames(countries)[colnames(countries)=="Population (millions)"] = "pop"
+colnames(countries)[colnames(countries)=="actual \r\nCountry Overshoot Day \r\n2018"] = "overshoot"
+colnames(countries)[colnames(countries)== "Ecological (Deficit) or Reserve"] = "ecological"
+colnames(countries)[grepl("Built up land", colnames(countries))] = paste("builtup", c("cons", "prod", ""), sep="_") # it's the same three times so we keep only one
+countries <- countries %>% select(-builtup_cons, -builtup_prod)
+
+colnames(countries) <- tolower(colnames(countries))
+colnames(countries) <- gsub(" ", "_", colnames(countries))
+
+countries <- countries %>% 
+  mutate(overshoot_day = map_dbl(overshoot, ~as.POSIXlt(.)$yday), 
+         overshoot_day = case_when(number_of_earths_required <= 1 ~ 365,
+                                   TRUE ~ overshoot_day),
+         per_capita_gdp = as.numeric(per_capita_gdp)) %>% 
+  arrange(overshoot_day) %>% 
+  column_to_rownames(var = "country")
+
+countries_comp <- countries %>% 
+  select( life_expectancy, hdi, per_capita_gdp, region, sdgi, total_biocapacity,
+         income_group, pop, total_prod, total_cons, number_of_countries_required, number_of_earths_required,
+         overshoot_day)
+
+save(countries_comp, file = "data/countries_comp.RData")
+save(countries, file = "data/countries.RData")
+
+```

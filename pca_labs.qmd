@@ -3,58 +3,189 @@ title: Principal Component Analysis -- Labs
 author: Marie-Pierre Etienne
 date: '2024/07/24 (updated: `r Sys.Date()`)'
 institute: https://marieetienne.github.io/TopicsInStatistics/
-csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
 output:
   xaringan::moon_reader:
-    css: [  'metropolis',  'mpe_pres.css']
+    css: [  'metropolis',  'mpe_pres_revealjs.css']
     lib_dir: libs
     nature:
       ratio: 16:10
       highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      beforeInit: '../courses_tools/resources/collapseoutput.js'
-    includes:
-      after_body: '../courses_tools/resources/insert-logo.html'
-fontsize: 11pt
-params:
-  child_path: ''
-  setup_path: courses_tools/resources/
+fontsize: 12pt
 execute: 
   freeze: auto
 ---
 
 
 
+
 ```{r setup, include=FALSE, eval = TRUE}
-with_sol <- TRUE ## in order to control the output
-with_course <- TRUE
 library(RefManageR)
+library(tidyverse) ## to benefit from the tidyverse coding system
+library(reticulate) ## to use python from R
+library(wesanderson)
+```
+
+
+## Data Description
+
+The dataset used in this lab comes from the website \url{https://www.footprintnetwork.org/licenses/public-data-package-free/}
+It contains ecological footprint and biocapacity results for 184 countries_comp.
+
+### Some Vocabulary
+More details can be found here \url{https://data.footprintnetwork.org/?_ga=2.237587203.280109455.1689844989-712229654.1682588383#/abouttheData}
+
+ - Global hectare (gha): It is the unit chosen to express all quantities of interest regarding Carbon consumption/emission. A unit of area corresponding to the average productivity of one hectare of world land. An hectare of farmland will be worth more global hectares than an hectare of desert.
+ - Ecological footprint (in gha): The number of gha required to produce the needs and absorb the waste of a country.
+ - Biocapacity (in gha): Biocapacity is given in gha per year, per country, and by land type. It translates the (actual) surface area of different land types in a country into gha, considering the climate, agricultural techniques, etc.
+
+  - number_of_earths_required (one value per country): The number of Earths needed if everyone lived like the people in the given country (number of gha per person in the country / 1.583 (number of gha per inhabitant of the Earth, this figure is updated every year))
+
+  - number_of_country_required (one per country): The number of countries_comp required for the country to be self-sufficient (e.g., Japan has 0.6 gha per inhabitant, uses 4.6 gha per year, so 4.6/0.6 Japan per year, Japan consumes 4.6/0.6 times what it is able to produce)
+  
+### Variables Description
+
+We can divide the variables into three groups:
+
+  - The socio-economic data of the country:
+ "country" (the country), "data_quality", "sdgi" (Sustainable Development Goals Index: an index indicating how close each country is to achieving sustainable development goals),
+ "life_expectancy", "hdi" (Human Development Index), "per_capita_gdp", "region", "income_group", "pop".
+
+ The other two categories are given in gha by land type:
+ 
+  - cropland (food and fiber for human consumption, livestock feed, oilseeds, and rubber)
+  
+  - grazing (for livestock)
+  
+  - forest (for wood and timber)
+  
+  - fish (for fish, counted based on the maximum sustainable yield for various fish species, then translated into product quantities)
+  
+  - builtup (built-up area)
+  
+  - total: represents the total ecological footprint.
+  
+  - Productions (ending in _prod)
+  They represent in gha the production of a country for each type of land, summing what is harvested and what is wasted per year. (For forest, for instance, it’s the area required to reproduce all the wood harvested.)
+  (for cropland, grazing, forest, fish, built_up, carbon, total)
+  
+  - Biocapacities (ending in _bioc)
+  They translate the actual surface area of different land types in a country into gha, considering the climate and agricultural techniques.
+ 
+  - Consumptions by land type (ending in _cons)
+  They represent in gha the consumption of a country (i.e., the number of gha it produces minus the number it exports plus the number it imports). These data are available by land type because different imported and exported products are linked to different land types.
+  
+  Remarks: Built-up areas have the same values for cons, prod, and biocapacity.
+  It is considered that all built-up areas are used within the country.
+  To avoid considering the same variable three times, we will only keep one.
+
+## Import data
+  
+
+The data have been prepared to be easy more easy to manipulate. The preparation script is available on the Github repository and is named `footprint_prep.qmd`. The resulting datasets are  available as a`.RData` object `data/countries_comp.RData` and `data/countries.RData`. The first one is a simplified version focusing on the socio economic variables.
+  
+  
+```{r, import_data}
+
 library(tidyverse)
-library(ggplot2)
+library(readxl)
+theme_set(theme_minimal())
+load("data/countries_comp.RData")
+load("data/countries.RData")
+#Identify countries by their names
+pal <- wes_palette(8, name = "Zissou1", type = "continuous") # nice color based on wesanderson moovie
 ```
 
-```{r xaringanExtra-share-again, echo=FALSE}
-xaringanExtra::use_share_again()
+## Descriptive analysis
+  
+  1. Conduct a brief descriptive study of the different variables 
+
+```{r}
+summary(countries)
 ```
-
-```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
-BibOptions(check.entries = FALSE,
-           bib.style = "authoryear",
-           cite.style = "alphabetic",
-           style = "markdown",
-           hyperlink = FALSE,
-           dashed = FALSE)
-myBib <- ReadBib("./topics.bib", check = FALSE)
-```
-
-
-
----
-
-```{r ggplot_back, echo = FALSE, eval = TRUE}
-ggplot <- function(...) ggplot2::ggplot(...) 
+  
+    a. Represent, by world region, the overshoot day, and then the development indices (hdi, sdgi)
+  
+    
+```{r}
+countries_comp %>% 
+  ggplot(aes(y = overshoot_day, fill = region, x = region)) + geom_boxplot() + 
+  scale_fill_manual(values=pal) + 
+  geom_point(alpha=0.5, position = "jitter") + coord_flip()
 ```
 
 
+```{r}
+countries_comp %>% 
+  select(overshoot_day,  hdi, region, total_biocapacity) %>% 
+  pivot_longer(cols = -"region", names_to = "type", values_to = "value") %>% 
+  mutate(type = factor(type, c("overshoot_day", "sdgi", "hdi", "total_biocapacity"))) %>% 
+  ggplot(aes(y = value, fill = region, x = region)) + 
+  geom_boxplot() +  geom_point(alpha = 0.5, position = "jitter")  +
+  facet_grid(type ~ ., scale = "free_y") + scale_fill_manual(values = pal) +  scale_color_manual(values = pal) +
+  theme(axis.text.x = element_blank())
+```
 
+  b. Represent the overshoot day according to the human development index, then the number of countries_comp, then the number of Earths required per country. Make a representation allowing a visual comparison of world regions. (You can display certain countries_comp using \t|ggrepel::geom_label_repel(aes(label = country))|)
+  
+```{r simple_plots, fig.width=6, fig.height=3}
+countries_comp %>% 
+  ggplot(aes(x = hdi, y = overshoot_day, color = region)) + 
+  geom_point() + 
+  scale_colour_manual(values = pal) # + ggrepel::geom_label_repel(aes(label = country))
+
+##earths
+countries_comp %>% 
+  ggplot(aes(x = hdi, y = number_of_earths_required, color = region)) + 
+  geom_point() + 
+  scale_colour_manual(values = pal) # + ggrepel::geom_label_repel(aes(label = country))
+
+countries_comp %>% 
+  ggplot(aes(x = hdi, y = number_of_earths_required, color = region)) + 
+  geom_point() + 
+  scale_colour_manual(values = pal) + 
+  #ggrepel::geom_label_repel(aes(label = country)) + 
+  scale_y_log10()
+
+## countries_comp 
+countries_comp %>% 
+  ggplot(aes(x = hdi, y = number_of_countries_required, color = region)) + 
+  geom_point() + 
+  scale_colour_manual(values = pal) # + ggrepel::geom_label_repel(aes(label = country))
+countries_comp %>% 
+  ggplot(aes(x = hdi, y = number_of_countries_required, color = region)) + 
+  geom_point() + scale_y_log10() +
+  scale_colour_manual(values = pal) # + ggrepel::geom_label_repel(aes(label = country))
+```
+  
+ 
+
+## Principal Component Analysis
+
+4. Perform a PCA on the countries_comp.
+
+```{r fake_pca}
+#|echo: true
+#|eval: false
+
+# library(Factoshiny)
+# PCAshiny(countries_comp)
+# res.PCA<-PCA(countries_comp,quali.sup=c(4,5),graph=FALSE)
+# plot.PCA(res.PCA,choix='var')
+# plot.PCA(res.PCA)
+```
+
+  a. Discuss the quality of the representation on the first principal plan.
+  
+  b. How many axis should you consider?
+
+  c. Which variables are well represented?
+  
+  d. Could you discuss the link between `total_cons` and `overshoot_day`, `pop` and `overshoot_day`, `number_of_countries_required` and `overshot_day`.
+  
+  e. Cite the countries which contribute the most to the different axis.
+  
+  f. If you choose to consider `overshoot_day` as a supplementary variable, are you confident to be able to predict it with other variables ?
+  
+## Principal Component Analysis
+
+5. Explore the whole dataset `countries`. Remember that PCA is, at first, a solution to visualize the data and you are free to use it as you want. 

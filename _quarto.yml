@@ -29,7 +29,7 @@ website:
       - text: Labs
         menu:
         - text: PCA Labs
-      #     href: pca_labs.qmd        
+          href: pca_labs.qmd
       #   - text: Regression labs
       #     href: regression_labs.qmd
 

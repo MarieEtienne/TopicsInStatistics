@@ -790,10 +790,10 @@ PCAshiny(penguins)
 
 ## The Doubs River example
 
-```{r}
-#|echo: true
-#|eval: false
-
+```{r doubs_shiny}
+#| echo: true
+#| eval: false
+#| 
 PCAshiny(doubs.env)
 ```
 
