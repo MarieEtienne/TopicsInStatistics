@@ -17,6 +17,8 @@ website:
     right:
       - text: Lecture Notes
         menu:
+        - text: Introduction
+          href: introduction.qmd
         - text: Basic Linear Algebra for Data Science
           href: linearalgebra4DS.qmd
         - text: Principal Component Analysis
