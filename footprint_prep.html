@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Marie-Pierre Etienne">
+<meta name="dcterms.date" content="2024-08-25">
 
-<title>The Topics In Statistics Companion website ! - References</title>
+<title>The Topics In Statistics Companion website ! - Footprint Data preparation</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -100,11 +68,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/clipboard-2.0.6/clipboard.min.js"></script>
-<link href="site_libs/shareon-1.4.1/shareon.min.css" rel="stylesheet">
-<script src="site_libs/shareon-1.4.1/shareon.min.js"></script>
-<link href="site_libs/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet">
-<script src="site_libs/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -133,7 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./references.html" aria-current="page"> 
+    <a class="nav-link" href="./references.html"> 
 <span class="menu-text">References</span></a>
   </li>  
 </ul>
@@ -195,18 +158,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">References</h1>
+<h1 class="title">Footprint Data preparation</h1>
 </div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Marie-Pierre Etienne </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            https://marieetienne.github.io/TopicsInStatistics/
+          </p>
+      </div>
+  </div>
 
 <div class="quarto-title-meta">
 
-    
+      
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Last Updated on September, 2024</p>
+      <p class="date">August 25, 2024</p>
     </div>
   </div>
   
@@ -218,30 +194,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="cell">
-<div class="cell-output-display">
-
-</div>
-</div>
-<div class="hidden">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>liste <span class="ot">&lt;-</span> </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readLines</span>(<span class="st">'topics.bib'</span>) <span class="sc">|&gt;</span> </span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(stringr<span class="sc">::</span><span class="fu">str_detect</span>(value, <span class="at">pattern =</span> <span class="st">'@'</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">key =</span> stringr<span class="sc">::</span><span class="fu">str_remove</span>(value, <span class="at">pattern =</span> <span class="st">'@[:alnum:]+</span><span class="sc">\\</span><span class="st">{'</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">key =</span> stringr<span class="sc">::</span><span class="fu">str_remove</span>(key, <span class="at">pattern =</span> <span class="st">','</span>)) <span class="sc">|&gt;</span> </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">NoCite</span>(<span class="at">bib =</span> myBib, liste)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p>Cohen, M. X. (2022). <em>Practical linear algebra for data science</em>. O’Reilly Media, Inc.</p>
-<p>Gentle, J. E. (2007). “Matrix algebra”. In: <em>Springer texts in statistics, Springer, New York, NY, doi</em> 10, pp.&nbsp;978-0.</p>
-<p>Harville, D. A. (1998). <em>Matrix algebra from a statistician’s perspective</em>.</p>
-<p>Husson, F., S. Lê, and J. Pagès (2011). <em>Exploratory multivariate analysis by example using R</em>. Vol. 15. CRC press Boca Raton.</p>
-<p>Petersen, K. B., M. S. Pedersen, and others (2008). “The matrix cookbook”. In: <em>Technical University of Denmark</em> 7.15, p.&nbsp;510.</p>
-<p>Yoshida, R. (2021). <em>Linear algebra and its applications with R</em>. Chapman and Hall/CRC. URL: <a href="https://shainarace.github.io/LinearAlgebra/">https://shainarace.github.io/LinearAlgebra/</a>.</p>
+<p>This document presents the data preparation of the original Overshoot day data available on the website It contains ecological footprint and biocapacity results for 184 countries.</p>
+<p>Incomplete data will be omitted and the name of the different variables will be formatted in a more readable manner.</p>
 
 
 

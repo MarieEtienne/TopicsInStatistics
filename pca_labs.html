@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -68,11 +102,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script src="site_libs/clipboard-2.0.6/clipboard.min.js"></script>
-<link href="site_libs/shareon-1.4.1/shareon.min.css" rel="stylesheet">
-<script src="site_libs/shareon-1.4.1/shareon.min.js"></script>
-<link href="site_libs/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet">
-<script src="site_libs/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
 
 
 <link rel="stylesheet" href="styles.css">
@@ -111,6 +140,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Lecture Notes</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-lecture-notes">    
+        <li>
+    <a class="dropdown-item" href="./introduction.html">
+ <span class="dropdown-text">Introduction</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="./linearalgebra4DS.html">
  <span class="dropdown-text">Basic Linear Algebra for Data Science</span></a>
@@ -152,7 +185,21 @@ ul.task-list li input[type="checkbox"] {
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link active" data-scroll-target="#data-description">Data Description</a>
+  <ul class="collapse">
+  <li><a href="#some-vocabulary" id="toc-some-vocabulary" class="nav-link" data-scroll-target="#some-vocabulary">Some Vocabulary</a></li>
+  <li><a href="#variables-description" id="toc-variables-description" class="nav-link" data-scroll-target="#variables-description">Variables Description</a></li>
+  </ul></li>
+  <li><a href="#import-data" id="toc-import-data" class="nav-link" data-scroll-target="#import-data">Import data</a></li>
+  <li><a href="#descriptive-analysis" id="toc-descriptive-analysis" class="nav-link" data-scroll-target="#descriptive-analysis">Descriptive analysis</a></li>
+  <li><a href="#principal-component-analysis" id="toc-principal-component-analysis" class="nav-link" data-scroll-target="#principal-component-analysis">Principal Component Analysis</a></li>
+  <li><a href="#principal-component-analysis-1" id="toc-principal-component-analysis-1" class="nav-link" data-scroll-target="#principal-component-analysis-1">Principal Component Analysis</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -195,14 +242,300 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="data-description" class="level2">
+<h2 class="anchored" data-anchor-id="data-description">Data Description</h2>
+<p>The dataset used in this lab comes from the website It contains ecological footprint and biocapacity results for 184 countries_comp.</p>
+<section id="some-vocabulary" class="level3">
+<h3 class="anchored" data-anchor-id="some-vocabulary">Some Vocabulary</h3>
+<p>More details can be found here </p>
+<ul>
+<li><p>Global hectare (gha): It is the unit chosen to express all quantities of interest regarding Carbon consumption/emission. A unit of area corresponding to the average productivity of one hectare of world land. An hectare of farmland will be worth more global hectares than an hectare of desert.</p></li>
+<li><p>Ecological footprint (in gha): The number of gha required to produce the needs and absorb the waste of a country.</p></li>
+<li><p>Biocapacity (in gha): Biocapacity is given in gha per year, per country, and by land type. It translates the (actual) surface area of different land types in a country into gha, considering the climate, agricultural techniques, etc.</p></li>
+<li><p>number_of_earths_required (one value per country): The number of Earths needed if everyone lived like the people in the given country (number of gha per person in the country / 1.583 (number of gha per inhabitant of the Earth, this figure is updated every year))</p></li>
+<li><p>number_of_country_required (one per country): The number of countries_comp required for the country to be self-sufficient (e.g., Japan has 0.6 gha per inhabitant, uses 4.6 gha per year, so 4.6/0.6 Japan per year, Japan consumes 4.6/0.6 times what it is able to produce)</p></li>
+</ul>
+</section>
+<section id="variables-description" class="level3">
+<h3 class="anchored" data-anchor-id="variables-description">Variables Description</h3>
+<p>We can divide the variables into three groups:</p>
+<ul>
+<li>The socio-economic data of the country: “country” (the country), “data_quality”, “sdgi” (Sustainable Development Goals Index: an index indicating how close each country is to achieving sustainable development goals), “life_expectancy”, “hdi” (Human Development Index), “per_capita_gdp”, “region”, “income_group”, “pop”.</li>
+</ul>
+<p>The other two categories are given in gha by land type:</p>
+<ul>
+<li><p>cropland (food and fiber for human consumption, livestock feed, oilseeds, and rubber)</p></li>
+<li><p>grazing (for livestock)</p></li>
+<li><p>forest (for wood and timber)</p></li>
+<li><p>fish (for fish, counted based on the maximum sustainable yield for various fish species, then translated into product quantities)</p></li>
+<li><p>builtup (built-up area)</p></li>
+<li><p>total: represents the total ecological footprint.</p></li>
+<li><p>Productions (ending in _prod) They represent in gha the production of a country for each type of land, summing what is harvested and what is wasted per year. (For forest, for instance, it’s the area required to reproduce all the wood harvested.) (for cropland, grazing, forest, fish, built_up, carbon, total)</p></li>
+<li><p>Biocapacities (ending in _bioc) They translate the actual surface area of different land types in a country into gha, considering the climate and agricultural techniques.</p></li>
+<li><p>Consumptions by land type (ending in _cons) They represent in gha the consumption of a country (i.e., the number of gha it produces minus the number it exports plus the number it imports). These data are available by land type because different imported and exported products are linked to different land types.</p></li>
+</ul>
+<p>Remarks: Built-up areas have the same values for cons, prod, and biocapacity. It is considered that all built-up areas are used within the country. To avoid considering the same variable three times, we will only keep one.</p>
+</section>
+</section>
+<section id="import-data" class="level2">
+<h2 class="anchored" data-anchor-id="import-data">Import data</h2>
+<p>The data have been prepared to be easy more easy to manipulate. The preparation script is available on the Github repository and is named <code>footprint_prep.qmd</code>. The resulting datasets are available as a<code>.RData</code> object <code>data/countries_comp.RData</code> and <code>data/countries.RData</code>. The first one is a simplified version focusing on the socio economic variables.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_set</span>(<span class="fu">theme_minimal</span>())</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/countries_comp.RData"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(<span class="st">"data/countries.RData"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Identify countries by their names</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pal <span class="ot">&lt;-</span> <span class="fu">wes_palette</span>(<span class="dv">8</span>, <span class="at">name =</span> <span class="st">"Zissou1"</span>, <span class="at">type =</span> <span class="st">"continuous"</span>) <span class="co"># nice color based on wesanderson moovie</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="descriptive-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="descriptive-analysis">Descriptive analysis</h2>
+<ol type="1">
+<li>Conduct a brief descriptive study of the different variables</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(countries)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> data_quality            sdgi       life_expectancy      hdi        
+ Length:184         Min.   :38.30   Min.   :52.80   Min.   :0.3910  
+ Class :character   1st Qu.:58.75   1st Qu.:67.05   1st Qu.:0.5820  
+ Mode  :character   Median :68.30   Median :73.82   Median :0.7350  
+                    Mean   :66.69   Mean   :72.29   Mean   :0.7146  
+                    3rd Qu.:74.20   3rd Qu.:77.44   3rd Qu.:0.8230  
+                    Max.   :85.90   Max.   :84.21   Max.   :0.9560  
+                    NA's   :21      NA's   :8       NA's   :7       
+ per_capita_gdp        region          income_group            pop           
+ Min.   :   210.8   Length:184         Length:184         Min.   :   0.0716  
+ 1st Qu.:  1756.2   Class :character   Class :character   1st Qu.:   2.7964  
+ Median :  5467.9   Mode  :character   Mode  :character   Median :   9.6092  
+ Mean   : 13839.4                                         Mean   :  41.4348  
+ 3rd Qu.: 15881.8                                         3rd Qu.:  29.5638  
+ Max.   :111380.6                                         Max.   :1459.3800  
+ NA's   :12                                                                  
+ cropland_prod       grazing_prod     forest_product_prod   fish_prod       
+ Min.   :0.000846   Min.   :0.00000   Min.   :0.000492    Min.   :0.000000  
+ 1st Qu.:0.154880   1st Qu.:0.02598   1st Qu.:0.091821    1st Qu.:0.003108  
+ Median :0.332667   Median :0.09402   Median :0.224672    Median :0.026386  
+ Mean   :0.475706   Mean   :0.26175   Mean   :0.543812    Mean   :0.184808  
+ 3rd Qu.:0.568109   3rd Qu.:0.20968   3rd Qu.:0.482257    3rd Qu.:0.116898  
+ Max.   :2.751370   Max.   :5.44232   Max.   :8.136008    Max.   :5.518731  
+ NA's   :22         NA's   :22        NA's   :22          NA's   :22        
+  carbon_prod          total_prod      cropland_cons      grazing_cons    
+ Min.   : 0.009275   Min.   : 0.3001   Min.   :0.08915   Min.   :0.00000  
+ 1st Qu.: 0.215931   1st Qu.: 1.2149   1st Qu.:0.37924   1st Qu.:0.07877  
+ Median : 0.832324   Median : 1.9104   Median :0.53177   Median :0.17775  
+ Mean   : 1.506820   Mean   : 2.9263   Mean   :0.54153   Mean   :0.25956  
+ 3rd Qu.: 2.066430   3rd Qu.: 3.7680   3rd Qu.:0.68909   3rd Qu.:0.31387  
+ Max.   :11.810378   Max.   :12.0559   Max.   :1.49325   Max.   :4.44132  
+ NA's   :22          NA's   :1         NA's   :22        NA's   :22       
+ forest_product_cons   fish_cons         carbon_cons         total_cons     
+ Min.   :0.02045     Min.   :0.000756   Min.   : 0.03487   Min.   : 0.5085  
+ 1st Qu.:0.16786     1st Qu.:0.025297   1st Qu.: 0.32282   1st Qu.: 1.5073  
+ Median :0.25760     Median :0.068960   Median : 1.16135   Median : 2.3916  
+ Mean   :0.42907     Mean   :0.149919   Mean   : 1.73370   Mean   : 3.1477  
+ 3rd Qu.:0.49035     3rd Qu.:0.141522   3rd Qu.: 2.57061   3rd Qu.: 4.3699  
+ Max.   :4.03395     Max.   :5.144393   Max.   :12.82295   Max.   :14.2710  
+ NA's   :22          NA's   :22         NA's   :22         NA's   :1        
+ cropland_bioc      grazing_land_bioc forest_land_bioc   fishing_ground_bioc
+ Min.   :0.000846   Min.   :0.00000   Min.   : 0.00000   Min.   : 0.00000   
+ 1st Qu.:0.154880   1st Qu.:0.04866   1st Qu.: 0.07533   1st Qu.: 0.01944   
+ Median :0.332667   Median :0.13673   Median : 0.30881   Median : 0.10781   
+ Mean   :0.475706   Mean   :0.41283   Mean   : 2.44214   Mean   : 0.59577   
+ 3rd Qu.:0.568109   3rd Qu.:0.37282   3rd Qu.: 1.29848   3rd Qu.: 0.33874   
+ Max.   :2.751370   Max.   :7.22182   Max.   :78.24552   Max.   :13.73367   
+ NA's   :22         NA's   :22        NA's   :22         NA's   :22         
+    builtup_       total_biocapacity   ecological      
+ Min.   :0.00000   Min.   : 0.0567   Min.   :-13.3506  
+ 1st Qu.:0.03735   1st Qu.: 0.6328   1st Qu.: -2.0697  
+ Median :0.05612   Median : 1.2998   Median : -0.7640  
+ Mean   :0.06658   Mean   : 3.6791   Mean   :  0.5313  
+ 3rd Qu.:0.08554   3rd Qu.: 2.7252   3rd Qu.:  0.2094  
+ Max.   :0.22554   Max.   :92.1399   Max.   : 90.2615  
+ NA's   :22        NA's   :1         NA's   :1         
+ number_of_earths_required number_of_countries_required
+ Min.   :0.3213            Min.   :  0.02039           
+ 1st Qu.:0.9524            1st Qu.:  0.89307           
+ Median :1.5112            Median :  1.83882           
+ Mean   :1.9889            Mean   :  3.73551           
+ 3rd Qu.:2.7612            3rd Qu.:  3.08943           
+ Max.   :9.0173            Max.   :104.61627           
+ NA's   :1                 NA's   :1                   
+   overshoot                      overshoot_day  
+ Min.   :2018-02-10 11:28:07.17   Min.   : 40.0  
+ 1st Qu.:2018-04-27 15:37:18.96   1st Qu.:131.5  
+ Median :2018-06-17 10:29:52.94   Median :241.0  
+ Mean   :2018-07-09 11:40:43.92   Mean   :238.0  
+ 3rd Qu.:2018-09-12 11:15:33.48   3rd Qu.:365.0  
+ Max.   :2018-12-26 08:45:50.03   Max.   :365.0  
+ NA's   :52                       NA's   :1      </code></pre>
+</div>
+</div>
+<pre><code>a. Represent, by world region, the overshoot day, and then the development indices (hdi, sdgi)</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> overshoot_day, <span class="at">fill =</span> region, <span class="at">x =</span> region)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span>pal) <span class="sc">+</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha=</span><span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"jitter"</span>) <span class="sc">+</span> <span class="fu">coord_flip</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1 row containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
 <div class="cell-output-display">
-
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<hr>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(overshoot_day,  hdi, region, total_biocapacity) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span><span class="st">"region"</span>, <span class="at">names_to =</span> <span class="st">"type"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">type =</span> <span class="fu">factor</span>(type, <span class="fu">c</span>(<span class="st">"overshoot_day"</span>, <span class="st">"sdgi"</span>, <span class="st">"hdi"</span>, <span class="st">"total_biocapacity"</span>))) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> value, <span class="at">fill =</span> region, <span class="at">x =</span> region)) <span class="sc">+</span> </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">position =</span> <span class="st">"jitter"</span>)  <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(type <span class="sc">~</span> ., <span class="at">scale =</span> <span class="st">"free_y"</span>) <span class="sc">+</span> <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_blank</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 9 rows containing non-finite outside the scale range
+(`stat_boxplot()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 9 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li>Represent the overshoot day according to the human development index, then the number of countries_comp, then the number of Earths required per country. Make a representation allowing a visual comparison of world regions. (You can display certain countries_comp using ggrepel::geom_label_repel(aes(label = country))|)</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hdi, <span class="at">y =</span> overshoot_day, <span class="at">color =</span> region)) <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="co"># + ggrepel::geom_label_repel(aes(label = country))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/simple_plots-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="do">##earths</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hdi, <span class="at">y =</span> number_of_earths_required, <span class="at">color =</span> region)) <span class="sc">+</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="co"># + ggrepel::geom_label_repel(aes(label = country))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/simple_plots-2.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hdi, <span class="at">y =</span> number_of_earths_required, <span class="at">color =</span> region)) <span class="sc">+</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">#ggrepel::geom_label_repel(aes(label = country)) + </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_log10</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/simple_plots-3.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="do">## countries_comp </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hdi, <span class="at">y =</span> number_of_countries_required, <span class="at">color =</span> region)) <span class="sc">+</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="co"># + ggrepel::geom_label_repel(aes(label = country))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/simple_plots-4.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>countries_comp <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> hdi, <span class="at">y =</span> number_of_countries_required, <span class="at">color =</span> region)) <span class="sc">+</span> </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">scale_y_log10</span>() <span class="sc">+</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="co"># + ggrepel::geom_label_repel(aes(label = country))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 8 rows containing missing values or values outside the scale range
+(`geom_point()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="pca_labs_files/figure-html/simple_plots-5.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="principal-component-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="principal-component-analysis">Principal Component Analysis</h2>
+<ol start="4" type="1">
+<li>Perform a PCA on the countries_comp.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co">#|echo: true</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co">#|eval: false</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># library(Factoshiny)</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># PCAshiny(countries_comp)</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="co"># res.PCA&lt;-PCA(countries_comp,quali.sup=c(4,5),graph=FALSE)</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># plot.PCA(res.PCA,choix='var')</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># plot.PCA(res.PCA)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li><p>Discuss the quality of the representation on the first principal plan.</p></li>
+<li><p>How many axis should you consider?</p></li>
+<li><p>Which variables are well represented?</p></li>
+<li><p>Could you discuss the link between <code>total_cons</code> and <code>overshoot_day</code>, <code>pop</code> and <code>overshoot_day</code>, <code>number_of_countries_required</code> and <code>overshot_day</code>.</p></li>
+<li><p>Cite the countries which contribute the most to the different axis.</p></li>
+<li><p>If you choose to consider <code>overshoot_day</code> as a supplementary variable, are you confident to be able to predict it with other variables ?</p></li>
+</ol>
+</section>
+<section id="principal-component-analysis-1" class="level2">
+<h2 class="anchored" data-anchor-id="principal-component-analysis-1">Principal Component Analysis</h2>
+<ol start="5" type="1">
+<li>Explore the whole dataset <code>countries</code>. Remember that PCA is, at first, a solution to visualize the data and you are free to use it as you want.</li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

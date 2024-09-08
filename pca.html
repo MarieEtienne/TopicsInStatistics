@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2024-07-24">
+  <meta name="dcterms.date" content="2024-09-08">
   <title>The Topics In Statistics Companion website ! - Principal Component Analysis</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="mpe_pres_revealjs.css">
@@ -349,7 +414,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2024-07-24</p>
+  <p class="date">2024-09-08</p>
 </section>
 <section class="slide level2">
 
@@ -508,8 +573,8 @@ Marie-Pierre Etienne
 <h3 id="idea-1-represent-the-relationships-between-variables-2-by-2-2">Idea 1: Represent the relationships between variables 2 by 2</h3>
 <div class="cell">
 <div class="cell-output-display">
-<div id="htmlwidget-e098ffa9df36ff6a8668" style="width:500px;height:500px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e098ffa9df36ff6a8668">{"x":{"visdat":{"3f468830f52":["function () ","plotlyVisDat"]},"cur_data":"3f468830f52","attrs":{"3f468830f52":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","size":12,"inherit":true}},"layout":{"width":500,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter plot","scene":{"camera":{"eye":{"x":-2,"y":0,"z":0}},"center":{"x":17.164864864864864},"xaxis":{"title":"bill_depth_mm"},"yaxis":{"title":"-body_mass_g"},"zaxis":{"title":"flipper_length_mm"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[18.699999999999999,17.399999999999999,18,19.300000000000001,20.600000000000001,17.800000000000001,19.600000000000001,17.600000000000001,21.199999999999999,21.100000000000001,17.800000000000001,19,20.699999999999999,18.399999999999999,21.5,18.300000000000001,18.699999999999999,19.199999999999999,18.100000000000001,17.199999999999999,18.899999999999999,18.600000000000001,17.899999999999999,18.600000000000001,18.899999999999999,16.699999999999999,18.100000000000001,17.800000000000001,18.899999999999999,17,21.100000000000001,20,18.5,19.300000000000001,19.100000000000001,18,18.399999999999999,18.5,19.699999999999999,16.899999999999999,18.800000000000001,19,17.899999999999999,21.199999999999999,17.699999999999999,18.899999999999999,17.899999999999999,19.5,18.100000000000001,18.600000000000001,17.5,18.800000000000001,16.600000000000001,19.100000000000001,16.899999999999999,21.100000000000001,17,18.199999999999999,17.100000000000001,18,16.199999999999999,19.100000000000001,16.600000000000001,19.399999999999999,19,18.399999999999999,17.199999999999999,18.899999999999999,17.5,18.5,16.800000000000001,19.399999999999999,16.100000000000001,19.100000000000001,17.199999999999999,17.600000000000001,18.800000000000001,19.399999999999999,17.800000000000001,20.300000000000001,19.5,18.600000000000001,19.199999999999999,18.800000000000001,18,18.100000000000001,17.100000000000001,18.100000000000001,17.300000000000001,18.899999999999999,18.600000000000001,18.5,16.100000000000001,18.5,17.899999999999999,20,16,20,18.600000000000001,18.899999999999999,17.199999999999999,20,17,19,16.5,20.300000000000001,17.699999999999999,19.5,20.699999999999999,18.300000000000001,17,20.5,17,18.600000000000001,17.199999999999999,19.800000000000001,17,18.5,15.9,19,17.600000000000001,18.300000000000001,17.100000000000001,18,17.899999999999999,19.199999999999999,18.5,18.5,17.600000000000001,17.5,17.5,20.100000000000001,16.5,17.899999999999999,17.100000000000001,17.199999999999999,15.5,17,16.800000000000001,18.699999999999999,18.600000000000001,18.399999999999999,17.800000000000001,18.100000000000001,17.100000000000001,18.5,13.199999999999999,16.300000000000001,14.1,15.199999999999999,14.5,13.5,14.6,15.300000000000001,13.4,15.4,13.699999999999999,16.100000000000001,13.699999999999999,14.6,14.6,15.699999999999999,13.5,15.199999999999999,14.5,15.1,14.300000000000001,14.5,14.5,15.800000000000001,13.1,15.1,15,14.300000000000001,15.300000000000001,15.300000000000001,14.199999999999999,14.5,17,14.800000000000001,16.300000000000001,13.699999999999999,17.300000000000001,13.6,15.699999999999999,13.699999999999999,16,13.699999999999999,15,15.9,13.9,13.9,15.9,13.300000000000001,15.800000000000001,14.199999999999999,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.300000000000001,13.800000000000001,14.9,13.9,15.699999999999999,14.199999999999999,16.800000000000001,16.199999999999999,14.199999999999999,15,15,15.6,15.6,14.800000000000001,15,16,14.199999999999999,16.300000000000001,13.800000000000001,16.399999999999999,14.5,15.6,14.6,15.9,13.800000000000001,17.300000000000001,14.4,14.199999999999999,14,17,15,17.100000000000001,14.5,16.100000000000001,14.699999999999999,15.699999999999999,15.800000000000001,14.6,14.4,16.5,15,17,15.5,15,16.100000000000001,14.699999999999999,15.800000000000001,14,15.1,15.199999999999999,15.9,15.199999999999999,16.300000000000001,14.1,16,16.199999999999999,13.699999999999999,14.300000000000001,15.699999999999999,14.800000000000001,16.100000000000001,17.899999999999999,19.5,19.199999999999999,18.699999999999999,19.800000000000001,17.800000000000001,18.199999999999999,18.199999999999999,18.899999999999999,19.899999999999999,17.800000000000001,20.300000000000001,17.300000000000001,18.100000000000001,17.100000000000001,19.600000000000001,20,17.800000000000001,18.600000000000001,18.199999999999999,17.300000000000001,17.5,16.600000000000001,19.399999999999999,17.899999999999999,19,18.399999999999999,19,17.800000000000001,20,16.600000000000001,20.800000000000001,16.699999999999999,18.800000000000001,18.600000000000001,16.800000000000001,18.300000000000001,20.699999999999999,16.600000000000001,19.899999999999999,19.5,17.5,19.100000000000001,17,17.899999999999999,18.5,17.899999999999999,19.600000000000001,18.699999999999999,17.300000000000001,16.399999999999999,19,17.300000000000001,19.699999999999999,17.300000000000001,18.800000000000001,16.600000000000001,19.899999999999999,18.800000000000001,19.399999999999999,19.5,16.5,17,19.800000000000001,18.100000000000001,18.199999999999999,19,18.699999999999999],"y":[-3750,-3800,-3250,-3450,-3650,-3625,-4675,-3200,-3800,-4400,-3700,-3450,-4500,-3325,-4200,-3400,-3600,-3800,-3950,-3800,-3800,-3550,-3200,-3150,-3950,-3250,-3900,-3300,-3900,-3325,-4150,-3950,-3550,-3300,-4650,-3150,-3900,-3100,-4400,-3000,-4600,-3425,-3450,-4150,-3500,-4300,-3450,-4050,-2900,-3700,-3550,-3800,-2850,-3750,-3150,-4400,-3600,-4050,-2850,-3950,-3350,-4100,-3050,-4450,-3600,-3900,-3550,-4150,-3700,-4250,-3700,-3900,-3550,-4000,-3200,-4700,-3800,-4200,-3350,-3550,-3800,-3500,-3950,-3600,-3550,-4300,-3400,-4450,-3300,-4300,-3700,-4350,-2900,-4100,-3725,-4725,-3075,-4250,-2925,-3550,-3750,-3900,-3175,-4775,-3825,-4600,-3200,-4275,-3900,-4075,-2900,-3775,-3350,-3325,-3150,-3500,-3450,-3875,-3050,-4000,-3275,-4300,-3050,-4000,-3325,-3500,-3500,-4475,-3425,-3900,-3175,-3975,-3400,-4250,-3400,-3475,-3050,-3725,-3000,-3650,-4250,-3475,-3450,-3750,-3700,-4000,-4500,-5700,-4450,-5700,-5400,-4550,-4800,-5200,-4400,-5150,-4650,-5550,-4650,-5850,-4200,-5850,-4150,-6300,-4800,-5350,-5700,-5000,-4400,-5050,-5000,-5100,-5650,-4600,-5550,-5250,-4700,-5050,-6050,-5150,-5400,-4950,-5250,-4350,-5350,-3950,-5700,-4300,-4750,-5550,-4900,-4200,-5400,-5100,-5300,-4850,-5300,-4400,-5000,-4900,-5050,-4300,-5000,-4450,-5550,-4200,-5300,-4400,-5650,-4700,-5700,-5800,-4700,-5550,-4750,-5000,-5100,-5200,-4700,-5800,-4600,-6000,-4750,-5950,-4625,-5450,-4725,-5350,-4750,-5600,-4600,-5300,-4875,-5550,-4950,-5400,-4750,-5650,-4850,-5200,-4925,-4875,-4625,-5250,-4850,-5600,-4975,-5500,-5500,-4700,-5500,-4575,-5500,-5000,-5950,-4650,-5500,-4375,-5850,-6000,-4925,-4850,-5750,-5200,-5400,-3500,-3900,-3650,-3525,-3725,-3950,-3250,-3750,-4150,-3700,-3800,-3775,-3700,-4050,-3575,-4050,-3300,-3700,-3450,-4400,-3600,-3400,-2900,-3800,-3300,-4150,-3400,-3800,-3700,-4550,-3200,-4300,-3350,-4100,-3600,-3900,-3850,-4800,-2700,-4500,-3950,-3650,-3550,-3500,-3675,-4450,-3400,-4300,-3250,-3675,-3325,-3950,-3600,-4050,-3350,-3450,-3250,-4050,-3800,-3525,-3950,-3650,-3650,-4000,-3400,-3775,-4100,-3775],"z":[181,186,195,193,190,181,195,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201,211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,215,210,219,208,209,216,229,213,230,217,230,222,214,215,222,212,213,192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(31,119,180,1)"}},"textfont":{"size":55},"error_y":{"color":"rgba(31,119,180,1)","width":55},"error_x":{"color":"rgba(31,119,180,1)","width":55},"line":{"color":"rgba(31,119,180,1)","width":55},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-122b3aa6af27e5661273" style="width:500px;height:500px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-122b3aa6af27e5661273">{"x":{"visdat":{"5991f99d128":["function () ","plotlyVisDat"]},"cur_data":"5991f99d128","attrs":{"5991f99d128":{"x":{},"y":{},"z":{},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d","mode":"markers","size":12,"inherit":true}},"layout":{"width":500,"height":500,"margin":{"b":40,"l":60,"t":25,"r":10},"title":"3D Scatter plot","scene":{"camera":{"eye":{"x":-2,"y":0,"z":0}},"center":{"x":17.164864864864864},"xaxis":{"title":"bill_depth_mm"},"yaxis":{"title":"-body_mass_g"},"zaxis":{"title":"flipper_length_mm"}},"hovermode":"closest","showlegend":false},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"x":[18.699999999999999,17.399999999999999,18,19.300000000000001,20.600000000000001,17.800000000000001,19.600000000000001,17.600000000000001,21.199999999999999,21.100000000000001,17.800000000000001,19,20.699999999999999,18.399999999999999,21.5,18.300000000000001,18.699999999999999,19.199999999999999,18.100000000000001,17.199999999999999,18.899999999999999,18.600000000000001,17.899999999999999,18.600000000000001,18.899999999999999,16.699999999999999,18.100000000000001,17.800000000000001,18.899999999999999,17,21.100000000000001,20,18.5,19.300000000000001,19.100000000000001,18,18.399999999999999,18.5,19.699999999999999,16.899999999999999,18.800000000000001,19,17.899999999999999,21.199999999999999,17.699999999999999,18.899999999999999,17.899999999999999,19.5,18.100000000000001,18.600000000000001,17.5,18.800000000000001,16.600000000000001,19.100000000000001,16.899999999999999,21.100000000000001,17,18.199999999999999,17.100000000000001,18,16.199999999999999,19.100000000000001,16.600000000000001,19.399999999999999,19,18.399999999999999,17.199999999999999,18.899999999999999,17.5,18.5,16.800000000000001,19.399999999999999,16.100000000000001,19.100000000000001,17.199999999999999,17.600000000000001,18.800000000000001,19.399999999999999,17.800000000000001,20.300000000000001,19.5,18.600000000000001,19.199999999999999,18.800000000000001,18,18.100000000000001,17.100000000000001,18.100000000000001,17.300000000000001,18.899999999999999,18.600000000000001,18.5,16.100000000000001,18.5,17.899999999999999,20,16,20,18.600000000000001,18.899999999999999,17.199999999999999,20,17,19,16.5,20.300000000000001,17.699999999999999,19.5,20.699999999999999,18.300000000000001,17,20.5,17,18.600000000000001,17.199999999999999,19.800000000000001,17,18.5,15.9,19,17.600000000000001,18.300000000000001,17.100000000000001,18,17.899999999999999,19.199999999999999,18.5,18.5,17.600000000000001,17.5,17.5,20.100000000000001,16.5,17.899999999999999,17.100000000000001,17.199999999999999,15.5,17,16.800000000000001,18.699999999999999,18.600000000000001,18.399999999999999,17.800000000000001,18.100000000000001,17.100000000000001,18.5,13.199999999999999,16.300000000000001,14.1,15.199999999999999,14.5,13.5,14.6,15.300000000000001,13.4,15.4,13.699999999999999,16.100000000000001,13.699999999999999,14.6,14.6,15.699999999999999,13.5,15.199999999999999,14.5,15.1,14.300000000000001,14.5,14.5,15.800000000000001,13.1,15.1,15,14.300000000000001,15.300000000000001,15.300000000000001,14.199999999999999,14.5,17,14.800000000000001,16.300000000000001,13.699999999999999,17.300000000000001,13.6,15.699999999999999,13.699999999999999,16,13.699999999999999,15,15.9,13.9,13.9,15.9,13.300000000000001,15.800000000000001,14.199999999999999,14.1,14.4,15,14.4,15.4,13.9,15,14.5,15.300000000000001,13.800000000000001,14.9,13.9,15.699999999999999,14.199999999999999,16.800000000000001,16.199999999999999,14.199999999999999,15,15,15.6,15.6,14.800000000000001,15,16,14.199999999999999,16.300000000000001,13.800000000000001,16.399999999999999,14.5,15.6,14.6,15.9,13.800000000000001,17.300000000000001,14.4,14.199999999999999,14,17,15,17.100000000000001,14.5,16.100000000000001,14.699999999999999,15.699999999999999,15.800000000000001,14.6,14.4,16.5,15,17,15.5,15,16.100000000000001,14.699999999999999,15.800000000000001,14,15.1,15.199999999999999,15.9,15.199999999999999,16.300000000000001,14.1,16,16.199999999999999,13.699999999999999,14.300000000000001,15.699999999999999,14.800000000000001,16.100000000000001,17.899999999999999,19.5,19.199999999999999,18.699999999999999,19.800000000000001,17.800000000000001,18.199999999999999,18.199999999999999,18.899999999999999,19.899999999999999,17.800000000000001,20.300000000000001,17.300000000000001,18.100000000000001,17.100000000000001,19.600000000000001,20,17.800000000000001,18.600000000000001,18.199999999999999,17.300000000000001,17.5,16.600000000000001,19.399999999999999,17.899999999999999,19,18.399999999999999,19,17.800000000000001,20,16.600000000000001,20.800000000000001,16.699999999999999,18.800000000000001,18.600000000000001,16.800000000000001,18.300000000000001,20.699999999999999,16.600000000000001,19.899999999999999,19.5,17.5,19.100000000000001,17,17.899999999999999,18.5,17.899999999999999,19.600000000000001,18.699999999999999,17.300000000000001,16.399999999999999,19,17.300000000000001,19.699999999999999,17.300000000000001,18.800000000000001,16.600000000000001,19.899999999999999,18.800000000000001,19.399999999999999,19.5,16.5,17,19.800000000000001,18.100000000000001,18.199999999999999,19,18.699999999999999],"y":[-3750,-3800,-3250,-3450,-3650,-3625,-4675,-3200,-3800,-4400,-3700,-3450,-4500,-3325,-4200,-3400,-3600,-3800,-3950,-3800,-3800,-3550,-3200,-3150,-3950,-3250,-3900,-3300,-3900,-3325,-4150,-3950,-3550,-3300,-4650,-3150,-3900,-3100,-4400,-3000,-4600,-3425,-3450,-4150,-3500,-4300,-3450,-4050,-2900,-3700,-3550,-3800,-2850,-3750,-3150,-4400,-3600,-4050,-2850,-3950,-3350,-4100,-3050,-4450,-3600,-3900,-3550,-4150,-3700,-4250,-3700,-3900,-3550,-4000,-3200,-4700,-3800,-4200,-3350,-3550,-3800,-3500,-3950,-3600,-3550,-4300,-3400,-4450,-3300,-4300,-3700,-4350,-2900,-4100,-3725,-4725,-3075,-4250,-2925,-3550,-3750,-3900,-3175,-4775,-3825,-4600,-3200,-4275,-3900,-4075,-2900,-3775,-3350,-3325,-3150,-3500,-3450,-3875,-3050,-4000,-3275,-4300,-3050,-4000,-3325,-3500,-3500,-4475,-3425,-3900,-3175,-3975,-3400,-4250,-3400,-3475,-3050,-3725,-3000,-3650,-4250,-3475,-3450,-3750,-3700,-4000,-4500,-5700,-4450,-5700,-5400,-4550,-4800,-5200,-4400,-5150,-4650,-5550,-4650,-5850,-4200,-5850,-4150,-6300,-4800,-5350,-5700,-5000,-4400,-5050,-5000,-5100,-5650,-4600,-5550,-5250,-4700,-5050,-6050,-5150,-5400,-4950,-5250,-4350,-5350,-3950,-5700,-4300,-4750,-5550,-4900,-4200,-5400,-5100,-5300,-4850,-5300,-4400,-5000,-4900,-5050,-4300,-5000,-4450,-5550,-4200,-5300,-4400,-5650,-4700,-5700,-5800,-4700,-5550,-4750,-5000,-5100,-5200,-4700,-5800,-4600,-6000,-4750,-5950,-4625,-5450,-4725,-5350,-4750,-5600,-4600,-5300,-4875,-5550,-4950,-5400,-4750,-5650,-4850,-5200,-4925,-4875,-4625,-5250,-4850,-5600,-4975,-5500,-5500,-4700,-5500,-4575,-5500,-5000,-5950,-4650,-5500,-4375,-5850,-6000,-4925,-4850,-5750,-5200,-5400,-3500,-3900,-3650,-3525,-3725,-3950,-3250,-3750,-4150,-3700,-3800,-3775,-3700,-4050,-3575,-4050,-3300,-3700,-3450,-4400,-3600,-3400,-2900,-3800,-3300,-4150,-3400,-3800,-3700,-4550,-3200,-4300,-3350,-4100,-3600,-3900,-3850,-4800,-2700,-4500,-3950,-3650,-3550,-3500,-3675,-4450,-3400,-4300,-3250,-3675,-3325,-3950,-3600,-4050,-3350,-3450,-3250,-4050,-3800,-3525,-3950,-3650,-3650,-4000,-3400,-3775,-4100,-3775],"z":[181,186,195,193,190,181,195,182,191,198,185,195,197,184,194,174,180,189,185,180,187,183,187,172,180,178,178,188,184,195,196,190,180,181,184,182,195,186,196,185,190,182,190,191,186,188,190,200,187,191,186,193,181,194,185,195,185,192,184,192,195,188,190,198,190,190,196,197,190,195,191,184,187,195,189,196,187,193,191,194,190,189,189,190,202,205,185,186,187,208,190,196,178,192,192,203,183,190,193,184,199,190,181,197,198,191,193,197,191,196,188,199,189,189,187,198,176,202,186,199,191,195,191,210,190,197,193,199,187,190,191,200,185,193,193,187,188,190,192,185,190,184,195,193,187,201,211,230,210,218,215,210,211,219,209,215,214,216,214,213,210,217,210,221,209,222,218,215,213,215,215,215,215,210,220,222,209,207,230,220,220,213,219,208,208,208,225,210,216,222,217,210,225,213,215,210,220,210,225,217,220,208,220,208,224,208,221,214,231,219,230,229,220,223,216,221,221,217,216,230,209,220,215,223,212,221,212,224,212,228,218,218,212,230,218,228,212,224,214,226,216,222,203,225,219,228,215,228,215,210,219,208,209,216,229,213,230,217,230,222,214,215,222,212,213,192,196,193,188,197,198,178,197,195,198,193,194,185,201,190,201,197,181,190,195,181,191,187,193,195,197,200,200,191,205,187,201,187,203,195,199,195,210,192,205,210,187,196,196,196,201,190,212,187,198,199,201,193,203,187,197,191,203,202,194,206,189,195,207,202,193,210,198],"type":"scatter3d","mode":"markers","marker":{"color":"rgba(31,119,180,1)","size":[55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55],"sizemode":"area","line":{"color":"rgba(31,119,180,1)"}},"textfont":{"size":55},"error_y":{"color":"rgba(31,119,180,1)","width":55},"error_x":{"color":"rgba(31,119,180,1)","width":55},"line":{"color":"rgba(31,119,180,1)","width":55},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </section>
@@ -605,7 +670,7 @@ Marie-Pierre Etienne
 </ul>
 <p><span class="math inline">\(G = (x_{.,1}, \cdots, x_{.,d})^\intercal\)</span> and <span class="math inline">\(I_G = min_{a\in \R^d} I_a\)</span></p>
 <h3 id="remarks-1">Remarks</h3>
-<p>Assume, we deal with centred sacled variables:</p>
+<p>Assume, we deal with centred scaled variables:</p>
 <p><span class="math inline">\(I_G = \sum_{i=1}^n \norm{X_{i,.}^\intercal - G}^2 = \sum_{i=1}^n \class{rouge}{\sum_{k=1}^d} (x_{ik} - x_{.,k})^2 = \class{rouge}{\sum_{k=1}^d} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2.\)</span></p>
 <p>As the variables are scaled, <span class="math inline">\(\sum_{i=1}^n  (x_{ik} - x_{.,k})^2 = n s^2_k = n.\)</span> and <span class="math inline">\(I_G=nd.\)</span></p>
 <p><span class="rouge">Total inertia with scaled centred variables is <span class="math inline">\(nd\)</span></span></p>
@@ -661,16 +726,21 @@ I &amp; = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
 &amp; = tr(\sum_{i}^n x_i x_i^\intercal ) \cr
 &amp; = tr(X^\intercal  X) \cr
 \end{align}\]</span></p>
+<div class="columns">
+<div class="column" style="width:45%;">
 <h3 id="remarks-2">Remarks</h3>
 <ul>
 <li><p><span class="math inline">\(X^\intercal  X\)</span> is the covariance matrix of the <span class="math inline">\(d\)</span> variables,</p></li>
 <li><p><span class="math inline">\(X^\intercal  X\)</span> is a symmetric <span class="math inline">\(\R^{d\times d}\)</span> matrix, and the corresponding SVD</p></li>
 </ul>
-<p><span class="math display">\[X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q^\intercal D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.\]</span></p>
+<p><span class="math display">\[X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.\]</span></p>
+</div><div class="column" style="width:45%;">
 <ul>
-<li><span class="math inline">\(I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(P^\intercal P D ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,\)</span><br>
+<li><span class="math inline">\(I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(Q^\intercal Q D  ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,\)</span><br>
 where <span class="math inline">\(\sigma^2_k\)</span> stands for the k<span class="math inline">\(^{th}\)</span> eigen value.</li>
 </ul>
+</div>
+</div>
 </section></section>
 <section>
 <section id="principal-components-construction" class="title-slide slide level1 center">
@@ -682,17 +752,288 @@ where <span class="math inline">\(\sigma^2_k\)</span> stands for the k<span clas
 <p>Consider <span class="math inline">\(I_{\Delta_{U}}\)</span> the inertia with respect to <span class="math inline">\(\Delta_{U}\)</span> affine subspace containing <span class="math inline">\(G\)</span> with directed bu the unitary vector <span class="math inline">\(U\)</span>.</p>
 <p><span class="math inline">\(I_{\Delta_{U}}\)</span> is the cost of the projection on <span class="math inline">\(\Delta_{U}\)</span>, i.e the loss information.</p>
 <p><strong>Minimizing <span class="math inline">\(I_{\Delta_{U}}\)</span></strong> equals <strong>maximizing <span class="math inline">\(I_{\Delta_{U^T}}\)</span></strong>, i.e the dispersion of the projected set of data points.</p>
-<h3 id="projection-on-u">Projection on U</h3>
+<h3 id="projection-on-u">Projection on <span class="math inline">\(U\)</span></h3>
 <p><span class="math inline">\(d(X_{i,}, U^\intercal)^2= \left ( x_i \dot U^\intercal \right )^2 = \left ( X_i^\intercal U \right )^2 = cos(\theta)^2 \norm{x_i}^2 ,\)</span></p>
 <p>So that <span class="math display">\[\begin{align}
 I_{\Delta_{U^\intercal}} &amp; = \sum_{i=1}^n  d(X_{i,}, U^\intercal)^2 \cr
-                         &amp; = \norm{X U} \cr
+                         &amp; = \norm{X U}^2 \cr
                          &amp; = U^\intercal X^\intercal X  U\cr
                          &amp; = U^\intercal Q D^2  Q^\intercal   U\cr
 \end{align}\]</span></p>
-<p>But <span class="math inline">\(U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})\)</span> Is the coordinate of the unitary vector <span class="math inline">\(U\)</span> on the basis defined by the eigen vector of <span class="math inline">\(X\)</span>: <span class="math inline">\(\omega_1 q_1 +  = \omega_d q_d,\)</span> such that <span class="math inline">\(\sum_k \omega_k^2=1\)</span></p>
+<p>But <span class="math inline">\(U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})\end{pmatrix}\)</span> Is the coordinate of the unitary vector <span class="math inline">\(U\)</span> on the basis defined by the eigen vector of <span class="math inline">\(X\)</span>: <span class="math inline">\(\omega_1 q_1 +  \cdots +  \omega_d q_d,\)</span> such that <span class="math inline">\(\sum_k \omega_k^2=1\)</span></p>
 <p><span class="math inline">\(I_{\Delta_{U^\intercal}} = \sum_{k=1}^d \omega_k \sigma^2_k.\)</span></p>
 <p>Maximizing <span class="math inline">\(I_{\Delta_{U^\intercal}}\)</span>, as <span class="math inline">\(\sigma^2_k\)</span> are in decreasing order, consists in choosing <span class="math inline">\(\omega_1=1\)</span></p>
+</section>
+<section id="principal-components" class="slide level2">
+<h2>Principal Components</h2>
+<p>Consider the sequence of eigen vectors in <span class="math inline">\(Q\)</span>, they</p>
+<ul>
+<li>form an orthonormal basis,</li>
+<li>are ordered according their corresponding eigen values.</li>
+</ul>
+<p>From a mathematical point of view, PCA consist in using this new basis.</p>
+<h3 id="consequences">Consequences</h3>
+<ul>
+<li><p>Define <span class="math inline">\(d\)</span> new variables <span class="math inline">\(C_1, \cdots, C_d,\)</span> which are Linear combination of initial variables, i.e <span class="math inline">\(C_j = \sum_{k= 1}^d q_{jk} V_k\)</span></p></li>
+<li><p>Quantify the quantity of information captured by each variable,</p></li>
+<li><p>Being able to quantify the quality of representation for one individual or one variable</p></li>
+</ul>
+</section>
+<section id="practical-considerations" class="slide level2">
+<h2>Practical considerations</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
+<h3 id="normalizing-inertia">Normalizing inertia</h3>
+<p>Total Inertia of the scaled dataset depends on the number of individual.</p>
+<p>It is common to define a scaled Inertia to get rid of<span class="math inline">\(n\)</span>.</p>
+<p><span class="math display">\[I^{s} = \frac{1}{n} I,\]</span></p>
+<p>We also define the Covariance matrix <span class="math inline">\(\Sigma\)</span></p>
+<p><span class="math display">\[\Sigma = \frac{1}{n} X^\intercal X,\]</span> and we considered the SVD for <span class="math inline">\(\frac{1}{\sqrt{n}} X.\)</span></p>
+<p><span class="rouge">This is generally the implemented version.</span></p>
+</div><div class="column" style="width:45%;">
+<h3 id="svd-of-xintercal-x-instead-of-x">SVD of <span class="math inline">\(X^\intercal X\)</span> instead of <span class="math inline">\(X\)</span></h3>
+<p>As we are mainly interesting in <span class="math inline">\(Q\)</span>, <span class="math inline">\(d\times d\)</span> matrix (not <span class="math inline">\(P\)</span> the <span class="math inline">\(n\times n\)</span> matrix) and the square of the eigen values, it is more efficient to consider the SVD of <span class="math inline">\(\Sigma\)</span> directly.</p>
+<h3 id="geometrically">Geometrically</h3>
+<ul>
+<li><p>The matrix <span class="math inline">\(Q^\intercal\)</span> transform the original canonical basis <span class="math inline">\((e_1, \cdots, e_d)\)</span> of <span class="math inline">\(\R^d\)</span> in the new ACP basis <span class="math inline">\((v_1, \cdots, v_d)\)</span>; .</p></li>
+<li><p>In the new basis variable <span class="math inline">\(k\)</span>,</p></li>
+</ul>
+<p><span class="math display">\[ \sum_{j=1}^d \sqrt{\sigma_j^2} q_{kj} v_j = \begin{pmatrix} \sigma_1 q_{1j}, \cdots, \sigma_d q_{dj} \end{pmatrix}^\intercal\]</span></p>
+</div>
+</div>
+</section>
+<section id="palmer-penguins-example" class="slide level2">
+<h2>Palmer Penguins example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="do">## the core scale function normalizes by n-1 instead of n</span></span>
+<span id="cb3-2"><a></a>scale2 <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">na.rm =</span> <span class="cn">FALSE</span>) (x <span class="sc">-</span> <span class="fu">mean</span>(x, <span class="at">na.rm =</span> na.rm)) <span class="sc">/</span> ( <span class="fu">sqrt</span>((<span class="fu">length</span>(x)<span class="sc">-</span><span class="dv">1</span>) <span class="sc">/</span> <span class="fu">length</span>(x)) <span class="sc">*</span><span class="fu">sd</span>(x, na.rm) )</span>
+<span id="cb3-3"><a></a></span>
+<span id="cb3-4"><a></a>X <span class="ot">&lt;-</span> penguins <span class="sc">|&gt;</span> </span>
+<span id="cb3-5"><a></a>  <span class="fu">mutate</span>(<span class="at">year =</span> <span class="fu">as.factor</span>(year))<span class="sc">|&gt;</span>  <span class="do">## year willnot be considered as numerical variable</span></span>
+<span id="cb3-6"><a></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.numeric)) <span class="sc">|&gt;</span>      <span class="do">## select all numeric columns</span></span>
+<span id="cb3-7"><a></a>  <span class="fu">mutate_all</span>(<span class="fu">list</span>(scale2))          <span class="do">## and scale them</span></span>
+<span id="cb3-8"><a></a></span>
+<span id="cb3-9"><a></a>n <span class="ot">&lt;-</span> <span class="fu">nrow</span>(X) <span class="co"># number of individuals</span></span>
+<span id="cb3-10"><a></a></span>
+<span id="cb3-11"><a></a>X_mat <span class="ot">&lt;-</span> X <span class="sc">|&gt;</span>  <span class="fu">as.matrix</span>()          <span class="do">## the data point matrix </span></span>
+<span id="cb3-12"><a></a>X_norm_mat <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">/</span><span class="fu">sqrt</span>(n) <span class="sc">*</span> X_mat     <span class="do">## the version considered to get rid of the number of individuals</span></span>
+<span id="cb3-13"><a></a></span>
+<span id="cb3-14"><a></a>X_mat_trace <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">diag</span>(<span class="fu">t</span>(X_mat)<span class="sc">%*%</span> X_mat) )  <span class="co"># n d </span></span>
+<span id="cb3-15"><a></a>X_norm_mat_trace <span class="ot">&lt;-</span> <span class="fu">sum</span>( <span class="fu">diag</span>( <span class="fu">t</span>( X_norm_mat)<span class="sc">%*%</span> X_norm_mat ) )  <span class="co"># d</span></span>
+<span id="cb3-16"><a></a></span>
+<span id="cb3-17"><a></a>penguins_svd <span class="ot">&lt;-</span> <span class="fu">svd</span>( <span class="fu">t</span>(X_mat)<span class="sc">%*%</span> X_mat )</span>
+<span id="cb3-18"><a></a>penguins_norm_svd <span class="ot">&lt;-</span> <span class="fu">svd</span>( <span class="fu">t</span>(X_norm_mat)<span class="sc">%*%</span> X_norm_mat )</span>
+<span id="cb3-19"><a></a></span>
+<span id="cb3-20"><a></a><span class="do">## eigenvalues</span></span>
+<span id="cb3-21"><a></a>penguins_eigenvalue <span class="ot">&lt;-</span> penguins_svd<span class="sc">$</span>d</span>
+<span id="cb3-22"><a></a><span class="fu">sum</span>(penguins_eigenvalue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1332</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a>penguins_norm_eigenvalue <span class="ot">&lt;-</span> penguins_norm_svd<span class="sc">$</span>d</span>
+<span id="cb5-2"><a></a><span class="fu">sum</span>(penguins_norm_eigenvalue)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+</div>
+<p>:::</p>
+<p>::::</p>
+</section>
+<section id="palmer-penguins-example-1" class="slide level2">
+<h2>Palmer Penguins example</h2>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a>penguins_Q <span class="ot">&lt;-</span> penguins_svd<span class="sc">$</span>u</span>
+<span id="cb7-2"><a></a>penguins_norm_Q <span class="ot">&lt;-</span> penguins_norm_svd<span class="sc">$</span>u</span>
+<span id="cb7-3"><a></a></span>
+<span id="cb7-4"><a></a><span class="do">## From orginal variable to new basis</span></span>
+<span id="cb7-5"><a></a><span class="do">## t(Q) %*% t(X[1,]) for 1st individual</span></span>
+<span id="cb7-6"><a></a><span class="do">## t(Q) %*% t(X) for all individuals, or in order to keep individual in lines</span></span>
+<span id="cb7-7"><a></a><span class="do">## X %*% Q </span></span>
+<span id="cb7-8"><a></a></span>
+<span id="cb7-9"><a></a>coord_newbasis <span class="ot">&lt;-</span> X_mat <span class="sc">%*%</span> (penguins_Q) </span>
+<span id="cb7-10"><a></a>coord_norm_newbasis <span class="ot">&lt;-</span> X_norm_mat <span class="sc">%*%</span> (penguins_Q) </span>
+<span id="cb7-11"><a></a></span>
+<span id="cb7-12"><a></a>coord_newbasis <span class="ot">&lt;-</span> coord_newbasis <span class="sc">|&gt;</span> </span>
+<span id="cb7-13"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb7-14"><a></a>  <span class="fu">rename</span>(<span class="at">Dim1 =</span> V1, <span class="at">Dim2 =</span> V2, <span class="at">Dim3 =</span> V3, <span class="at">Dim4 =</span> V4)</span>
+<span id="cb7-15"><a></a></span>
+<span id="cb7-16"><a></a><span class="fu">ggplot</span>(coord_newbasis) <span class="sc">+</span> <span class="fu">aes</span>(<span class="at">x=</span> Dim1, <span class="at">y =</span> Dim2) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="pca_files/figure-revealjs/representation-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="co">#ggplot(coord_newbasis) + aes(x= Dim1, y = Dim2) + geom_point()</span></span>
+<span id="cb8-2"><a></a><span class="fu">dist</span>(X[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span>
+<span id="cb8-3"><a></a><span class="fu">dist</span>(coord_newbasis[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,])</span>
+<span id="cb8-4"><a></a><span class="co">#dist(coord_norm_newbasis[1:5,]) * sqrt(n)</span></span>
+<span id="cb8-5"><a></a>X_C <span class="ot">&lt;-</span> <span class="fu">as.matrix</span>(coord_newbasis)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          1         2         3         4
+2 0.7576266                              
+3 1.2500130 0.9980553                    
+4 1.0773914 1.2792018 0.9767689          
+5 1.1679522 1.6632525 1.4687302 0.8784467
+          1         2         3         4
+2 0.7576266                              
+3 1.2500130 0.9980553                    
+4 1.0773914 1.2792018 0.9767689          
+5 1.1679522 1.6632525 1.4687302 0.8784467</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="global-quality-of-the-representation" class="slide level2">
+<h2>Global quality of the representation</h2>
+<p>Let <span class="math inline">\(C_{12}\)</span> designs the plan defined by <span class="math inline">\(C_1\)</span> and <span class="math inline">\(C_2\)</span> and let <span class="math inline">\(X^{C}\)</span> be the coordinates of the individuals in the new basis.</p>
+<p>The information preserved by projection is <span class="math display">\[\begin{align}
+I_{C_{12}^\perp} &amp; = \sum_{i=1}^n \left ( \left(x^{C}_{i1)}\right)^2 + \left(x^{C}_{i2}\right)^2 \right) \cr
+                  &amp; = tr\left( \left(X^{C}_{,1:2}\right)^\intercal X^{C}_{,1:2}\right)\cr
+                  &amp; =  \lambda_1^2 + \lambda^2_2\cr
+                  &amp; = n (\sigma_1^2 + \sigma^2_2)\cr
+\end{align}\]</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="fu">cat</span>(<span class="st">"On plan 12: "</span>, <span class="fu">sum</span>(penguins_eigenvalue[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]), <span class="st">".</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-2"><a></a><span class="fu">cat</span>(<span class="st">"Working with the correlation matrix (/n), sum of eigenvalues is "</span>, <span class="fu">sum</span>(penguins_norm_eigenvalue[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]), <span class="st">". </span><span class="sc">\n</span><span class="st"> This has to be multiply by the size of the dataset to get inertia:"</span>, <span class="fu">sum</span>(penguins_norm_eigenvalue[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]) <span class="sc">*</span> n, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb10-3"><a></a></span>
+<span id="cb10-4"><a></a><span class="fu">cat</span>(<span class="st">"This is easier to appreciate when expressed  as a propotion of total inertia:"</span>,  <span class="fu">round</span>(<span class="fu">sum</span>(penguins_norm_eigenvalue[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])<span class="sc">/</span><span class="fu">sum</span>(penguins_norm_eigenvalue)<span class="sc">*</span><span class="dv">100</span>,<span class="dv">2</span>),<span class="st">"%. </span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>On plan 12:  1173.316 .
+Working with the correlation matrix (/n), sum of eigenvalues is  3.523473 . 
+ This has to be multiply by the size of the dataset to get inertia: 1173.316 
+This is easier to appreciate when expressed  as a propotion of total inertia: 88.09 %. </code></pre>
+</div>
+</div>
+</section>
+<section id="representing-jointly-initial-variables-and-principal-components" class="slide level2">
+<h2>Representing jointly initial variables and principal components</h2>
+<p>To understand the links between original and new variables, or between original variables themselve.</p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>new_var_coord <span class="ot">&lt;-</span> <span class="fu">diag</span>(<span class="fu">sqrt</span>(penguins_norm_eigenvalue))<span class="sc">%*%</span><span class="fu">t</span>(penguins_norm_Q)</span>
+<span id="cb12-2"><a></a></span>
+<span id="cb12-3"><a></a><span class="do">## for graphical purpose</span></span>
+<span id="cb12-4"><a></a>new_var_coord_df <span class="ot">&lt;-</span> <span class="fu">t</span>(new_var_coord) <span class="sc">|&gt;</span> <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">C1=</span>V1, <span class="at">C2=</span> V2, <span class="at">C3 =</span>V3, <span class="at">C4 =</span> V4)</span>
+<span id="cb12-5"><a></a>circle_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">theta =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">2</span><span class="sc">*</span>pi, <span class="at">length.out =</span> <span class="dv">501</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb12-6"><a></a>  <span class="fu">mutate</span>(<span class="at">x =</span> <span class="fu">cos</span>(theta), <span class="at">y  =</span> <span class="fu">sin</span>(theta))</span>
+<span id="cb12-7"><a></a></span>
+<span id="cb12-8"><a></a><span class="fu">ggplot</span>(new_var_coord_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>C1, <span class="at">y=</span>C2)) <span class="sc">+</span> <span class="fu">coord_fixed</span>() <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb12-9"><a></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span><span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>), <span class="at">y =</span> <span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">4</span>), <span class="at">xend=</span>C1, <span class="at">yend =</span> C2),  <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.5</span>, <span class="st">"cm"</span>))) <span class="sc">+</span></span>
+<span id="cb12-10"><a></a>  <span class="fu">geom_path</span>(<span class="at">data =</span> circle_df, <span class="fu">aes</span>(<span class="at">x=</span>x, <span class="at">y=</span>y)) <span class="sc">+</span></span>
+<span id="cb12-11"><a></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">label =</span> <span class="fu">colnames</span>(X), <span class="at">x =</span> new_var_coord_df<span class="sc">$</span>C1  <span class="sc">+</span> <span class="fl">0.05</span>, <span class="at">y =</span> new_var_coord_df<span class="sc">$</span>C2<span class="sc">-</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="pca_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="quality-fo-the-representation-of-the-variables" class="slide level2">
+<h2>Quality fo the representation of the variables</h2>
+<ul>
+<li>The quality of the projection on a component <span class="math inline">\(j\)</span> depends on the angle <span class="math inline">\(\theta_{ij}\)</span> between the original variable and <span class="math inline">\(C^j\)</span>.</li>
+</ul>
+<p><span class="math display">\[cos(\theta_{ij})^2 = \frac{(C_j^T X^i)^2}{\norm{X^i}\norm{X^i}} =  \sigma^2_j q_{ij}^2\]</span></p>
+<ul>
+<li>The quality of the projection on a the plan <span class="math inline">\((C^1C^2)\)</span> depends on the angle <span class="math inline">\(\theta_{i,1-2}\)</span> between the original variable and the projection plan.</li>
+</ul>
+<p><span class="math display">\[ cos(\theta_{i,1-2})^2 = \sum_{j=1}^2 \frac{(C_j^T X^i)^2}{\norm{X^i}\norm{C^j}} =  \sum_{j=1}^2 \sigma^2_j  q_{ij}^2\]</span></p>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="do">## quality of the representation for variable 1 on teh different axis</span></span>
+<span id="cb13-2"><a></a>new_var_coord[,<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> </span>
+<span id="cb13-3"><a></a></span>
+<span id="cb13-4"><a></a><span class="do">## quality of the projection on plan C1-C2</span></span>
+<span id="cb13-5"><a></a><span class="fu">sum</span>((new_var_coord[,<span class="dv">1</span>]<span class="sc">^</span><span class="dv">2</span> )[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.565246607 0.280304201 0.152175611 0.002273581
+[1] 0.8455508</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizing-individuals" class="slide level2">
+<h2>Visualizing individuals</h2>
+<ul>
+<li><p><span class="math inline">\(X\)</span> is the matrix of individuals on the original basis, <span class="math inline">\(XQ\)</span> is the matrix of individual in the new basis (no information lost)</p></li>
+<li><p>To visualizing the dataset, we can project on the two first dimensions of the new basis</p></li>
+</ul>
+<div class="cell columns column-output-location">
+<div class="column">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a>XQ <span class="ot">&lt;-</span> X_mat <span class="sc">%*%</span> penguins_norm_Q</span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a>XQ_df <span class="ot">&lt;-</span> XQ <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a></a>  <span class="fu">as_tibble</span>() <span class="sc">|&gt;</span> </span>
+<span id="cb15-5"><a></a>  <span class="fu">rename</span>(<span class="at">C1 =</span> V1, <span class="at">C2 =</span> V2, <span class="at">C3 =</span> V3, <span class="at">C4 =</span> V4)</span>
+<span id="cb15-6"><a></a></span>
+<span id="cb15-7"><a></a><span class="fu">ggplot</span>(XQ_df) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span>C1, <span class="at">y=</span>C2)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div><div class="column">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="pca_files/figure-revealjs/projection-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-1" class="slide level2">
+<h2>Interpretation</h2>
+<h3 id="quality-of-representation-of-individual-i-on-the-plan">Quality of representation of individual <span class="math inline">\(i\)</span> on the plan</h3>
+<ul>
+<li>The angle between the original individual vector <span class="math inline">\(i\)</span> and component <span class="math inline">\(j\)</span>:</li>
+</ul>
+<p><span class="math display">\[cos(\theta_{ij})^2 = \frac{( X_i Q^j)^2}{\norm{X_i}^2} \]</span></p>
+<h3 id="contribution-to-the-axe-c_i">Contribution to the axe <span class="math inline">\(C_i\)</span></h3>
+<p>The total inertia on component <span class="math inline">\(1\)</span> is <span class="math inline">\(\sigma^2_i = \sum_{i=1}^n (XQ)_{i1}^2\)</span>.</p>
+<p>Individual <span class="math inline">\(i\)</span> contributes for <span class="math inline">\((XQ)_{i1}^2/\sigma^2_i\)</span></p>
+</section>
+<section id="practically-speaking" class="slide level2">
+<h2>Practically speaking</h2>
+<p>It is way simpler !!!</p>
+<p>You can have a look at the book Husson, Lê, and Pagès [HLP11] and visit <a href="https://husson.github.io/MOOC_GB/index.html">François Husson MOOC</a>, author of the <code>FactoMineR</code> package.</p>
+<div class="columns">
+<div class="column" style="width:45%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># install.packages('FactoMineR')</span></span>
+<span id="cb16-2"><a></a><span class="co"># install.packages('FactoShiny')</span></span>
+<span id="cb16-3"><a></a><span class="fu">library</span>(FactoMineR)</span>
+<span id="cb16-4"><a></a></span>
+<span id="cb16-5"><a></a>penguins_pca <span class="ot">&lt;-</span> <span class="fu">PCA</span>(X, <span class="at">ncp =</span> <span class="fu">ncol</span>(X), <span class="at">graph =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb16-6"><a></a></span>
+<span id="cb16-7"><a></a>penguins_pca<span class="sc">$</span>eig</span>
+<span id="cb16-8"><a></a></span>
+<span id="cb16-9"><a></a>penguins_pca<span class="sc">$</span>var</span>
+<span id="cb16-10"><a></a></span>
+<span id="cb16-11"><a></a>penguins_pca<span class="sc">$</span>ind</span>
+<span id="cb16-12"><a></a></span>
+<span id="cb16-13"><a></a><span class="fu">plot</span>(penguins_pca, <span class="at">axis =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">choix =</span> <span class="st">"ind"</span>)</span>
+<span id="cb16-14"><a></a></span>
+<span id="cb16-15"><a></a><span class="fu">plot</span>(penguins_pca, <span class="at">axis =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="at">choix =</span> <span class="st">"var"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div><div class="column" style="width:45%;">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">library</span>(Factoshiny)</span>
+<span id="cb17-2"><a></a><span class="fu">PCAshiny</span>(penguins)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-doubs-river-example" class="slide level2">
+<h2>The Doubs River example</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">PCAshiny</span>(doubs.env)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
