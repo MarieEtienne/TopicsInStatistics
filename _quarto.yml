@@ -37,6 +37,10 @@ website:
         menu:
         - text: Overshoot Day
           href: data/overshoot.xlsx
+        - text: Overshoot Day - countries.RData
+          href: data/countries.RData
+        - text: Overshoot Day - countries_comp.RData
+          href: data/countries_comp.RData
 
 format:
   html:
