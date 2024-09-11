@@ -1,34 +1,43 @@
 ---
 title: Linear Regression
 author: Marie-Pierre Etienne
-date: '2024/07/24 (updated: `r Sys.Date()`)'
+date: "Last updated on `r format(Sys.time(), '%d %B, %Y')`"
 institute: https://marieetienne.github.io/TopicsInStatistics/
-csl: ../courses_tools/resources/apa-no-doi-no-issue.csl
-output:
-  xaringan::moon_reader:
-    css: [  'metropolis',  'mpe_pres.css']
-    lib_dir: libs
-    nature:
-      ratio: 16:10
-      highlightStyle: github
-      highlightLines: true
-      countIncrementalSlides: false
-      beforeInit: '../courses_tools/resources/collapseoutput.js'
-    includes:
-      after_body: '../courses_tools/resources/insert-logo.html'
-fontsize: 11pt
-params:
-  child_path: ''
 execute: 
-  freeze: auto
+  freeze: false
+editor: 
+  markdown: 
+    wrap: 72
+css: mpe_pres_revealjs.css
+format:
+  revealjs: 
+    theme: [default, custom.scss]
+    width: 1050
+    margin: 0.05
+    slide-number: true
+    show-slide-number: print
+    menu:
+      useTextContentForMissingTitles: false
 ---
 
+::: hidden
+$$
+\newcommand\R{{\mathbb{R}}}
+\newcommand\norm[1]{\lVert#1\rVert}
+\newcommand{\indep}{\perp \!\!\! \perp}
+$$
+\definecolor{wongBlue}{RGB}{0, 114, 178}
+
+:::
 
 
 ```{r setup, include=FALSE, eval = TRUE}
 with_sol <- TRUE ## in order to control the output
 with_course <- TRUE
 library(RefManageR)
+library(reticulate)
+# use_condaenv("topicsinstat", required = TRUE)
+
 library(tidyverse)
 ```
 
@@ -44,10 +53,537 @@ BibOptions(check.entries = FALSE,
            hyperlink = FALSE,
            dashed = FALSE)
 myBib <- ReadBib("./topics.bib", check = FALSE)
+
+```
+
+# Introduction
+
+## Lecture objectives
+
+* Present the classical statistical version of linear model ( a bit different from the machine learning approach)
+* Equivalence between Ordinary Least square estimation and normal likelihood estimation
+* A reminder about statistical testing and an overview of the classical test in linear modelling
+* Some diagnostic regarding the assumptions 
+
+* A tutorial with Python
+
+## Regression analysis context
+
+Focus on a quantitative variable $Y$ and interesting in 
+
+* understanding the relationship with this variables and other variables of interest, named **covariates** (explanatory variables, regressors, features),
+* selecting the meaningful covariates, 
+* predicting the value of $Y$ given the values of the covariates.
+
+### Examples 
+
+* **Economic**: $Y$ is the inflation rate and the covariates are interest rates, unemployment rates, and government spending.
+
+* **Marketing**: $Y$ is the value of a customer purchase, explained by age, salary, marketting campaigns exposure, ...
+
+* **Environmental Science**: $Y$ is the daily Ozone concentration at a given site which might depend  on industrial activity, population density, and meteorological factors. 
+
+* **Agriculture**: $Y$ is the  crop yields, which might be explained by soil quality, rainfall, previous production, the quantity of fertilizers, ..
+
+
+
+
+
+
+
+
+
+# Regression Model
+
+## Multiple Linear Regression Model
+
+$$Y_{k} = \beta_0 +\beta_1 x_{k}^{1}  + \beta_2 x_{k}^{2} + \ldots +  \beta_p x_{k}^{p}  +  E_{k},\quad E_{k}\overset{ind}{\sim}\mathcal{N}(0, \sigma^2),$$
+
+Where:
+- $x_{k}^{l}$ is the value of explanatory variable $l$ for observation $k$,
+- $k=1,\ldots,n$ is the index of the individual, and $n$ is the total number of individuals,
+- $\beta_0$ is the intercept, 
+- $\beta_l$ represents the effect of variable $X^{l}$ on the dependent variable,
+- $\sigma^2$ is the variance.
+
+### Equivalent Notation
+
+$$Y_{k} \overset{ind}{\sim}\mathcal{N}(\beta_0 +\beta_1 x_{k}^{1}  + \beta_2 x_{k}^{2} + \ldots +  \beta_p x_{k}^{p} , \sigma^2).$$
+
+### Number of Parameters
+
+- $p+1$ parameters for the mean $(\beta_0, \beta_1, \ldots, \beta_p)$,
+- 1 parameter for the variance $\sigma^2$ (the noise).
+
+
+## Sous forme matricielle
+ $$\bf{Y = X\beta + E}$$
+
+$$Y=\begin{pmatrix}
+Y_{1}\\
+Y_{2}\\
+\vdots\\
+Y_{k}\\
+\vdots\\
+Y_{n}\end{pmatrix},
+ \quad
+{\bf{X}} ={\begin{pmatrix}
+1 & x_1^{1} & x_1^{2} & \ldots &x_1^{l}\\
+1 & x_2^{1} & x_2^{2} & \ldots &x_2^{l}\\
+\vdots & \vdots& \vdots && \vdots\\
+1 & x_k^{1} & x_k^{2} & \ldots &x_k^{l}\\
+ \vdots & \vdots& \vdots && \vdots\\
+1 & x_n^{1} & x_n^{2} & \ldots &x_n^{l}\\
+ \end{pmatrix}},\quad
+{\bf{\beta}} =\begin{pmatrix}
+\beta_0\\
+\beta_1\\
+\beta_2\\
+\vdots\\
+\beta_l\\
+\end{pmatrix}, \quad{\bf{E}} = \overset{}{\begin{pmatrix}
+E_{1}\\
+E_{2}\\
+\vdots\\
+E_{k}\\
+\vdots\\
+E_{n}\\
+\end{pmatrix}}.$$
+
+
+## Python requirement
+
+```{python}
+#| echo: true
+#| eval: false
+
+conda create --name topicsinstats python=3.11 pip 
+conda activate topicsinstats
+pip install -r requirements.txt
+```
+
+## Palmers penuins companion Data set
+
+Just go back to our dear penguins. We want to explain the flipper length by the body mass and the bill length. 
+
+**Write the first rows of $Y$, $X$ and specify the dimension of the different objects**
+
+::: {.panel-tabset} 
+
+### Data presentation
+
+```{python data_pres}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+import pandas as pd
+import seaborn as sns 
+from palmerpenguins import load_penguins
+import statsmodels.api as sm
+
+penguins = load_penguins() # load dataset
+penguins = penguins.dropna() # drop na
+penguins[['flipper_length_mm', 'body_mass_g', 'bill_length_mm']] # show first rows
+```
+
+### Solution 
+
+$$ Y = \begin{pmatrix}
+ 181 \\ 
+ 186 \\ 
+ 195 \\ 
+ 193 \\ 
+ 190 \\ 
+  \vdots
+   \end{pmatrix}, \quad 
+   X = \begin{pmatrix}
+   1 & 3750 & 39.10 \\ 
+   1 & 3800 & 39.50 \\ 
+   1 & 3250 & 40.30 \\ 
+   1 & 3450 & 36.70 \\ 
+   1 & 3650 & 39.30 \\  
+    & \vdots&
+    \end{pmatrix}, \quad \beta = \begin{pmatrix}
+ \beta_0 \\ 
+ \beta_1 \\ 
+ \beta_2 \\
+ \end{pmatrix}.
+ $$
+
+### Solution with Python 
+
+```{python lm_spec}
+#| echo: true
+#| output-location: column
+#| results: hold
+#| 
+Y = penguins['flipper_length_mm']  # regressor / features      
+X = penguins[['body_mass_g', 'bill_length_mm']]   # regressor / features      
+X.head()
+print("\n")
+
+X = sm.add_constant(X)          # Add the constant to the regressor
+X.head()
+```
+
+:::
+
+## Quick Reminder on Gaussian Multivariate Random Vector
+
+A **Gaussian Multivariate Random Vector** $\mathbf{U} \in \mathbb{R}^n$ is defined by the following properties:
+
+1. **Mean Vector** $\boldsymbol{\mu} = \mathbb{E}[\mathbf{U}] \in \mathbb{R}^n$:  
+   $$\boldsymbol{\mu} = \begin{bmatrix} 
+   \mu_1 \\ 
+   \mu_2 \\ 
+   \vdots \\ 
+   \mu_n 
+   \end{bmatrix}$$
+
+2. **Covariance Matrix** $\boldsymbol{\Sigma} = \mathbb{E}[(\mathbf{U} - \boldsymbol{\mu})(\mathbf{U} - \boldsymbol{\mu})^\top] \in \mathbb{R}^{n \times n}$:  
+  $$\boldsymbol{\Sigma} = \begin{bmatrix} 
+   \sigma_{11} & \sigma_{12} & \dots & \sigma_{1n} \\
+   \sigma_{21} & \sigma_{22} & \dots & \sigma_{2n} \\
+   \vdots & \vdots & \ddots & \vdots \\
+   \sigma_{n1} & \sigma_{n2} & \dots & \sigma_{nn}
+   \end{bmatrix}$$
+
+3. **Probability Density Function (PDF)** for $\mathbf{U}$:
+   $$f(\mathbf{U}) = \frac{1}{(2\pi)^{n/2} |\boldsymbol{\Sigma}|^{1/2}} \exp\left(-\frac{1}{2} (\mathbf{U} - \boldsymbol{\mu})^\top \boldsymbol{\Sigma}^{-1} (\mathbf{U} - \boldsymbol{\mu})\right)$$
+
+
+
+## Key Properties
+
+- **Marginals**: Each component $X_i$ of $\mathbf{X}$ is normally distributed: $X_i \sim \mathcal{N}(\mu_i, \sigma_{ii})$.
+  
+- **Independence**: If the covariance matrix $\boldsymbol{\Sigma}$ is diagonal, then all components are independent.
+  
+- **Linear Combinations**: Any linear combination of the components of a Gaussian vector is also Gaussian.
+
+$$c^\intercal \mathbf{U}  \sim \mathcal{N} \left ( c^\intercal \mathbb{E}(\mathbf{U}), c^\intercal \mathbb{\Sigma} c \right).$$
+
+## Cochran's Theorem
+
+
+:::: {.callout-note icon="false"}
+### Theorem
+
+Let $\mathbf{X} \in \mathbb{R}^n$ be a **multivariate Gaussian vector** such that:
+
+$$\mathbf{X} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}_n),$$
+let $Q_1, \cdots, Q_k$ be quadratic forms with ranks $r_1,\cdots,r_k$ and suppose the $Q_1 +\cdots Q_k= X^\intercal X,$
+
+Then $Q_1, \cdots, Q_k$ are independently distributed as  $\chi^2$ with $r_1, \cdots, r_k$ degrees of freedom respectively if and only if $\sum_{i=1}^k r_i =n$
+::::
+
+### Useful Application
+
+Consider $P$ the projector on some subspace $V \subset \R^n$ of dimension $p$, so that $P=P^\intercal$ and $P^2=P$. 
+* $(X-PX) \perp PX$, since $P (X-PX) = PX - P^2 X = 0,$
+* \begin{align}
+ X^\intercal X & = \left ((X-PX) + PX \right)^\intercal  \left ((X-PX) + PX \right) = (X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX) +  (X-PX)^\intercal  PX + (PX)^\intercal (X-PX)\cr
+  & =(X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX),
+  \end{align}
+and  $rank(P^\intercal P)=p$ $rank((I-P)^\intercal (I-P))=n-p,$ so that
+$$\norm{PX}^2 \sim \chi^2(p), \norm{X-PX}^2 \sim \chi^2(n-p),  \quad \norm{PX}^2 \indep  \norm{X-PX}^2.$$
+
+
+# Statistical inference
+
+## Parameter estimation
+How to pick a good value for $\beta$ in
+
+$$Y = X \beta + E$$
+
+::: {.panel-tabset} 
+
+### Intuitively 
+
+\begin{align}
+\mathbb{E}(Y) &= X\beta \cr
+X^\intercal \mathbb{E}(Y) &= X^\intercal X\beta \mbox{ if } X \mbox {is full rank} \cr 
+\left( X^\intercal X\right)^{-1} X^\intercal \mathbb{E}(Y) &= \beta \cr 
+\end{align}
+
+A good guess would be $\hat{\beta} = \left( X^\intercal X\right)^{-1} X^\intercal Y$
+
+### Geometrical point of view: OLS
+
+* Find the $\hat{\beta}$ so that $X\hat{\beta}$ is as close as possible from $Y$, i.e
+* Find the element of $Im(X)$ as close as possible from $Y$,
+* Consider the orthogonal projection on $Im(X)$ $X\hat{\beta},$
+
+Then  $Y - X\hat{\beta}$  is orthogonal to any vector of $Im(X)= Xv,$
+\begin{align}
+\forall v\in \R^n, \quad <Xv, Y-X\hat{\beta}> & = 0\cr
+\forall v\in \R^n, \quad v^\intercal X^\intercal (Y-X\hat{\beta}) & = 0\cr
+\forall v\in \R^n, \quad v^\intercal X^\intercal Y & = v^\intercal X^\intercal X\hat{\beta}\cr
+ X^\intercal Y & = X^\intercal X\hat{\beta}\cr
+ \left(  X^\intercal X\right)^{-1} X^\intercal Y & = \hat{\beta}  \mbox{ if } X \mbox {is full rank} \cr 
+\end{align}
+ 
+
+
+**Ordinary Least Square estimation**: $\hat{\beta}$, so that $\norm{Y-X\hat{\beta}}^2$ is minimal. 
+
+
+### Statistical point of view
+
+The log-likelihood of the model $\ell(\beta, \sigma^2; Y)$ is given by 
+
+$$\ell(\beta, \sigma^2; Y)  = Cte - \frac{n}{2} \log{\sigma^2}  -\frac{1}{2\sigma^2} (\mathbf{Y} - X\beta)^\intercal   (\mathbf{Y} - X\beta).$$
+By maximizing the log-likelihood and after a matrix derivation, we get **maximum likelihood estimator** (MLE) $\hat{\beta}$ is solution to
+$$X^\intercal Y = X^\intercal X \hat{\beta}.$$
+
+The MLE for $\sigma^2$ is 
+$$\widehat{\sigma^2}_{MLE} = \frac{1}{n} (\mathbf{Y} - X\hat{\beta})^\intercal   (\mathbf{Y} - X\hat{\beta})$$
+:::
+
+## Estimators properties
+
+::: {.panel-tabset} 
+
+### $\hat{\beta}$ properties
+
+As $\hat{\beta} =  \left(X^\intercal X\right)^{-1} X^\intercal Y$ is a linear combination of a Gaussian vector,
+$$\hat{\beta} \sim\mathcal{N}(\boldsymbol{\mu}, \boldsymbol{\Sigma} ),$$
+with 
+
+* $\boldsymbol{\mu} = \left(X^\intercal X\right)^{-1} X^\intercal \mathbb{E}\left(Y\right)=\left(X^\intercal X\right)^{-1} X^\intercal X \beta = \beta$, 
+
+* and $\boldsymbol{\Sigma} = \left(X^\intercal X\right)^{-1} X^\intercal \sigma^2 I_n  \left( \left(X^\intercal X\right)^{-1} X^\intercal\right)^\intercal = \sigma^2 \left(X^\intercal X\right)^{-1}.$
+
+$\mathbb{E}{\hat{\beta}}=\beta$, the estimator is unbiased.
+
+
+### $\widehat{\sigma^2}_{MLE}$ properties
+
+Recall that $X\hat{\beta}$ is the the orthogonal projection on $Im(X)$, so that the projector $P$ is defined by
+$ P = X\hat{\beta}=X \left(X^\intercal X\right)^{-1} X^\intercal.$
+
+And $\norm{Y-X\theta}^2 =  \norm{Y-PY}^2 + \norm{PY-X\beta}^2,$ following Cochran theorem
+
+$$\frac{1}{\sigma^2}\norm{Y-PY}^2\sim\chi^2(n-rank(X)), \quad \frac{1}{\sigma^2}\norm{PY-X\theta}^2\sim\chi^2(rank(X)), \quad \norm{Y-PY}^2\indep \norm{PY-X\theta}^2.$$
+As $\mathbb{E}\left(\frac{1}{n} \norm{Y-PY}^2 \right) = \frac{n-rank(X)}{n}$ of $\sigma^2$, the **MLE estimator is biased** 
+
+We prefer the unbiased version $$\widehat{\sigma}^2 = \frac{1}{n-rank(X)} \norm{Y-PY}^2.$$
+
+
+:::
+
+
+
+## Illustrationon the Palmer penguins 
+
+
+```{python }
+#| echo: true
+#| output-location: column
+#| results: hold
+
+import numpy as np
+import statsmodels.api as sm
+from statsmodels.stats.anova import anova_lm
+
+n = X.shape[0]
+
+# linear regression model
+lm1 = sm.OLS(Y, X)  # OLS: Ordinary Least Squares (Moindres Carrés Ordinaires)
+fit1 = lm1.fit()    # fit the model
+print(fit1.summary())
+
+X_numpy = X.to_numpy()
+Y_numpy = Y.to_numpy()
+p = np.linalg.matrix_rank(X)
+
+XT_X = X_numpy.T.dot(X_numpy)
+XT_X_inv = np.linalg.inv(XT_X)
+hat_beta = XT_X_inv.dot(X_numpy.T.dot(Y_numpy))
+
+
+P = X_numpy.dot(XT_X_inv.dot(X_numpy.T))
+R = Y_numpy - P.dot(Y_numpy)
+## to compare with 
+fit1.resid
+
+hat_sigma2 = R.T.dot(R)/(n-p)
 ```
 
 
----
+# Regression  test
+
+## Test on a linear combination of parameter
+
+To test whether or not a linear combination $c$ of parameters equals $0$,  we would like to decide between two assumptions
+$$H_0 = \left \lbrace c^\intercal \beta = 0\right\rbrace\quad \mbox{vs} \quad H_1 = \left \lbrace c^\intercal \beta \ne 0\right\rbrace.$$
+
+Since $c^\intercal \hat{\beta} \sim \mathcal{N}\left(c^\intercal \beta, \sigma^2 c^\intercal \left(X^\intercal X\right)^{-1} c\right)$ 
+and $\sigma^{-2}\norm{Y-PY}^2 \sim \chi^2(n-p),$ then
+
+$$\frac{c^\intercal\hat{\beta} - c^\intercal{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).$$
+So that [under assumption $H_0$]{.rouge}
+$$\frac{c^\intercal\hat{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).$$
+
+::: {.panel-tabset} 
+
+### Exercice 
+Describe this test when $p=3$ and $c = (0, 0, 1)^\intercal$
+
+### Solution
+
+* $c^\intercal \beta = \beta_2$
+
+* [Under assumption $H_0 = \left\lbrace \beta_2=0 \right\rbrace$]{.rouge}
+$$\frac{\hat{\beta}}{ \sqrt{ (n-p) \widehat{\sigma^2}  \left(X^\intercal X\right)^{-1}_{33} }} \sim \mathcal{T}(n-p).$$
+
+:::
+
+## Nested model test
+
+A model  $M_1$ is said to be **nested** within a more complex model $M_2$ if all the parameters in $M_1$ are also present in $M_2$, but $M_2$ has additional parameters that $M_1$.
+
+
+::: {.panel-tabset} 
+
+### Example
+
+* $M2:\quad  Y_k = \beta_0 + \beta_1 x_{k1} + \beta_2 x_{k2} + E_k$ and $M1:\quad  Y_k = \beta_0 + \beta_1 x_{k1} +  E_k$  
+
+But also 
+
+* $M_2:\quad  Y_k = \beta_0 + \beta_1 x_{k1} + \beta_2 x_{k2} + E_k$ and $M_1:\quad  Y_k = \beta_0 + \beta_1 (x_{k1} + x_{k2})  E_k$
+
+### Comparing nested models
+
+If $M_1$ and $M_2$ are two linear models, with $M_1$ nested in $M_2$. 
+
+$$M_1:\quad Y = X_1 \beta^1 + E^1; \quad \quad M_2:\quad Y = X_2 \beta^2 + E^2;$$
+with $Im(X_1) \subset Im(X_2).$
+
+Applying Cochran theorem, under $H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,$
+
+$\norm{Y - P_2 Y}^2 \sim \chi^2\left(n-rank(X_2)\right)$,  $\norm{P_2 Y - P_1 Y }^2 \sim \chi^2(rank(X_2)-rank(X_1))$ and $\norm{P_2 Y - P_1 Y }^2 \indep \norm{Y- P_2 Y}^2.$ 
+
+ Under $H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,$
+ $$\frac{\frac{\norm{P_2 Y - P_1 Y}^2}{p2-p_1}}{\frac{\norm{Y- P_2 Y}^2}{n-p2}}\sim \mathcal{F}_{p_2-p_1, n- p_2}$$
+
+### Python example
+
+```{python nested_model_test}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+## fit the null model 
+X0 = X[['const']]
+lm0 = sm.OLS(Y, X0)  # OLS: Ordinary Least Squares (Moindres Carrés Ordinaires)
+fit0 = lm0.fit()    # fit the model
+
+anova_results = anova_lm(fit0, fit1)
+print(anova_results)
+```
+
+:::
+
+## What about categorical variables ? { .smaller}
+
+[Does the flipper length  varies between species?]{.rouge}
+
+The model
+
+$$Y_{sk} = \mu + \alpha_s + E_{sk},$$
+where $s$ stands for the species.
+
+::: {.panel-tabset} 
+
+### Model { .smaller}
+
+* Transform into dummies variables:
+
+```{python python_dummies}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+penguins_dummies = pd.get_dummies(penguins, 
+columns=['species'],  dtype="int")
+print(penguins_dummies.iloc[:, [1] + list(range(7,10))].head())
+```
+
+* What is the rank of the so define design matrix ?
+
+
+### Identifiability { .smaller}
+
+```{python constrained_python_dummies}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+penguins_dummies_c = pd.get_dummies(penguins,
+columns=['species'],  dtype="int", drop_first = True)
+penguins_dummies_c.iloc[:, [1] + list(range(7,9))].head()
+```
+
+
+[Be very careful in the interpretation]{.rouge}
+
+
+### Effect of one factor { .smaller}
+
+```{python anova}
+#| echo: true
+#| output-location: column
+#| results: hold
+
+X_unid = penguins_dummies[['species_Adelie', 'species_Gentoo', 'species_Chinstrap']]
+X_unid = sm.add_constant(X_unid)          # Add the constant to the regressor
+p_unid = np.linalg.matrix_rank(X_unid)
+print(p_unid)
+
+
+X = penguins_dummies_c[[ 'species_Gentoo', 'species_Chinstrap']]
+X = sm.add_constant(X)          # Add the constant to the regressor
+p = np.linalg.matrix_rank(X)
+print(p)
+
+Y = penguins_dummies['flipper_length_mm']
+X_unid = X_unid[['const', 'species_Adelie', 'species_Chinstrap', 'species_Gentoo']]
+# linear regression model
+lm1 = sm.OLS(Y, X_unid)  # OLS: Ordinary Least Squares (Moindres Carrés Ordinaires)
+fit1 = lm1.fit()    # fit the model
+print(fit1.summary())
+```
+
+
+### Practical { .smaller}
+
+```{python anova_correct}
+from statsmodels.formula.api import ols
+
+model = ols('flipper_length_mm ~ C(species)', data=penguins).fit()
+anova_table = sm.stats.anova_lm(model, typ=2)  # typ=2 for Type II ANOVA
+print(anova_table)
+
+```
+
+::: 
+
+<!-- # Diagnostic -->
+
+<!-- ## Diagnosing Multicollinearity -->
+<!--         Eigenvalues, condition number, and rank deficiency -->
+<!--         Variance inflation factors (VIF) -->
+
+<!-- ## Residual Analysis -->
+<!--         Residuals as vectors -->
+
+<!-- ## Leverage, Cook’s distance, and influence diagnostics using linear algebra -->
+
+<!-- # Conclusion  -->
+
 
 ```{r ggplot_back, echo = FALSE, eval = TRUE}
 ggplot <- function(...) ggplot2::ggplot(...) 
