@@ -15,6 +15,7 @@ format:
     width: 1050
     margin: 0.05
     slide-number: true
+    smaller: true
     show-slide-number: print
     menu:
       useTextContentForMissingTitles: false
@@ -570,6 +571,7 @@ X <- penguins |>
   mutate_all(list(scale2))          ## and scale them
 
 n <- nrow(X) # number of individuals
+d <- ncol(X)
 
 X_mat <- X |>  as.matrix()          ## the data point matrix 
 X_norm_mat <- 1/sqrt(n) * X_mat     ## the version considered to get rid of the number of individuals
@@ -618,6 +620,9 @@ ggplot(coord_newbasis) + aes(x= Dim1, y = Dim2) + geom_point()
 #ggplot(coord_newbasis) + aes(x= Dim1, y = Dim2) + geom_point()
 dist(X[1:5,])
 dist(coord_newbasis[1:5,])
+dist(coord_newbasis[1:5,])
+dist(coord_newbasis[1:5,1:2])
+
 #dist(coord_norm_newbasis[1:5,]) * sqrt(n)
 X_C <- as.matrix(coord_newbasis)
 ```
@@ -763,9 +768,9 @@ penguins_pca$var
 
 penguins_pca$ind
 
-plot(penguins_pca, axis = c(1,2), choix = "ind")
+plot(penguins_pca, axes = c(1,2), choix = "ind")
 
-plot(penguins_pca, axis = c(1,2), choix = "var")
+plot(penguins_pca, axes = c(3,4) , choix = "var")
 
 
 
