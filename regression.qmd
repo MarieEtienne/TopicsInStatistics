@@ -361,7 +361,7 @@ $\mathbb{E}{\hat{\beta}}=\beta$, the estimator is unbiased.
 ### $\widehat{\sigma^2}_{MLE}$ properties
 
 Recall that $X\hat{\beta}$ is the the orthogonal projection on $Im(X)$, so that the projector $P$ is defined by
-$ P = X\hat{\beta}=X \left(X^\intercal X\right)^{-1} X^\intercal.$
+$P = X\hat{\beta}=X \left(X^\intercal X\right)^{-1} X^\intercal.$
 
 And $\norm{Y-X\theta}^2 =  \norm{Y-PY}^2 + \norm{PY-X\beta}^2,$ following Cochran theorem
 
@@ -396,15 +396,16 @@ print(fit1.summary())
 
 X_numpy = X.to_numpy()
 Y_numpy = Y.to_numpy()
-p = np.linalg.matrix_rank(X)
+p = np.linalg.matrix_rank(X_numpy)
 
 XT_X = X_numpy.T.dot(X_numpy)
 XT_X_inv = np.linalg.inv(XT_X)
 hat_beta = XT_X_inv.dot(X_numpy.T.dot(Y_numpy))
-
+print(hat_beta)
 
 P = X_numpy.dot(XT_X_inv.dot(X_numpy.T))
 R = Y_numpy - P.dot(Y_numpy)
+print(R[range(0,5)])
 ## to compare with 
 fit1.resid
 
@@ -412,7 +413,7 @@ hat_sigma2 = R.T.dot(R)/(n-p)
 ```
 
 
-# Regression  test
+# Regression  tests
 
 ## Test on a linear combination of parameter
 
@@ -422,9 +423,9 @@ $$H_0 = \left \lbrace c^\intercal \beta = 0\right\rbrace\quad \mbox{vs} \quad H_
 Since $c^\intercal \hat{\beta} \sim \mathcal{N}\left(c^\intercal \beta, \sigma^2 c^\intercal \left(X^\intercal X\right)^{-1} c\right)$ 
 and $\sigma^{-2}\norm{Y-PY}^2 \sim \chi^2(n-p),$ then
 
-$$\frac{c^\intercal\hat{\beta} - c^\intercal{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).$$
+$$\sqrt{n-p}\frac{c^\intercal\hat{\beta} - c^\intercal{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).$$
 So that [under assumption $H_0$]{.rouge}
-$$\frac{c^\intercal\hat{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).$$
+$$\sqrt{n-p}\frac{c^\intercal\hat{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).$$
 
 ::: {.panel-tabset} 
 
@@ -464,10 +465,10 @@ with $Im(X_1) \subset Im(X_2).$
 
 Applying Cochran theorem, under $H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,$
 
-$\norm{Y - P_2 Y}^2 \sim \chi^2\left(n-rank(X_2)\right)$,  $\norm{P_2 Y - P_1 Y }^2 \sim \chi^2(rank(X_2)-rank(X_1))$ and $\norm{P_2 Y - P_1 Y }^2 \indep \norm{Y- P_2 Y}^2.$ 
+$\sigma^{-2}\norm{Y - P_2 Y}^2 \sim \chi^2\left(n-rank(X_2)\right)$,  $\sigma^{-2}\norm{P_2 Y - P_1 Y }^2 \sim \chi^2(rank(X_2)-rank(X_1))$ and $\norm{P_2 Y - P_1 Y }^2 \indep \norm{Y- P_2 Y}^2.$ 
 
  Under $H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,$
- $$\frac{\frac{\norm{P_2 Y - P_1 Y}^2}{p2-p_1}}{\frac{\norm{Y- P_2 Y}^2}{n-p2}}\sim \mathcal{F}_{p_2-p_1, n- p_2}$$
+ $$\frac{\frac{\norm{P_2 Y - P_1 Y}^2}{p_2-p_1}}{\frac{\norm{Y- P_2 Y}^2}{n-p_2}}\sim \mathcal{F}_{p_2-p_1, n- p_2}$$
 
 ### Python example
 
@@ -571,6 +572,20 @@ print(anova_table)
 
 ::: 
 
+
+### Quality of the estimation
+
+## Condidence interval
+
+$$\hat{\beta} \sim \mathcal{N}(\beta, \sigma^2 \left ( X^\intercal X\right )^{-1} ),$$
+
+So that
+$$  \sigma^{-1} \left ( X^\intercal X\right )^{1/2} (\hat{\beta}-\beta) \sim \mathcal{N}(0, I_p)$$
+
+
+## Prediction interval
+
+ 
 <!-- # Diagnostic -->
 
 <!-- ## Diagnosing Multicollinearity -->
