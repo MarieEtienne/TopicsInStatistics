@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.4.555">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2024-09-11">
+  <meta name="dcterms.date" content="2024-09-12">
   <title>The Topics In Statistics Companion website ! - Linear Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -411,7 +411,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2024-09-11</p>
+  <p class="date">2024-09-12</p>
 </section>
 <section class="slide level2">
 
@@ -718,7 +718,7 @@ X^\intercal Y &amp; = X^\intercal X\hat{\beta}\cr
 <p><span class="math inline">\(\mathbb{E}{\hat{\beta}}=\beta\)</span>, the estimator is unbiased.</p>
 </div>
 <div id="tabset-3-2">
-<p>Recall that <span class="math inline">\(X\hat{\beta}\)</span> is the the orthogonal projection on <span class="math inline">\(Im(X)\)</span>, so that the projector <span class="math inline">\(P\)</span> is defined by $ P = X=X (X<sup>X)</sup>{-1} X^.$</p>
+<p>Recall that <span class="math inline">\(X\hat{\beta}\)</span> is the the orthogonal projection on <span class="math inline">\(Im(X)\)</span>, so that the projector <span class="math inline">\(P\)</span> is defined by <span class="math inline">\(P = X\hat{\beta}=X \left(X^\intercal X\right)^{-1} X^\intercal.\)</span></p>
 <p>And <span class="math inline">\(\norm{Y-X\theta}^2 =  \norm{Y-PY}^2 + \norm{PY-X\beta}^2,\)</span> following Cochran theorem</p>
 <p><span class="math display">\[\frac{1}{\sigma^2}\norm{Y-PY}^2\sim\chi^2(n-rank(X)), \quad \frac{1}{\sigma^2}\norm{PY-X\theta}^2\sim\chi^2(rank(X)), \quad \norm{Y-PY}^2\indep \norm{PY-X\theta}^2.\]</span> As <span class="math inline">\(\mathbb{E}\left(\frac{1}{n} \norm{Y-PY}^2 \right) = \frac{n-rank(X)}{n}\)</span> of <span class="math inline">\(\sigma^2\)</span>, the <strong>MLE estimator is biased</strong></p>
 <p>We prefer the unbiased version <span class="math display">\[\widehat{\sigma}^2 = \frac{1}{n-rank(X)} \norm{Y-PY}^2.\]</span></p>
@@ -743,19 +743,20 @@ X^\intercal Y &amp; = X^\intercal X\hat{\beta}\cr
 <span id="cb6-11"><a></a></span>
 <span id="cb6-12"><a></a>X_numpy <span class="op">=</span> X.to_numpy()</span>
 <span id="cb6-13"><a></a>Y_numpy <span class="op">=</span> Y.to_numpy()</span>
-<span id="cb6-14"><a></a>p <span class="op">=</span> np.linalg.matrix_rank(X)</span>
+<span id="cb6-14"><a></a>p <span class="op">=</span> np.linalg.matrix_rank(X_numpy)</span>
 <span id="cb6-15"><a></a></span>
 <span id="cb6-16"><a></a>XT_X <span class="op">=</span> X_numpy.T.dot(X_numpy)</span>
 <span id="cb6-17"><a></a>XT_X_inv <span class="op">=</span> np.linalg.inv(XT_X)</span>
 <span id="cb6-18"><a></a>hat_beta <span class="op">=</span> XT_X_inv.dot(X_numpy.T.dot(Y_numpy))</span>
-<span id="cb6-19"><a></a></span>
+<span id="cb6-19"><a></a><span class="bu">print</span>(hat_beta)</span>
 <span id="cb6-20"><a></a></span>
 <span id="cb6-21"><a></a>P <span class="op">=</span> X_numpy.dot(XT_X_inv.dot(X_numpy.T))</span>
 <span id="cb6-22"><a></a>R <span class="op">=</span> Y_numpy <span class="op">-</span> P.dot(Y_numpy)</span>
-<span id="cb6-23"><a></a><span class="co">## to compare with </span></span>
-<span id="cb6-24"><a></a>fit1.resid</span>
-<span id="cb6-25"><a></a></span>
-<span id="cb6-26"><a></a>hat_sigma2 <span class="op">=</span> R.T.dot(R)<span class="op">/</span>(n<span class="op">-</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-23"><a></a><span class="bu">print</span>(R[<span class="bu">range</span>(<span class="dv">0</span>,<span class="dv">5</span>)])</span>
+<span id="cb6-24"><a></a><span class="co">## to compare with </span></span>
+<span id="cb6-25"><a></a>fit1.resid</span>
+<span id="cb6-26"><a></a></span>
+<span id="cb6-27"><a></a>hat_sigma2 <span class="op">=</span> R.T.dot(R)<span class="op">/</span>(n<span class="op">-</span>p)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div><div class="column">
 <div class="cell-output cell-output-stdout">
 <pre><code>                            OLS Regression Results                            
@@ -763,8 +764,8 @@ X^\intercal Y &amp; = X^\intercal X\hat{\beta}\cr
 Dep. Variable:      flipper_length_mm   R-squared:                       0.791
 Model:                            OLS   Adj. R-squared:                  0.790
 Method:                 Least Squares   F-statistic:                     626.3
-Date:                Wed, 11 Sep 2024   Prob (F-statistic):          4.51e-113
-Time:                        22:04:53   Log-Likelihood:                -1090.1
+Date:                Thu, 12 Sep 2024   Prob (F-statistic):          4.51e-113
+Time:                        11:57:10   Log-Likelihood:                -1090.1
 No. Observations:                 333   AIC:                             2186.
 Df Residuals:                     330   BIC:                             2198.
 Df Model:                           2                                         
@@ -786,6 +787,8 @@ Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
 [2] The condition number is large, 3.49e+04. This might indicate that there are
 strong multicollinearity or other numerical problems.
+[1.22268670e+02 1.30173337e-02 5.44035274e-01]
+[-11.35545088  -7.22393167   8.50037362   5.85543388  -1.16252457]
 0     -11.355451
 1      -7.223932
 2       8.500374
@@ -803,15 +806,15 @@ Length: 333, dtype: float64</code></pre>
 </div>
 </section></section>
 <section>
-<section id="regression-test" class="title-slide slide level1 center">
-<h1>Regression test</h1>
+<section id="regression-tests" class="title-slide slide level1 center">
+<h1>Regression tests</h1>
 
 </section>
 <section id="test-on-a-linear-combination-of-parameter" class="slide level2">
 <h2>Test on a linear combination of parameter</h2>
 <p>To test whether or not a linear combination <span class="math inline">\(c\)</span> of parameters equals <span class="math inline">\(0\)</span>, we would like to decide between two assumptions <span class="math display">\[H_0 = \left \lbrace c^\intercal \beta = 0\right\rbrace\quad \mbox{vs} \quad H_1 = \left \lbrace c^\intercal \beta \ne 0\right\rbrace.\]</span></p>
 <p>Since <span class="math inline">\(c^\intercal \hat{\beta} \sim \mathcal{N}\left(c^\intercal \beta, \sigma^2 c^\intercal \left(X^\intercal X\right)^{-1} c\right)\)</span> and <span class="math inline">\(\sigma^{-2}\norm{Y-PY}^2 \sim \chi^2(n-p),\)</span> then</p>
-<p><span class="math display">\[\frac{c^\intercal\hat{\beta} - c^\intercal{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).\]</span> So that <span class="rouge">under assumption <span class="math inline">\(H_0\)</span></span> <span class="math display">\[\frac{c^\intercal\hat{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).\]</span></p>
+<p><span class="math display">\[\sqrt{n-p}\frac{c^\intercal\hat{\beta} - c^\intercal{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).\]</span> So that <span class="rouge">under assumption <span class="math inline">\(H_0\)</span></span> <span class="math display">\[\sqrt{n-p}\frac{c^\intercal\hat{\beta}}{\norm{Y-PY} \sqrt{c^\intercal \left(X^\intercal X\right)^{-1} c}} \sim \mathcal{T}(n-p).\]</span></p>
 <div class="panel-tabset">
 <ul id="tabset-4" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-4-1">Exercice</a></li><li><a href="#tabset-4-2">Solution</a></li></ul>
 <div class="tab-content">
@@ -846,8 +849,8 @@ Length: 333, dtype: float64</code></pre>
 <p>If <span class="math inline">\(M_1\)</span> and <span class="math inline">\(M_2\)</span> are two linear models, with <span class="math inline">\(M_1\)</span> nested in <span class="math inline">\(M_2\)</span>.</p>
 <p><span class="math display">\[M_1:\quad Y = X_1 \beta^1 + E^1; \quad \quad M_2:\quad Y = X_2 \beta^2 + E^2;\]</span> with <span class="math inline">\(Im(X_1) \subset Im(X_2).\)</span></p>
 <p>Applying Cochran theorem, under <span class="math inline">\(H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,\)</span></p>
-<p><span class="math inline">\(\norm{Y - P_2 Y}^2 \sim \chi^2\left(n-rank(X_2)\right)\)</span>, <span class="math inline">\(\norm{P_2 Y - P_1 Y }^2 \sim \chi^2(rank(X_2)-rank(X_1))\)</span> and <span class="math inline">\(\norm{P_2 Y - P_1 Y }^2 \indep \norm{Y- P_2 Y}^2.\)</span></p>
-<p>Under <span class="math inline">\(H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,\)</span> <span class="math display">\[\frac{\frac{\norm{P_2 Y - P_1 Y}^2}{p2-p_1}}{\frac{\norm{Y- P_2 Y}^2}{n-p2}}\sim \mathcal{F}_{p_2-p_1, n- p_2}\]</span></p>
+<p><span class="math inline">\(\sigma^{-2}\norm{Y - P_2 Y}^2 \sim \chi^2\left(n-rank(X_2)\right)\)</span>, <span class="math inline">\(\sigma^{-2}\norm{P_2 Y - P_1 Y }^2 \sim \chi^2(rank(X_2)-rank(X_1))\)</span> and <span class="math inline">\(\norm{P_2 Y - P_1 Y }^2 \indep \norm{Y- P_2 Y}^2.\)</span></p>
+<p>Under <span class="math inline">\(H_0=\left\lbrace X_1\beta^1 =X_2 \beta^2\right\rbrace,\)</span> <span class="math display">\[\frac{\frac{\norm{P_2 Y - P_1 Y}^2}{p_2-p_1}}{\frac{\norm{Y- P_2 Y}^2}{n-p_2}}\sim \mathcal{F}_{p_2-p_1, n- p_2}\]</span></p>
 </div>
 <div id="tabset-5-3">
 <div class="cell columns column-output-location">
@@ -951,8 +954,8 @@ Length: 333, dtype: float64</code></pre>
 Dep. Variable:      flipper_length_mm   R-squared:                       0.775
 Model:                            OLS   Adj. R-squared:                  0.773
 Method:                 Least Squares   F-statistic:                     567.4
-Date:                Wed, 11 Sep 2024   Prob (F-statistic):          1.59e-107
-Time:                        22:04:54   Log-Likelihood:                -1103.0
+Date:                Thu, 12 Sep 2024   Prob (F-statistic):          1.59e-107
+Time:                        11:57:10   Log-Likelihood:                -1103.0
 No. Observations:                 333   AIC:                             2212.
 Df Residuals:                     330   BIC:                             2223.
 Df Model:                           2                                         
@@ -990,6 +993,15 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
 </div>
 </div>
 </div>
+<h3 id="quality-of-the-estimation">Quality of the estimation</h3>
+</section>
+<section id="condidence-interval" class="slide level2">
+<h2>Condidence interval</h2>
+<p><span class="math display">\[\hat{\beta} \sim \mathcal{N}(\beta, \sigma^2 \left ( X^\intercal X\right )^{-1} ),\]</span></p>
+<p>So that <span class="math display">\[  \sigma^{-1} \left ( X^\intercal X\right )^{1/2} (\hat{\beta}-\beta) \sim \mathcal{N}(0, I_p)\]</span></p>
+</section>
+<section id="prediction-interval" class="slide level2">
+<h2>Prediction interval</h2>
 <!-- # Diagnostic -->
 <!-- ## Diagnosing Multicollinearity -->
 <!--         Eigenvalues, condition number, and rank deficiency -->
