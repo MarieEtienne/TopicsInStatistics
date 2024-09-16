@@ -30,8 +30,8 @@ website:
         menu:
         - text: PCA Labs
           href: pca_labs.qmd
-      #   - text: Regression labs
-      #     href: regression_labs.qmd
+        - text: Regression labs
+          href: overshoot_regression.ipynb
 
       - text: Dataset
         menu:
@@ -41,6 +41,8 @@ website:
           href: data/countries.RData
         - text: Overshoot Day - countries_comp.RData
           href: data/countries_comp.RData
+        - text: Overshoot Day - csv version for regression
+          href: data/overshootday_overview.csv
 
 format:
   html:
