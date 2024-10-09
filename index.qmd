@@ -1,10 +1,10 @@
 ---
 title: "Topics In Statistics - Smart Data"
-subtitle: "A good start with some mathematics and statitics refreshers"
+subtitle: "A good start with some mathematics and statistics refreshers"
 format: html
 toc: true
 date: last-modified
-date-format: "[Last Updated on] September, 2024"
+date-format: "[Last Updated on] MMM D, YYYY"
 execute: 
   freeze: auto
 ---
