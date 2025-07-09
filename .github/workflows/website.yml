@@ -32,7 +32,7 @@ jobs:
           Rscript -e "install.packages(c('reticulate', 'ggpubr', 'GGally', 'xaringanExtra', 'flipbookr', 'ggrepel'))"
       - name: Additional Python packages
         run: |
-          pip install numpy scipy pandas seaborn scikit-learn statsmodels palmerpenguins
+          pip install numpy scipy pandas seaborn scikit-learn statsmodels palmerpenguins scipy
       - name: Generate slides
         run: "quarto render"
       - name: GitHub Pages action
