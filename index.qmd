@@ -42,7 +42,7 @@ This course is specifically tailored for those who are stepping into data scienc
 
 **Course Format**
 
-This course is conducted in English and combines lectures, practical examples, and hands-on exercises to reinforce learning. Whether you're a beginner or someone looking to refresh these topics, the structured approach and close link made between the linear algebra concept and their use in statistics  will help you grasp and apply these concepts effectively.
+This course is conducted in English and combines lectures, practical examples, and hands-on exercises to reinforce learning. Whether you're a beginner or just need to refresh these topics, the course will be helpful by highlighting the link between the linear algebra concept and their use in statistics. This will help you grasp and apply these usefulf concepts effectively. These concepts will be important for the whole master year.
 
 
 **How to use this website**

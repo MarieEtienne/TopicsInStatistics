@@ -50,9 +50,9 @@ myBib <- ReadBib("./topics.bib", check = FALSE)
 
 * Reactivate Basic Linear algebra useful in  data Science
 
-* Provide basic Data Science tools for representing and analyzing gentle multivariate quantitative Dataset
+* Provide basic Data Science tools for representing and analyzing  multivariate quantitative Dataset
 
-* Implementing simple R and Python Data analysis
+* Implementing simple R  analysis (codes in Python also provided)
 
 
 ## Organization
@@ -67,10 +67,10 @@ myBib <- ReadBib("./topics.bib", check = FALSE)
 
 ## Planning
 
-* Friday, September 6 - Lecture 1 and 2
-* Monday, September 9 - Lecture 2 and lab 1
-* Thursday, September 12 - Lecture 3  
-* Friday, September 6 - Lab 2
+* Monday, September 15 - Lecture 1 and 2
+* Tuesday, September 16 - Lecture 2 and lab 1
+* Monday, September 22 - Lecture 3  
+* Wednesday, September 24 - Lab 2
 
 
 ## Material 

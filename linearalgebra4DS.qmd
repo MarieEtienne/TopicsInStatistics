@@ -64,6 +64,8 @@ For a general overview
 ![](img/51GMICIEVcL._AC_UF1000,1000_QL80_.jpg){width="15%"} `r Cite(myBib,c('gentle2007matrix'))` 
 
 ![](img/978-0-387-22677-4.jpeg){width="15%"} `r Cite(myBib,c('harville1998matrix'))`
+![](img/linear_algebra_and_matrix.jpeg){width="15%"} `r Cite(myBib,c('banerjee2014linear'))` 
+
 
 :::
 
