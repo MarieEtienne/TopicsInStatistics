@@ -8,11 +8,11 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2024-10-09">
-  <title>The Topics In Statistics Companion website ! - Linear Regression</title>
+  <meta name="dcterms.date" content="2025-07-10">
+  <title>The Topics In Statistics Companion website ! – Linear Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -71,7 +71,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -85,7 +85,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -411,7 +411,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2024-10-09</p>
+  <p class="date">2025-07-10</p>
 </section>
 <section class="slide level2">
 
@@ -553,8 +553,7 @@ E_{n}\\
 
 [333 rows x 3 columns]</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-1-2">
 <p><span class="math display">\[ Y = \begin{pmatrix}
@@ -605,8 +604,7 @@ E_{n}\\
 4    1.0       3450.0            36.7
 5    1.0       3650.0            39.3</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 </div>
 </div>
@@ -764,8 +762,8 @@ X^\intercal Y &amp; = X^\intercal X\hat{\beta}\cr
 Dep. Variable:      flipper_length_mm   R-squared:                       0.791
 Model:                            OLS   Adj. R-squared:                  0.790
 Method:                 Least Squares   F-statistic:                     626.3
-Date:                Wed, 09 Oct 2024   Prob (F-statistic):          4.51e-113
-Time:                        06:59:32   Log-Likelihood:                -1090.1
+Date:                Thu, 10 Jul 2025   Prob (F-statistic):          4.51e-113
+Time:                        06:54:54   Log-Likelihood:                -1090.1
 No. Observations:                 333   AIC:                             2186.
 Df Residuals:                     330   BIC:                             2198.
 Df Model:                           2                                         
@@ -802,8 +800,7 @@ strong multicollinearity or other numerical problems.
 343    -0.719676
 Length: 333, dtype: float64</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 </section></section>
 <section>
 <section id="regression-tests" class="title-slide slide level1 center">
@@ -868,8 +865,7 @@ Length: 333, dtype: float64</code></pre>
 0     332.0  65218.636637      0.0           NaN         NaN            NaN
 1     330.0  13598.383598      2.0  51620.253039  626.349572  4.508888e-113</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 </div>
 </div>
@@ -900,8 +896,7 @@ Length: 333, dtype: float64</code></pre>
 4            36.7               1                  0               0
 5            39.3               1                  0               0</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 <ul>
 <li>What is the rank of the so define design matrix ?</li>
 </ul>
@@ -921,8 +916,7 @@ Length: 333, dtype: float64</code></pre>
 4            36.7                  0               0
 5            39.3                  0               0</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 <p><span class="rouge">Be very careful in the interpretation</span></p>
 </div>
 <div id="tabset-6-3">
@@ -954,8 +948,8 @@ Length: 333, dtype: float64</code></pre>
 Dep. Variable:      flipper_length_mm   R-squared:                       0.775
 Model:                            OLS   Adj. R-squared:                  0.773
 Method:                 Least Squares   F-statistic:                     567.4
-Date:                Wed, 09 Oct 2024   Prob (F-statistic):          1.59e-107
-Time:                        06:59:33   Log-Likelihood:                -1103.0
+Date:                Thu, 10 Jul 2025   Prob (F-statistic):          1.59e-107
+Time:                        06:54:55   Log-Likelihood:                -1103.0
 No. Observations:                 333   AIC:                             2212.
 Df Residuals:                     330   BIC:                             2223.
 Df Model:                           2                                         
@@ -979,8 +973,7 @@ Notes:
 [2] The smallest eigenvalue is 1.03e-28. This might indicate that there are
 strong multicollinearity problems or that the design matrix is singular.</code></pre>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-6-4">
 <div class="cell">
@@ -1297,18 +1290,7 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1340,7 +1322,29 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1348,7 +1352,7 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

@@ -8,11 +8,11 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2024-10-09">
-  <title>The Topics In Statistics Companion website ! - Linear Algebra Survival Kit For Data Science</title>
+  <meta name="dcterms.date" content="2025-07-10">
+  <title>The Topics In Statistics Companion website ! – Linear Algebra Survival Kit For Data Science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -43,7 +43,7 @@
     }
     @media print {
     pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
     }
     pre.numberSource code
       { counter-reset: source-line 0; }
@@ -71,7 +71,7 @@
     code span.at { color: #657422; } /* Attribute */
     code span.bn { color: #ad0000; } /* BaseN */
     code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
     code span.ch { color: #20794d; } /* Char */
     code span.cn { color: #8f5902; } /* Constant */
     code span.co { color: #5e5e5e; } /* Comment */
@@ -85,7 +85,7 @@
     code span.fu { color: #4758ab; } /* Function */
     code span.im { color: #00769e; } /* Import */
     code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
     code span.op { color: #5e5e5e; } /* Operator */
     code span.ot { color: #003b4f; } /* Other */
     code span.pp { color: #ad0000; } /* Preprocessor */
@@ -406,7 +406,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2024-10-09</p>
+  <p class="date">2025-07-10</p>
 </section>
 <section class="slide level2">
 
@@ -423,15 +423,14 @@ Marie-Pierre Etienne
 <div class="column" style="width:45%;">
 <p>For a general overview</p>
 <p><img data-src="img/51GMICIEVcL._AC_UF1000,1000_QL80_.jpg" style="width:15.0%"> [Gen07]</p>
-<p><img data-src="img/978-0-387-22677-4.jpeg" style="width:15.0%"> [Har98]</p>
+<p><img data-src="img/978-0-387-22677-4.jpeg" style="width:15.0%"> [Har98] <img data-src="img/linear_algebra_and_matrix.jpeg" style="width:15.0%"> [BR14]</p>
 </div><div class="column" style="width:45%;">
 <p>With R or Python applications</p>
 <p><img data-src="img/linear_algebra_R.jpg" style="width:15.0%"> [Yos21]</p>
 <p><img data-src="img/practical_python.jpg" style="width:15.0%"> [Coh22]</p>
 <p>Matrix computations reference book</p>
 <p><img data-src="img/matrix_cookbook.jpg" style="width:15.0%"> [PP08]</p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="linear-algebra-what-and-why" class="slide level2 smaller">
 <h2>Linear Algebra : What and why</h2>
@@ -518,8 +517,7 @@ a_{n1} &amp; a_{n2} &amp; \cdots &amp; a_{nd}
 <p>The column <span class="math inline">\(j\)</span> is refer to as <span class="math inline">\(A_{.,j}\)</span>, <span class="math inline">\(A_{.,j} = \begin{pmatrix} a_{1j} \cr \vdots\cr a_{nj} \end{pmatrix}.\)</span></p>
 </div><div class="column" style="width:55%;">
 <p>To respect the column vector convention, the row <span class="math inline">\(i\)</span> is refer to as <span class="math inline">\(A_{i,.}^\intercal\)</span>, <span class="math inline">\(A_{i,.}^\intercal = \begin{pmatrix} a_{i1}, &amp; \cdots &amp;  , a_{id} \end{pmatrix}\)</span></p>
-</div>
-</div>
+</div></div>
 </section></section>
 <section>
 <section id="basic-operations" class="title-slide slide level1 center">
@@ -551,8 +549,7 @@ a_{11} + b_{11} &amp;  \cdots &amp;  a_{1d} + b_{1d}\cr
 a_{n1} + b_{n1}&amp; \cdots &amp; a_{nd} + b_{nd}
 \end{pmatrix}.
 \]</span></p>
-</div>
-</div>
+</div></div>
 </section>
 <section id="visualization" class="slide level2">
 <h2>Visualization</h2>
@@ -773,8 +770,7 @@ A =  \begin{pmatrix}
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-4-3">
 <div class="columns">
@@ -790,8 +786,7 @@ A =  \begin{pmatrix}
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 </div>
 </div>
@@ -903,8 +898,7 @@ x_2 \end{pmatrix} =\begin{pmatrix}
                     \end{pmatrix}
 \end{align}\]</span></p>
 <p>In particular <span class="math inline">\(M \begin{pmatrix}1\cr 0\end{pmatrix} = M_{.,1}\)</span> and <span class="math inline">\(M \begin{pmatrix} 0\cr 1\end{pmatrix} = M_{.,2}.\)</span></p>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-5-2">
 <div class="columns">
@@ -926,8 +920,7 @@ M: &amp;\R^2 \to  \R^2\\
 </div>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-5-3">
 <div class="columns">
@@ -945,8 +938,7 @@ M: &amp;\R^2 \to  \R^2\\
 <li>Is it a linear transformation of <span class="math inline">\(\R^2\)</span> ?</li>
 <li>If so, could you write the corresponding matrix <span class="math inline">\(N\)</span> ?</li>
 </ul>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-5-4">
 <div class="columns">
@@ -971,8 +963,7 @@ f(\lambda_1 x + \lambda_2 z) &amp; = f\left ( \begin{pmatrix} \lambda_1 x_1 + \l
 <ul>
 <li>Square Norm <span class="math inline">\(f\)</span> of <span class="math inline">\(x\)</span> equals <span class="math inline">\(x_1^2 + x_2^2,\)</span> As <span class="math inline">\(f(\lambda_1 x ) = \lambda_1^2 f( x)\)</span>, the square norm is not a linear function and could not be expressed as a matrix.</li>
 </ul>
-</div>
-</div>
+</div></div>
 </div>
 </div>
 </div>
@@ -1088,8 +1079,7 @@ a_1 A &amp; \cdots &amp; a_d A\cr
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
-</div>
-</div>
+</div></div>
 </div>
 <div id="tabset-7-4">
 <div class="cell">
@@ -1320,6 +1310,7 @@ $v
 </section>
 <section id="bibliography" class="slide level2">
 <h2>Bibliography</h2>
+<p>Banerjee, S. and A. Roy (2014). <em>Linear algebra and matrix analysis for statistics</em>. Vol. 181. Crc Press Boca Raton.</p>
 <p>Cohen, M. X. (2022). <em>Practical linear algebra for data science</em>. O’Reilly Media, Inc.</p>
 <p>Gentle, J. E. (2007). “Matrix algebra”. In: <em>Springer texts in statistics, Springer, New York, NY, doi</em> 10, pp.&nbsp;978-0.</p>
 <p>Harville, D. A. (1998). <em>Matrix algebra from a statistician’s perspective</em>.</p>
@@ -1612,18 +1603,7 @@ $v
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -1655,7 +1635,29 @@ $v
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -1663,7 +1665,7 @@ $v
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {

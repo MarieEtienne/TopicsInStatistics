@@ -8,11 +8,11 @@
 <link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.555">
+  <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Marie-Pierre Etienne">
   <meta name="dcterms.date" content="2024-07-24">
-  <title>The Topics In Statistics Companion website ! - Topics in Statistics - Presentation</title>
+  <title>The Topics In Statistics Companion website ! – Topics in Statistics - Presentation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -360,8 +360,8 @@ Marie-Pierre Etienne
 <h2>Courses Objective</h2>
 <ul>
 <li><p>Reactivate Basic Linear algebra useful in data Science</p></li>
-<li><p>Provide basic Data Science tools for representing and analyzing gentle multivariate quantitative Dataset</p></li>
-<li><p>Implementing simple R and Python Data analysis</p></li>
+<li><p>Provide basic Data Science tools for representing and analyzing multivariate quantitative Dataset</p></li>
+<li><p>Implementing simple R analysis (codes in Python also provided)</p></li>
 </ul>
 </section>
 <section id="organization" class="slide level2">
@@ -377,11 +377,11 @@ Marie-Pierre Etienne
 <section id="planning" class="slide level2">
 <h2>Planning</h2>
 <ul>
-<li>Friday, September 6 - Lecture 1 and 2</li>
-<li>Monday, September 9 - Lecture 2 and lab 1</li>
-<li>Thursday, September 12 - Lecture 3<br>
+<li>Monday, September 15 - Lecture 1 and 2</li>
+<li>Tuesday, September 16 - Lecture 2 and lab 1</li>
+<li>Monday, September 22 - Lecture 3<br>
 </li>
-<li>Friday, September 6 - Lab 2</li>
+<li>Wednesday, September 24 - Lab 2</li>
 </ul>
 </section>
 <section id="material" class="slide level2">
@@ -677,18 +677,7 @@ Marie-Pierre Etienne
         }
         return false;
       }
-      const clipboard = new window.ClipboardJS('.code-copy-button', {
-        text: function(trigger) {
-          const codeEl = trigger.previousElementSibling.cloneNode(true);
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-      });
-      clipboard.on('success', function(e) {
+      const onCopySuccess = function(e) {
         // button target
         const button = e.trigger;
         // don't keep focus
@@ -720,7 +709,29 @@ Marie-Pierre Etienne
         }, 1000);
         // clear code selection
         e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
       });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
         var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
         var mailtoRegex = new RegExp(/^mailto:/);
           var filterRegex = new RegExp('/' + window.location.host + '/');
@@ -728,7 +739,7 @@ Marie-Pierre Etienne
             return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
         }
         // Inspect non-navigation links and adorn them if external
-     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
         for (var i=0; i<links.length; i++) {
           const link = links[i];
           if (!isInternal(link.href)) {
