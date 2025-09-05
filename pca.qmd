@@ -462,7 +462,7 @@ where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
 ## Identifying $U_1$
 
-Consider $I_{\Delta_{U}}$  the inertia with respect to $\Delta_{U}$ affine subspace containing $G$ with directed bu the unitary vector $U$. 
+Consider $I_{\Delta_{U}}$  the inertia with respect to $\Delta_{U}$ affine subspace containing $G$ with directed by the unitary vector $U$. 
 
 $I_{\Delta_{U}}$ is the cost of the projection on $\Delta_{U}$, i.e the loss information. 
 
@@ -589,9 +589,7 @@ penguins_norm_eigenvalue <- penguins_norm_svd$d
 sum(penguins_norm_eigenvalue)
 ```
 
-:::
 
-::::
 
 ## Palmer Penguins example
 
