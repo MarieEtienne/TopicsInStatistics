@@ -59,28 +59,29 @@ $$
 
 ::: {.column width="45%" }
 
-For a general overview
+### For a general overview
 
-[![](img/51GMICIEVcL._AC_UF1000,1000_QL80_.jpg){width="5%"}](https://marieetienne.github.io/TopicsInStatistics/img/51GMICIEVcL._AC_UF1000,1000_QL80_.jpg) `r Cite(myBib,c('gentle2007matrix'))` 
+[![](img/51GMICIEVcL._AC_UF1000,1000_QL80_.jpg){width="10%"}](https://marieetienne.github.io/TopicsInStatistics/img/51GMICIEVcL._AC_UF1000,1000_QL80_.jpg) `r Cite(myBib,c('gentle2007matrix'))` 
 
-![](img/978-0-387-22677-4.jpeg){width="15%"} `r Cite(myBib,c('harville1998matrix'))`
-![](img/linear_algebra_and_matrix.jpeg){width="15%"} `r Cite(myBib,c('banerjee2014linear'))` 
+[![](img/978-0-387-22677-4.jpeg){width="15%"} ](https://marieetienne.github.io/TopicsInStatistics/img/978-0-387-22677-4.jpeg) `r Cite(myBib,c('harville1998matrix'))`
+
+[![](img/linear_algebra_and_matrix.jpeg){width="15%"} ](https://marieetienne.github.io/TopicsInStatistics/img/linear_algebra_and_matrix.jpeg) `r Cite(myBib,c('banerjee2014linear'))` 
 
 
 :::
 
 ::: {.column width="45%" }
 
-With R or Python applications
+### With R or Python applications
 
-![](img/linear_algebra_R.jpg){width="15%"} `r Cite(myBib,c('yoshida2021linear'))` 
+[![](img/linear_algebra_R.jpg){width="15%"}](https://marieetienne.github.io/TopicsInStatistics/img/linear_algebra_R.jpg) `r Cite(myBib,c('yoshida2021linear'))` 
 
-![](img/practical_python.jpg){width="15%"} `r Cite(myBib,c('cohen2022practical'))`
+[![](img/practical_python.jpg){width="15%"}](https://marieetienne.github.io/TopicsInStatistics/img/practical_python.jpg) `r Cite(myBib,c('cohen2022practical'))`
 
 
-Matrix computations reference book
+### Matrix computations reference book
 
-![](img/matrix_cookbook.jpg){width="15%"} `r Cite(myBib,c('petersen2008matrix'))` 
+[![](img/matrix_cookbook.jpg){width="15%"}](https://marieetienne.github.io/TopicsInStatistics/img/matrix_cookbook.jpg) `r Cite(myBib,c('petersen2008matrix'))` 
 
 :::
 
