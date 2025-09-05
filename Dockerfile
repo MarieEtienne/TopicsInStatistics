@@ -30,7 +30,7 @@ ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN pip install --no-cache-dir numpy scipy pandas seaborn scikit-learn statsmodels matplotlib jupyter jupyter-cache 
 
 RUN R  -e "install.packages(c('Factoshiny', 'RefManageR', 'wesanderson', 'palmerpenguins', 'plotly'))"
-RUN R  -e "install.packages(c('ggpubr', 'GGally', 'flipbookr', 'ggrepel'))"
+RUN R  -e "install.packages(c('ggpubr', 'GGally',  'ggrepel'))"
           
 # Nettoyage de TeX docs si nécessaire
 RUN apt-get purge -y 'texlive.*-doc' && apt-get autoremove -y && apt-get clean

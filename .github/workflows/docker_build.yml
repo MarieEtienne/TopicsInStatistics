@@ -11,7 +11,7 @@
 
 # Script environment variables
 env:
-  DOCKER_IMAGE_NAME: finistr2025
+  DOCKER_IMAGE_NAME: topics
 
 name: Build and Push Docker image
 
