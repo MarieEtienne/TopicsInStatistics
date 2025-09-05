@@ -41,9 +41,9 @@ library(reticulate)
 library(tidyverse)
 ```
 
-```{r xaringanExtra-share-again, echo=FALSE}
-xaringanExtra::use_share_again()
-```
+# ```{r xaringanExtra-share-again, echo=FALSE}
+# xaringanExtra::use_share_again()
+# ```
 
 ```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
 BibOptions(check.entries = FALSE,
