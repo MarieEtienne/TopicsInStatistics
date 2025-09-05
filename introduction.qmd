@@ -30,9 +30,9 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-```{r xaringanExtra-share-again, echo=FALSE}
-xaringanExtra::use_share_again()
-```
+# ```{r xaringanExtra-share-again, echo=FALSE}
+# xaringanExtra::use_share_again()
+# ```
 
 ```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
 BibOptions(check.entries = FALSE,
@@ -52,7 +52,7 @@ myBib <- ReadBib("./topics.bib", check = FALSE)
 
 * Provide basic Data Science tools for representing and analyzing  multivariate quantitative Dataset
 
-* Implementing simple R  analysis (codes in Python also provided)
+* Implementing simple R analysis (codes in Python also provided)
 
 
 ## Organization
@@ -61,16 +61,13 @@ myBib <- ReadBib("./topics.bib", check = FALSE)
 * Lecture 2: Principal Component Analysis
 * Lecture 3: Regression
 
-* Lab1: Principal Component analysis with R
-* Lab2: Regression with Python 
-
 
 ## Planning
 
-* Monday, September 15 - Lecture 1 and 2
-* Tuesday, September 16 - Lecture 2 and lab 1
-* Monday, September 22 - Lecture 3  
-* Wednesday, September 24 - Lab 2
+* Monday, September 15 
+* Tuesday, September 16 
+* Monday, September 22 
+* Wednesday, September 24 
 
 
 ## Material 
