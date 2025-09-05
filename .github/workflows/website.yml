@@ -8,7 +8,7 @@ jobs:
   build:
     name: Build website with quarto
     runs-on: ubuntu-latest
-    container: mpetienne/topics:0.1
+    container: mpetienne/topics:latest
 
     steps:
       - name: Checkout repository
