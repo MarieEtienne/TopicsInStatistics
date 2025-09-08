@@ -98,7 +98,6 @@ div.callout-note {
 
 /* for background image in title slide */
 .title-slide {
-  background-image: url("background.png");
   background-size: cover;
 }
 
