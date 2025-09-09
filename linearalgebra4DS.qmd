@@ -295,7 +295,7 @@ ggpubr::ggarrange(p2, p3, p4, ncol = 3)
 ```
 
 
-### Vector representation
+### Vector representation 2
 
 ```{r}
 #| echo: false
@@ -650,28 +650,60 @@ p1
 
 :::
 
-# Link with Linear applications
-
-## Vector space
 
 
-:::: {.callout-note icon="false"}
-### Definition
- A real vector space $(V, +, . ,\R)$ is a set $V$ equipped with two operations satisfybing the following properties for all $(x,y,z)\in V^3$ and  all $(\lambda,\mu)\in\R^2:$
- 
- * *(close for addition)* $x + y \in V,$
- * *(close for scalar multiplication)* $\lambda x  \in V,$
- * *(commutativity)*  $x + y = y + x,$
- * *(associativity of +)* $(x + y) + z  = x + (y + z),$
- * *(Null element for +)* $x + \mathbb{0} = x,$
- * *(Existence of additive inverse +)* There exists $-x \in V$, such that $ + (-x) = \mathbb{0},$
- * *(Associativity of scalar multiplication)* $\lambda (\mu x)   = (\lambda \mu ) x,$
- * *(Distributivity of scalar sums)* $(\lambda + \mu ) x   = \lambda x + \mu x,$
- * *(Distributivity of vector sums)* $\lambda (x + y )   = \lambda x + \lambda y,$
- * *(Scalar multiplication identity)* $1 x   = x.$
-::::
- 
-It is enough for the course to think to the set of vectors in $\R^d$.
+## Linear independance
+A sequence of vectors $x_1, \cdots, x_k$ from $\R^n$ is said to be linearly independent, if the only solution to 
+$\sum_{i=1}^k a_i x_i  =\mathbb{0}$ is
+$a =\mathbb {0}$.
+
+::: {.panel-tabset} 
+
+### Example
+
+$x_1 = \begin{pmatrix}
+1 \cr
+0 \cr
+0 
+\end{pmatrix}, \quad x_2 = \begin{pmatrix}
+1 \cr
+1 \cr
+0
+\end{pmatrix}, \quad X=\begin{pmatrix}
+1 & 1  \cr
+0 & 1  \cr
+0 & 0 \cr
+\end{pmatrix}, \quad Xa = \begin{pmatrix}a_1 + a_2\cr
+a_2 \cr
+0 \end{pmatrix}.$
+
+$x_1$ and  $x_2$ are linearly independant.
+
+### Exercice
+
+$x_1 = \begin{pmatrix}
+1 \cr
+1 \cr
+1 
+\end{pmatrix}, \quad x_2 = \begin{pmatrix}
+1 \cr
+1 \cr
+0
+\end{pmatrix}, x_3 = \begin{pmatrix}
+0 \cr
+1 \cr
+1
+\end{pmatrix}, x_4 = \begin{pmatrix}
+0 \cr
+-1 \cr
+1
+\end{pmatrix}$
+
+* Are $(x_1, x_2,x_3)$ linearly independant ?
+* Are $(x_1, x_2,x_4)$ linearly independant ?
+
+:::
+
 
 ## Span of a set of vectors
 
@@ -695,24 +727,28 @@ Intuitively, the span represents the *space generated* by those vectors:
 - If you have two linearly independent vectors in $\mathbb{R}^2$, their span is the whole plane.  
 - In higher dimensions, the span gives you the smallest subspace that contains all the vectors.
 
+### Exercises
+
+$$\text{span}\left(\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right );$$
+$$\text{span}\left(\begin{pmatrix} 1 \\ 1 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right );$$
+$$\text{span}\left(\begin{pmatrix} 1 \\ 1 \\1\end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}, \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}\right );$$
+
+
 ### Illustration
 
 ```{r}
 #| label: span-ggplot
-#| echo: true
+#| echo: false
 #| results: 'asis'
-
 
 # define two vectors in R^2
 v1 <- c(2, 1)
 v2 <- c(-1, 2)
 
-
 # build a grid of coefficients
 a <- seq(-1.5, 1.5, by = 0.15)
 b <- seq(-1.5, 1.5, by = 0.15)
 combos <- expand.grid(a = a, b = b)
-
 
 # compute linear combinations
 pts <- t(apply(combos, 1, function(ab) ab[1]*v1 + ab[2]*v2))
@@ -736,11 +772,88 @@ p + geom_segment(data = arrow_df, aes(x = x, y = y, xend = xend, yend = yend),
 arrow = arrow(length = unit(0.25, 'cm')), size = 1.0) +
 geom_text(data = arrow_df, aes(x = xend, y = yend, label = label),
 nudge_x = 0.2, nudge_y = 0.2)
-
 ```
 
 ::: 
 
+
+
+
+## Vector space
+
+:::: {.callout-note icon="false"}
+### Definition
+ A real vector space $(V, +, . ,\R)$ is a set $V$ equipped with two operations satisfybing the following properties for all $(x,y,z)\in V^3$ and  all $(\lambda,\mu)\in\R^2:$
+ 
+ * *(close for addition)* $x + y \in V,$
+ * *(close for scalar multiplication)* $\lambda x  \in V,$
+ * *(commutativity)*  $x + y = y + x,$
+ * *(associativity of +)* $(x + y) + z  = x + (y + z),$
+ * *(Null element for +)* $x + \mathbb{0} = x,$
+ * *(Existence of additive inverse +)* There exists $-x \in V$, such that $ + (-x) = \mathbb{0},$
+ * *(Associativity of scalar multiplication)* $\lambda (\mu x)   = (\lambda \mu ) x,$
+ * *(Distributivity of scalar sums)* $(\lambda + \mu ) x   = \lambda x + \mu x,$
+ * *(Distributivity of vector sums)* $\lambda (x + y )   = \lambda x + \lambda y,$
+ * *(Scalar multiplication identity)* $1 x   = x.$
+::::
+ 
+It is enough for the course to think to the set of vectors in $\R^d$.
+
+
+## Basis of a Vector Space
+
+
+A set B of elements of a vector space V is called a basis if every element of V can be written in a unique way as a finite linear combination of elements of B. 
+
+::: {.panel-tabset}
+
+### Property
+
+A subset $B \subset V$ is a **basis** if it satisfies the two following conditions:
+
+1. **Linear independence**  
+   For every finite subset $\{ \mathbf{v}_1, \dotsc, \mathbf{v}_m \}$ of $B$,  
+   if 
+   $$
+   c_{1}\mathbf{v}_{1} + \cdots + c_{m}\mathbf{v}_{m} = \mathbf{0}
+   $$
+   for some $c_{1}, \dotsc, c_{m} \in F$, then necessarily
+   $$
+   c_{1} = \cdots = c_{m} = 0.
+   $$
+
+2. **Spanning property**  
+   For every vector $\mathbf{v} \in V$, one can choose $a_{1}, \dotsc, a_{n} \in F$  
+   and $\mathbf{v}_{1}, \dotsc, \mathbf{v}_{n} \in B$ such that
+   $$
+   \mathbf{v} = a_{1}\mathbf{v}_{1} + \cdots + a_{n}\mathbf{v}_{n}.
+   $$
+    
+The coefficients of this linear combination are referred to as components or coordinates of the vector with respect to B. The elements of a basis are called basis vectors. 
+
+If $\norm{v_i} =1$ for all $i$, the basis is **orthonormal**.
+
+### Example - Exercises
+
+$\left (\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right )$ is a basis of $\R^2$
+
+Check whether or not  this set of vectors form Orthobormal bases
+
+* in $\R^2$ $\left(\begin{pmatrix} 2 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 2 \end{pmatrix}\right )$ 
+
+* in $\R^2$ $\left(\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}\right )$ 
+
+* in $\R^3$ $\left(\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \\ 1\end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ 1\\ \sqrt{2}/2 \end{pmatrix}\right )$ 
+
+* in $\R^3$ 
+$${v}_1=\frac{1}{\sqrt{3}}\begin{pmatrix}1\\1\\1\end{pmatrix},\qquad
+v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\\0\end{pmatrix},\qquad
+{v}_3=\frac{1}{\sqrt{6}}\begin{pmatrix}1\\1\\-2\end{pmatrix}.$$
+
+:::
+
+
+# Link with Linear applications
 
 ## Linear mapping
 
@@ -965,63 +1078,12 @@ As $f(\lambda_1 x ) = \lambda_1^2 f( x)$, the square norm is not a linear functi
 
 :::
 
-## Linear independance
-A sequence of vectors $x_1, \cdots, x_k$ from $\R^n$ is said to be linearly independent, if the only solution to 
-$\sum_{i=1}^k a_i x_i  =\mathbb{0}$ is
-$a =\mathbb {0}$.
-
-::: {.panel-tabset} 
-
-### Example
-
-$x_1 = \begin{pmatrix}
-1 \cr
-0 \cr
-0 
-\end{pmatrix}, \quad x_2 = \begin{pmatrix}
-1 \cr
-1 \cr
-0
-\end{pmatrix}, \quad X=\begin{pmatrix}
-1 & 1  \cr
-0 & 1  \cr
-0 & 0 \cr
-\end{pmatrix}, \quad Xa = \begin{pmatrix}a_1 + a_2\cr
-a_2 \cr
-0 \end{pmatrix}.$
-
-$x_1$ and  $x_2$ are linearly independant.
-
-### Exercice
-
-$x_1 = \begin{pmatrix}
-1 \cr
-1 \cr
-1 
-\end{pmatrix}, \quad x_2 = \begin{pmatrix}
-1 \cr
-1 \cr
-0
-\end{pmatrix}, x_3 = \begin{pmatrix}
-0 \cr
-1 \cr
-1
-\end{pmatrix}, x_4 = \begin{pmatrix}
-0 \cr
--1 \cr
-1
-\end{pmatrix}$
-
-* Are $(x_1, x_2,x_3)$ linearly independant ?
-* Are $(x_1, x_2,x_4)$ linearly independant ?
-
-:::
 
 ## Matrix rank
 
 The sequence of columns of a matrix $M\in \R^{n\times d}$ forms a sequence of $d$ vectors $(c_1, \cdots,c_d)$ in $\R^n$, while the rows of a matrix forms a sequence of $n$ vectors $(r_1, \cdots,r_n)$ in $\R^d$. 
 
-The **rank** of a matrix is the length of the largest sequence of linearly independant columns or equivalently the length of the largest sequence of linearly independant rows.
+The **rank** of a matrix is the length of the largest sequence of linearly independent columns or equivalently the length of the largest sequence of linearly independent rows.
 
 
 ::: {.panel-tabset} 
@@ -1256,6 +1318,34 @@ p1
 
 :::
 
+## How are matrices used in Data Science
+
+### Solving Linear systems
+
+Matrices provide a compact way to represent and solve systems of linear equations, which appear in regression models, optimization problems, and numerical simulations.
+
+### Identifying Invariant Directions
+
+Matrices help reveal invariant directions in data transformations. This is the foundation of techniques like Principal Component Analysis (PCA), which reduces dimensionality while preserving essential structure.
+
+
+
+## Linear systems
+
+Numerically, linear regression sums up at solving a linear system 
+$$X \theta = b.$$
+where $X\in \R^{n\times p}$, $\theta\in\R^p$ and $b\in \R^n$. Assume $n>=p$.
+
+::: {.panel-tabset} 
+
+### Case $rg(X) = p$
+
+
+### Case $rg(X) < p$
+
+### Case $rg(X) > p$
+
+::: 
 
 ## Eigen values, Eigen vectors
 
