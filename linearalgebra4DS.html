@@ -949,19 +949,15 @@ and <span class="math inline">\(\mathbf{v}_{1}, \dotsc, \mathbf{v}_{n} \in B\)</
 <p>If <span class="math inline">\(\norm{v_i} =1\)</span> for all <span class="math inline">\(i\)</span>, the basis is <strong>orthonormal</strong>.</p>
 </div>
 <div id="tabset-8-2">
-<p><span class="math inline">\((\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right )\)</span> is a basis of <span class="math inline">\(\R^2\)</span></p>
+<p><span class="math inline">\(\left (\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right )\)</span> is a basis of <span class="math inline">\(\R^2\)</span></p>
 <p>Check whether or not this set of vectors form Orthobormal bases</p>
 <ul>
-<li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\((\begin{pmatrix} 2 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 2 \end{pmatrix}\right )\)</span></p></li>
-<li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\((\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
-<li><p>in <span class="math inline">\(\R^3\)</span> <span class="math inline">\((\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \\ 1\end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ 1\\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
-<li><p>in <span class="math inline">\(\R^3\)</span> [ _1=</p>
-<span class="math display">\[\begin{pmatrix}1\\1\\1\end{pmatrix}\]</span>
-<p>, _2=</p>
-<span class="math display">\[\begin{pmatrix}1\\-1\\0\end{pmatrix}\]</span>
-<p>, _3=</p>
-<span class="math display">\[\begin{pmatrix}1\\1\\-2\end{pmatrix}\]</span>
-<p>. ]</p></li>
+<li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\(\left(\begin{pmatrix} 2 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 2 \end{pmatrix}\right )\)</span></p></li>
+<li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\(\left(\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
+<li><p>in <span class="math inline">\(\R^3\)</span> <span class="math inline">\(\left(\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \\ 1\end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ 1\\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
+<li><p>in <span class="math inline">\(\R^3\)</span> <span class="math display">\[{v}_1=\frac{1}{\sqrt{3}}\begin{pmatrix}1\\1\\1\end{pmatrix},\qquad
+v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\\0\end{pmatrix},\qquad
+{v}_3=\frac{1}{\sqrt{6}}\begin{pmatrix}1\\1\\-2\end{pmatrix}.\]</span></p></li>
 </ul>
 </div>
 </div>
@@ -1123,7 +1119,7 @@ f(\lambda_1 x + \lambda_2 z) &amp; = f\left ( \begin{pmatrix} \lambda_1 x_1 + \l
 <section id="matrix-rank" class="slide level2">
 <h2>Matrix rank</h2>
 <p>The sequence of columns of a matrix <span class="math inline">\(M\in \R^{n\times d}\)</span> forms a sequence of <span class="math inline">\(d\)</span> vectors <span class="math inline">\((c_1, \cdots,c_d)\)</span> in <span class="math inline">\(\R^n\)</span>, while the rows of a matrix forms a sequence of <span class="math inline">\(n\)</span> vectors <span class="math inline">\((r_1, \cdots,r_n)\)</span> in <span class="math inline">\(\R^d\)</span>.</p>
-<p>The <strong>rank</strong> of a matrix is the length of the largest sequence of linearly independant columns or equivalently the length of the largest sequence of linearly independant rows.</p>
+<p>The <strong>rank</strong> of a matrix is the length of the largest sequence of linearly independent columns or equivalently the length of the largest sequence of linearly independent rows.</p>
 <div class="panel-tabset">
 <ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Example</a></li><li><a href="#tabset-10-2">Remarks</a></li><li><a href="#tabset-10-3">Example with R</a></li><li><a href="#tabset-10-4">Example with Python</a></li></ul>
 <div class="tab-content">
