@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2025-09-08">
+  <meta name="dcterms.date" content="2025-09-09">
   <title>The Topics In Statistics Companion website ! – Linear Algebra Survival Kit For Data Science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -406,7 +406,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2025-09-08</p>
+  <p class="date">2025-09-09</p>
 </section>
 <section class="slide level2">
 
@@ -556,7 +556,7 @@ a_{n1} + b_{n1}&amp; \cdots &amp; a_{nd} + b_{nd}
 <h2>Visualization</h2>
 <p>Consider <span class="math inline">\(x=\begin{pmatrix} 1 \cr 0 \end{pmatrix}\)</span> and <span class="math inline">\(y= \begin{pmatrix} 0 \cr 1 \end{pmatrix},\)</span> and <span class="math inline">\(z=x+2 y.\)</span></p>
 <div class="panel-tabset">
-<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Vector representation</a></li><li><a href="#tabset-1-2">Vector representation</a></li></ul>
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">Vector representation</a></li><li><a href="#tabset-1-2">Vector representation 2</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1">
 <div class="cell">
@@ -815,11 +815,87 @@ A =  \begin{pmatrix}
 </div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="link-with-linear-applications" class="title-slide slide level1 center">
-<h1>Link with Linear applications</h1>
-
+</section>
+<section id="linear-independance" class="slide level2">
+<h2>Linear independance</h2>
+<p>A sequence of vectors <span class="math inline">\(x_1, \cdots, x_k\)</span> from <span class="math inline">\(\R^n\)</span> is said to be linearly independent, if the only solution to <span class="math inline">\(\sum_{i=1}^k a_i x_i  =\mathbb{0}\)</span> is <span class="math inline">\(a =\mathbb {0}\)</span>.</p>
+<div class="panel-tabset">
+<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Example</a></li><li><a href="#tabset-6-2">Exercice</a></li></ul>
+<div class="tab-content">
+<div id="tabset-6-1">
+<p><span class="math inline">\(x_1 = \begin{pmatrix}
+1 \cr
+0 \cr
+0
+\end{pmatrix}, \quad x_2 = \begin{pmatrix}
+1 \cr
+1 \cr
+0
+\end{pmatrix}, \quad X=\begin{pmatrix}
+1 &amp; 1  \cr
+0 &amp; 1  \cr
+0 &amp; 0 \cr
+\end{pmatrix}, \quad Xa = \begin{pmatrix}a_1 + a_2\cr
+a_2 \cr
+0 \end{pmatrix}.\)</span></p>
+<p><span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are linearly independant.</p>
+</div>
+<div id="tabset-6-2">
+<p><span class="math inline">\(x_1 = \begin{pmatrix}
+1 \cr
+1 \cr
+1
+\end{pmatrix}, \quad x_2 = \begin{pmatrix}
+1 \cr
+1 \cr
+0
+\end{pmatrix}, x_3 = \begin{pmatrix}
+0 \cr
+1 \cr
+1
+\end{pmatrix}, x_4 = \begin{pmatrix}
+0 \cr
+-1 \cr
+1
+\end{pmatrix}\)</span></p>
+<ul>
+<li>Are <span class="math inline">\((x_1, x_2,x_3)\)</span> linearly independant ?</li>
+<li>Are <span class="math inline">\((x_1, x_2,x_4)\)</span> linearly independant ?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="span-of-a-set-of-vectors" class="slide level2">
+<h2>Span of a set of vectors</h2>
+<div class="panel-tabset">
+<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Definition</a></li><li><a href="#tabset-7-2">Exercises</a></li><li><a href="#tabset-7-3">Illustration</a></li></ul>
+<div class="tab-content">
+<div id="tabset-7-1">
+<p>The <strong>span of a set of vectors</strong> is the set of all possible linear combinations of these vectors.<br>
+In other words, if you take some vectors <span class="math inline">\(v_1, v_2, \dots, v_k\)</span>, their span is the collection of vectors you can build by multiplying each <span class="math inline">\(v_i\)</span> by a scalar and then adding the results together.</p>
+<p>Formally:</p>
+<p><span class="math display">\[
+\text{span}(v_1, v_2, \dots, v_k)
+= \{ a_1 v_1 + a_2 v_2 + \cdots + a_k v_k \;\mid\; a_1, a_2, \dots, a_k \in \mathbb{R} \}.
+\]</span></p>
+<p>Intuitively, the span represents the <em>space generated</em> by those vectors:</p>
+<ul>
+<li>If you have a single nonzero vector in <span class="math inline">\(\mathbb{R}^2\)</span>, its span is a line through the origin.<br>
+</li>
+<li>If you have two linearly independent vectors in <span class="math inline">\(\mathbb{R}^2\)</span>, their span is the whole plane.<br>
+</li>
+<li>In higher dimensions, the span gives you the smallest subspace that contains all the vectors.</li>
+</ul>
+</div>
+<div id="tabset-7-2">
+<p><span class="math display">\[\text{span}\left(\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right );\]</span> <span class="math display">\[\text{span}\left(\begin{pmatrix} 1 \\ 1 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right );\]</span> <span class="math display">\[\text{span}\left(\begin{pmatrix} 1 \\ 1 \\1\end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}, \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}\right );\]</span></p>
+</div>
+<div id="tabset-7-3">
+<p><img data-src="linearalgebra4DS_files/figure-revealjs/span-ggplot-1.png" width="960"></p>
+</div>
+</div>
+</div>
 </section>
 <section id="vector-space" class="slide level2">
 <h2>Vector space</h2>
@@ -847,72 +923,60 @@ A =  \begin{pmatrix}
 </div>
 <p>It is enough for the course to think to the set of vectors in <span class="math inline">\(\R^d\)</span>.</p>
 </section>
-<section id="span-of-a-set-of-vectors" class="slide level2">
-<h2>Span of a set of vectors</h2>
+<section id="basis-of-a-vector-space" class="slide level2">
+<h2>Basis of a Vector Space</h2>
+<p>A set B of elements of a vector space V is called a basis if every element of V can be written in a unique way as a finite linear combination of elements of B.</p>
 <div class="panel-tabset">
-<ul id="tabset-6" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-6-1">Definition</a></li><li><a href="#tabset-6-2">Illustration</a></li></ul>
+<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Property</a></li><li><a href="#tabset-8-2">Example - Exercises</a></li></ul>
 <div class="tab-content">
-<div id="tabset-6-1">
-<p>The <strong>span of a set of vectors</strong> is the set of all possible linear combinations of these vectors.<br>
-In other words, if you take some vectors <span class="math inline">\(v_1, v_2, \dots, v_k\)</span>, their span is the collection of vectors you can build by multiplying each <span class="math inline">\(v_i\)</span> by a scalar and then adding the results together.</p>
-<p>Formally:</p>
-<p><span class="math display">\[
-\text{span}(v_1, v_2, \dots, v_k)
-= \{ a_1 v_1 + a_2 v_2 + \cdots + a_k v_k \;\mid\; a_1, a_2, \dots, a_k \in \mathbb{R} \}.
-\]</span></p>
-<p>Intuitively, the span represents the <em>space generated</em> by those vectors:</p>
+<div id="tabset-8-1">
+<p>A subset <span class="math inline">\(B \subset V\)</span> is a <strong>basis</strong> if it satisfies the two following conditions:</p>
+<ol type="1">
+<li><p><strong>Linear independence</strong><br>
+For every finite subset <span class="math inline">\(\{ \mathbf{v}_1, \dotsc, \mathbf{v}_m \}\)</span> of <span class="math inline">\(B\)</span>,<br>
+if <span class="math display">\[
+c_{1}\mathbf{v}_{1} + \cdots + c_{m}\mathbf{v}_{m} = \mathbf{0}
+\]</span> for some <span class="math inline">\(c_{1}, \dotsc, c_{m} \in F\)</span>, then necessarily <span class="math display">\[
+c_{1} = \cdots = c_{m} = 0.
+\]</span></p></li>
+<li><p><strong>Spanning property</strong><br>
+For every vector <span class="math inline">\(\mathbf{v} \in V\)</span>, one can choose <span class="math inline">\(a_{1}, \dotsc, a_{n} \in F\)</span><br>
+and <span class="math inline">\(\mathbf{v}_{1}, \dotsc, \mathbf{v}_{n} \in B\)</span> such that <span class="math display">\[
+\mathbf{v} = a_{1}\mathbf{v}_{1} + \cdots + a_{n}\mathbf{v}_{n}.
+\]</span></p></li>
+</ol>
+<p>The coefficients of this linear combination are referred to as components or coordinates of the vector with respect to B. The elements of a basis are called basis vectors.</p>
+<p>If <span class="math inline">\(\norm{v_i} =1\)</span> for all <span class="math inline">\(i\)</span>, the basis is <strong>orthonormal</strong>.</p>
+</div>
+<div id="tabset-8-2">
+<p><span class="math inline">\((\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right )\)</span> is a basis of <span class="math inline">\(\R^2\)</span></p>
+<p>Check whether or not this set of vectors form Orthobormal bases</p>
 <ul>
-<li>If you have a single nonzero vector in <span class="math inline">\(\mathbb{R}^2\)</span>, its span is a line through the origin.<br>
-</li>
-<li>If you have two linearly independent vectors in <span class="math inline">\(\mathbb{R}^2\)</span>, their span is the whole plane.<br>
-</li>
-<li>In higher dimensions, the span gives you the smallest subspace that contains all the vectors.</li>
+<li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\((\begin{pmatrix} 2 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 2 \end{pmatrix}\right )\)</span></p></li>
+<li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\((\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
+<li><p>in <span class="math inline">\(\R^3\)</span> <span class="math inline">\((\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \\ 1\end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ 1\\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
+<li><p>in <span class="math inline">\(\R^3\)</span> [ _1=</p>
+<span class="math display">\[\begin{pmatrix}1\\1\\1\end{pmatrix}\]</span>
+<p>, _2=</p>
+<span class="math display">\[\begin{pmatrix}1\\-1\\0\end{pmatrix}\]</span>
+<p>, _3=</p>
+<span class="math display">\[\begin{pmatrix}1\\1\\-2\end{pmatrix}\]</span>
+<p>. ]</p></li>
 </ul>
 </div>
-<div id="tabset-6-2">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co"># define two vectors in R^2</span></span>
-<span id="cb12-2"><a></a>v1 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>)</span>
-<span id="cb12-3"><a></a>v2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">2</span>)</span>
-<span id="cb12-4"><a></a></span>
-<span id="cb12-5"><a></a></span>
-<span id="cb12-6"><a></a><span class="co"># build a grid of coefficients</span></span>
-<span id="cb12-7"><a></a>a <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="at">by =</span> <span class="fl">0.15</span>)</span>
-<span id="cb12-8"><a></a>b <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span>, <span class="at">by =</span> <span class="fl">0.15</span>)</span>
-<span id="cb12-9"><a></a>combos <span class="ot">&lt;-</span> <span class="fu">expand.grid</span>(<span class="at">a =</span> a, <span class="at">b =</span> b)</span>
-<span id="cb12-10"><a></a></span>
-<span id="cb12-11"><a></a></span>
-<span id="cb12-12"><a></a><span class="co"># compute linear combinations</span></span>
-<span id="cb12-13"><a></a>pts <span class="ot">&lt;-</span> <span class="fu">t</span>(<span class="fu">apply</span>(combos, <span class="dv">1</span>, <span class="cf">function</span>(ab) ab[<span class="dv">1</span>]<span class="sc">*</span>v1 <span class="sc">+</span> ab[<span class="dv">2</span>]<span class="sc">*</span>v2))</span>
-<span id="cb12-14"><a></a>pts_df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(pts)</span>
-<span id="cb12-15"><a></a><span class="fu">colnames</span>(pts_df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'x'</span>,<span class="st">'y'</span>)</span>
-<span id="cb12-16"><a></a></span>
-<span id="cb12-17"><a></a></span>
-<span id="cb12-18"><a></a><span class="co"># base plot with points showing the span</span></span>
-<span id="cb12-19"><a></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(pts_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)) <span class="sc">+</span></span>
-<span id="cb12-20"><a></a><span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb12-21"><a></a><span class="fu">coord_equal</span>(<span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">4</span>,<span class="dv">4</span>)) <span class="sc">+</span></span>
-<span id="cb12-22"><a></a><span class="fu">labs</span>(<span class="at">title =</span> <span class="st">'Span of v1 and v2: cloud of linear combinations'</span>, <span class="at">x =</span> <span class="st">'x'</span>, <span class="at">y =</span> <span class="st">'y'</span>)</span>
-<span id="cb12-23"><a></a></span>
-<span id="cb12-24"><a></a></span>
-<span id="cb12-25"><a></a><span class="co"># add arrows for v1 and v2</span></span>
-<span id="cb12-26"><a></a>arrow_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="at">y =</span> <span class="dv">0</span>, <span class="at">xend =</span> <span class="fu">c</span>(v1[<span class="dv">1</span>], v2[<span class="dv">1</span>]), <span class="at">yend =</span> <span class="fu">c</span>(v1[<span class="dv">2</span>], v2[<span class="dv">2</span>]),</span>
-<span id="cb12-27"><a></a><span class="at">label =</span> <span class="fu">c</span>(<span class="st">'v1'</span>,<span class="st">'v2'</span>))</span>
-<span id="cb12-28"><a></a></span>
-<span id="cb12-29"><a></a></span>
-<span id="cb12-30"><a></a>p <span class="sc">+</span> <span class="fu">geom_segment</span>(<span class="at">data =</span> arrow_df, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">xend =</span> xend, <span class="at">yend =</span> yend),</span>
-<span id="cb12-31"><a></a><span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="fl">0.25</span>, <span class="st">'cm'</span>)), <span class="at">size =</span> <span class="fl">1.0</span>) <span class="sc">+</span></span>
-<span id="cb12-32"><a></a><span class="fu">geom_text</span>(<span class="at">data =</span> arrow_df, <span class="fu">aes</span>(<span class="at">x =</span> xend, <span class="at">y =</span> yend, <span class="at">label =</span> label),</span>
-<span id="cb12-33"><a></a><span class="at">nudge_x =</span> <span class="fl">0.2</span>, <span class="at">nudge_y =</span> <span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p><img data-src="linearalgebra4DS_files/figure-revealjs/span-ggplot-1.png" width="960"></p>
 </div>
 </div>
-</div>
+</section></section>
+<section>
+<section id="link-with-linear-applications" class="title-slide slide level1 center">
+<h1>Link with Linear applications</h1>
+
 </section>
 <section id="linear-mapping" class="slide level2">
 <h2>Linear mapping</h2>
 <p>Let <span class="math inline">\(f\)</span> be a function from <span class="math inline">\(\R^d\)</span> to <span class="math inline">\(\R^n\)</span>, <span class="math inline">\(f\)</span> is linear if and only if</p>
 <p>For all <span class="math inline">\((\lambda,\mu) \in \R^2\)</span> and for all <span class="math inline">\((x,y) (\R^d)^2,\)</span> <span class="math display">\[f(\lambda x + \mu y ) = \lambda  f(x) + \mu f( y )\]</span></p>
-<h3 id="example-4">Example</h3>
+<h3 id="example-5">Example</h3>
 <p><span class="math display">\[\begin{align}
 f : \R^2 &amp; \to \R\cr
 x &amp; \mapsto x_1-x_2
@@ -938,9 +1002,9 @@ A: &amp;\R^d \to  \R^n\\
   &amp; x  \mapsto  y = Ax
 \end{align}\]</span></p>
 <div class="panel-tabset">
-<ul id="tabset-7" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-7-1">Examples</a></li><li><a href="#tabset-7-2">Remarks</a></li><li><a href="#tabset-7-3">Visualisation</a></li><li><a href="#tabset-7-4">Exercices</a></li><li><a href="#tabset-7-5">Solutions</a></li></ul>
+<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Examples</a></li><li><a href="#tabset-9-2">Remarks</a></li><li><a href="#tabset-9-3">Visualisation</a></li><li><a href="#tabset-9-4">Exercices</a></li><li><a href="#tabset-9-5">Solutions</a></li></ul>
 <div class="tab-content">
-<div id="tabset-7-1">
+<div id="tabset-9-1">
 <div class="columns">
 <div class="column" style="width:40%;">
 <p><span class="math display">\[A = \begin{pmatrix}
@@ -984,11 +1048,11 @@ x_2 \end{pmatrix} =\begin{pmatrix}
 \end{align}\]</span></p>
 </div></div>
 </div>
-<div id="tabset-7-2">
+<div id="tabset-9-2">
 <p><span class="math inline">\(A \begin{pmatrix}1\cr 0\end{pmatrix} = A_{.,1}\)</span></p>
 <p><span class="math inline">\(A \begin{pmatrix} 0\cr 1\end{pmatrix} = A_{.,2}.\)</span></p>
 </div>
-<div id="tabset-7-3">
+<div id="tabset-9-3">
 <div class="columns">
 <div class="column" style="width:40%;">
 <p><span class="math display">\[\begin{align}
@@ -1010,7 +1074,7 @@ M: &amp;\R^2 \to  \R^2\\
 </div>
 </div></div>
 </div>
-<div id="tabset-7-4">
+<div id="tabset-9-4">
 <div class="columns">
 <div class="column" style="width:45%;">
 <h3 class="smaller" id="exercice-1">Exercice 1</h3>
@@ -1028,7 +1092,7 @@ M: &amp;\R^2 \to  \R^2\\
 </ul>
 </div></div>
 </div>
-<div id="tabset-7-5">
+<div id="tabset-9-5">
 <div class="columns">
 <div class="column" style="width:45%;">
 <h3 class="smaller" id="exercice-1-1">Exercice 1</h3>
@@ -1056,64 +1120,14 @@ f(\lambda_1 x + \lambda_2 z) &amp; = f\left ( \begin{pmatrix} \lambda_1 x_1 + \l
 </div>
 </div>
 </section>
-<section id="linear-independance" class="slide level2">
-<h2>Linear independance</h2>
-<p>A sequence of vectors <span class="math inline">\(x_1, \cdots, x_k\)</span> from <span class="math inline">\(\R^n\)</span> is said to be linearly independent, if the only solution to <span class="math inline">\(\sum_{i=1}^k a_i x_i  =\mathbb{0}\)</span> is <span class="math inline">\(a =\mathbb {0}\)</span>.</p>
-<div class="panel-tabset">
-<ul id="tabset-8" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-8-1">Example</a></li><li><a href="#tabset-8-2">Exercice</a></li></ul>
-<div class="tab-content">
-<div id="tabset-8-1">
-<p><span class="math inline">\(x_1 = \begin{pmatrix}
-1 \cr
-0 \cr
-0
-\end{pmatrix}, \quad x_2 = \begin{pmatrix}
-1 \cr
-1 \cr
-0
-\end{pmatrix}, \quad X=\begin{pmatrix}
-1 &amp; 1  \cr
-0 &amp; 1  \cr
-0 &amp; 0 \cr
-\end{pmatrix}, \quad Xa = \begin{pmatrix}a_1 + a_2\cr
-a_2 \cr
-0 \end{pmatrix}.\)</span></p>
-<p><span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are linearly independant.</p>
-</div>
-<div id="tabset-8-2">
-<p><span class="math inline">\(x_1 = \begin{pmatrix}
-1 \cr
-1 \cr
-1
-\end{pmatrix}, \quad x_2 = \begin{pmatrix}
-1 \cr
-1 \cr
-0
-\end{pmatrix}, x_3 = \begin{pmatrix}
-0 \cr
-1 \cr
-1
-\end{pmatrix}, x_4 = \begin{pmatrix}
-0 \cr
--1 \cr
-1
-\end{pmatrix}\)</span></p>
-<ul>
-<li>Are <span class="math inline">\((x_1, x_2,x_3)\)</span> linearly independant ?</li>
-<li>Are <span class="math inline">\((x_1, x_2,x_4)\)</span> linearly independant ?</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
 <section id="matrix-rank" class="slide level2">
 <h2>Matrix rank</h2>
 <p>The sequence of columns of a matrix <span class="math inline">\(M\in \R^{n\times d}\)</span> forms a sequence of <span class="math inline">\(d\)</span> vectors <span class="math inline">\((c_1, \cdots,c_d)\)</span> in <span class="math inline">\(\R^n\)</span>, while the rows of a matrix forms a sequence of <span class="math inline">\(n\)</span> vectors <span class="math inline">\((r_1, \cdots,r_n)\)</span> in <span class="math inline">\(\R^d\)</span>.</p>
 <p>The <strong>rank</strong> of a matrix is the length of the largest sequence of linearly independant columns or equivalently the length of the largest sequence of linearly independant rows.</p>
 <div class="panel-tabset">
-<ul id="tabset-9" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-9-1">Example</a></li><li><a href="#tabset-9-2">Remarks</a></li><li><a href="#tabset-9-3">Example with R</a></li><li><a href="#tabset-9-4">Example with Python</a></li></ul>
+<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Example</a></li><li><a href="#tabset-10-2">Remarks</a></li><li><a href="#tabset-10-3">Example with R</a></li><li><a href="#tabset-10-4">Example with Python</a></li></ul>
 <div class="tab-content">
-<div id="tabset-9-1">
+<div id="tabset-10-1">
 <ul>
 <li><span class="math inline">\(X_1 =\begin{pmatrix}
 1 &amp; 1  \cr
@@ -1131,58 +1145,58 @@ a_2 \cr
 \end{pmatrix}, \quad rank(X_3) = 2;\)</span></li>
 </ul>
 </div>
-<div id="tabset-9-2">
+<div id="tabset-10-2">
 <p>Let <span class="math inline">\(A= (a_1, \cdots, a_d)^\intercal \in \R^d\)</span>, <span class="math inline">\(A A^\intercal = \begin{pmatrix}
 &amp; &amp;  \cr
 a_1 A &amp; \cdots &amp; a_d A\cr
 &amp; &amp;  \cr
 \end{pmatrix}\)</span> if of rank <span class="math inline">\(1\)</span>.</p>
 </div>
-<div id="tabset-9-3">
+<div id="tabset-10-3">
 <div class="columns">
 <div class="column" style="width:45%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="co">#install.packages('Matrix')</span></span>
-<span id="cb13-2"><a></a><span class="fu">library</span>(Matrix)</span>
-<span id="cb13-3"><a></a>X1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb13-4"><a></a>X2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span>
-<span id="cb13-5"><a></a>X3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a><span class="co">#install.packages('Matrix')</span></span>
+<span id="cb12-2"><a></a><span class="fu">library</span>(Matrix)</span>
+<span id="cb12-3"><a></a>X1 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb12-4"><a></a>X2 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span>
+<span id="cb12-5"><a></a>X3 <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ncol =</span> <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div><div class="column" style="width:45%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="fu">rankMatrix</span>(X1)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a></a><span class="fu">rankMatrix</span>(X1)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="fu">rankMatrix</span>(X2)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a></a><span class="fu">rankMatrix</span>(X2)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a></a><span class="fu">rankMatrix</span>(X3)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="fu">rankMatrix</span>(X3)[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
 </div>
 </div></div>
 </div>
-<div id="tabset-9-4">
+<div id="tabset-10-4">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb20-2"><a></a><span class="im">from</span> numpy.linalg <span class="im">import</span> matrix_rank</span>
-<span id="cb20-3"><a></a></span>
-<span id="cb20-4"><a></a>X1 <span class="op">=</span> np.array([[ <span class="dv">1</span>, <span class="dv">1</span>], [ <span class="dv">0</span>, <span class="dv">1</span>], [ <span class="dv">0</span>, <span class="dv">0</span>]])</span>
-<span id="cb20-5"><a></a>X2 <span class="op">=</span> np.array([[ <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>], [ <span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [ <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]])</span>
-<span id="cb20-6"><a></a>X3 <span class="op">=</span> np.array([[ <span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [ <span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [ <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]])</span>
-<span id="cb20-7"><a></a></span>
-<span id="cb20-8"><a></a>matrix_rank(X1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb19-2"><a></a><span class="im">from</span> numpy.linalg <span class="im">import</span> matrix_rank</span>
+<span id="cb19-3"><a></a></span>
+<span id="cb19-4"><a></a>X1 <span class="op">=</span> np.array([[ <span class="dv">1</span>, <span class="dv">1</span>], [ <span class="dv">0</span>, <span class="dv">1</span>], [ <span class="dv">0</span>, <span class="dv">0</span>]])</span>
+<span id="cb19-5"><a></a>X2 <span class="op">=</span> np.array([[ <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>], [ <span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [ <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]])</span>
+<span id="cb19-6"><a></a>X3 <span class="op">=</span> np.array([[ <span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [ <span class="dv">1</span>, <span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>], [ <span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>]])</span>
+<span id="cb19-7"><a></a></span>
+<span id="cb19-8"><a></a>matrix_rank(X1) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>np.int64(2)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a></a>matrix_rank(X2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a></a>matrix_rank(X2) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>np.int64(3)</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a></a>matrix_rank(X3) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a></a>matrix_rank(X3) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>np.int64(2)</code></pre>
 </div>
@@ -1222,16 +1236,16 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 <h3 id="diagonal-matrix">Diagonal matrix</h3>
 <p>A <strong>Diagonal matrix</strong> is a matrix in which elements outside the main diagonal are all zeros. The term is mostly used for square matrix but the terminology might also be used otherwise.</p>
 <div class="panel-tabset">
-<ul id="tabset-10" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-10-1">Example</a></li><li><a href="#tabset-10-2">Geometrical point of view</a></li></ul>
+<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Example</a></li><li><a href="#tabset-11-2">Geometrical point of view</a></li></ul>
 <div class="tab-content">
-<div id="tabset-10-1">
+<div id="tabset-11-1">
 <p>Let’s <span class="math inline">\(e_i = (\delta_{i1}, \cdots, \delta_{id})\)</span> and <span class="math inline">\(D = \begin{pmatrix}2 &amp; 0 &amp; 0 \cr
                     0 &amp; 1 &amp; 0 \cr
                     0 &amp; 0 &amp; -1
                     \end{pmatrix}\)</span> <span class="math display">\[D \class{rouge}{e_1} = 2 \class{rouge}{e_1},\quad D \class{bleu}{e_2} =  \class{bleu}{e_2},\quad D \class{orange}{e_3} = - \class{orange}{e_3}.\]</span></p>
 <p><span class="math inline">\(D\)</span> acts as simple scalar multiplier on the basis vectors.</p>
 </div>
-<div id="tabset-10-2">
+<div id="tabset-11-2">
 <div class="columns">
 <div class="column" style="width:35%;">
 <p>Consider <span class="math inline">\(D = \begin{pmatrix}2  &amp; 0 \cr
@@ -1259,16 +1273,16 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 <h3 id="definition-4">Definition</h3>
 <p>An orthogonal matrix, <span class="math inline">\(Q\)</span> or orthonormal matrix, is a real square matrix whose columns and rows are orthonormal vectors and therefore verifies <span class="math display">\[Q^\intercal Q =  Q Q^\intercal = I.\]</span></p>
 <div class="panel-tabset">
-<ul id="tabset-11" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-11-1">Example</a></li><li><a href="#tabset-11-2">Geometrical point of view</a></li></ul>
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Example</a></li><li><a href="#tabset-12-2">Geometrical point of view</a></li></ul>
 <div class="tab-content">
-<div id="tabset-11-1">
+<div id="tabset-12-1">
 <p><span class="math inline">\(Q = \begin{pmatrix}\frac{\sqrt{2}}{2} &amp; 0 &amp;  -\frac{\sqrt{2}}{2}\cr
                     \frac{\sqrt{2}}{2} &amp; 0 &amp;  \frac{\sqrt{2}}{2}\cr
                     0 &amp; 1 &amp; 0
                     \end{pmatrix}\)</span> <span class="math display">\[Q  Q^\intercal = I_3\]</span></p>
 <p><span class="math inline">\(D\)</span> transform the vector basis in new orthonormal vectors.</p>
 </div>
-<div id="tabset-11-2">
+<div id="tabset-12-2">
 <div class="columns">
 <div class="column" style="width:35%;">
 <p>Consider <span class="math inline">\(Q = \begin{pmatrix}\frac{\sqrt{2}}{2} &amp;   -\frac{\sqrt{2}}{2}\cr
@@ -1292,13 +1306,38 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </div>
 </div>
 </section>
+<section id="how-are-matrices-used-in-data-science" class="slide level2">
+<h2>How are matrices used in Data Science</h2>
+<h3 id="solving-linear-systems">Solving Linear systems</h3>
+<p>Matrices provide a compact way to represent and solve systems of linear equations, which appear in regression models, optimization problems, and numerical simulations.</p>
+<h3 id="identifying-invariant-directions">Identifying Invariant Directions</h3>
+<p>Matrices help reveal invariant directions in data transformations. This is the foundation of techniques like Principal Component Analysis (PCA), which reduces dimensionality while preserving essential structure.</p>
+</section>
+<section id="linear-systems" class="slide level2">
+<h2>Linear systems</h2>
+<p>Numerically, linear regression sums up at solving a linear system <span class="math display">\[X \theta = b.\]</span> where <span class="math inline">\(X\in \R^{n\times p}\)</span>, <span class="math inline">\(\theta\in\R^p\)</span> and <span class="math inline">\(b\in \R^n\)</span>. Assume <span class="math inline">\(n&gt;=p\)</span>.</p>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Case <span class="math inline">\(rg(X) = p\)</span></a></li><li><a href="#tabset-13-2">Case <span class="math inline">\(rg(X) &lt; p\)</span></a></li><li><a href="#tabset-13-3">Case <span class="math inline">\(rg(X) &gt; p\)</span></a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
+
+</div>
+<div id="tabset-13-2">
+
+</div>
+<div id="tabset-13-3">
+
+</div>
+</div>
+</div>
+</section>
 <section id="eigen-values-eigen-vectors" class="slide level2">
 <h2>Eigen values, Eigen vectors</h2>
 <p>Consider a square matrix, <span class="math inline">\(A \in \R^{d\times d}\)</span>, and a nonzero vector, <span class="math inline">\(v \in \R^d\)</span>, <span class="math inline">\(v\)</span> is an <strong>eigen vector</strong> for the <strong>eigen value</strong> <span class="math inline">\(\lambda\)</span> if <span class="math display">\[Av = \lambda v.\]</span> If <span class="math inline">\(v\)</span> is an eigen vector for <span class="math inline">\(A\)</span>, applying <span class="math inline">\(A\)</span> to <span class="math inline">\(v\)</span> just consists in multiplying by the corresponding eigen value.</p>
 <div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Geometric interpretation</a></li><li><a href="#tabset-12-2">Exercises</a></li></ul>
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Geometric interpretation</a></li><li><a href="#tabset-14-2">Exercises</a></li></ul>
 <div class="tab-content">
-<div id="tabset-12-1">
+<div id="tabset-14-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1309,7 +1348,7 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </div>
 </div>
 </div>
-<div id="tabset-12-2">
+<div id="tabset-14-2">
 <ul>
 <li>Identify the eigen values and eigen vectors for <span class="math inline">\(A_1 = \begin{pmatrix}1 &amp; 0 \cr 0 &amp; 2\end{pmatrix}\)</span>, <span class="math inline">\(A_2 = \begin{pmatrix}1 &amp; 3 \cr 0 &amp; 2\end{pmatrix},\)</span> <span class="math inline">\(A_3 = \begin{pmatrix} 2 &amp; 2 \cr -2 &amp; 2 \end{pmatrix}.\)</span></li>
 </ul>
@@ -1325,9 +1364,9 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
     \end{pmatrix} Q^\intercal\]</span></p>
 <p>For a nice and visual course on SVD see the <a href="https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv">Steve Brunton</a> Youbube Channel on this subject!</p>
 <div class="panel-tabset">
-<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Examples</a></li><li><a href="#tabset-13-2">Remarks</a></li><li><a href="#tabset-13-3">SVD in R</a></li><li><a href="#tabset-13-4">SVD in Python</a></li></ul>
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Examples</a></li><li><a href="#tabset-15-2">Remarks</a></li><li><a href="#tabset-15-3">SVD in R</a></li><li><a href="#tabset-15-4">SVD in Python</a></li></ul>
 <div class="tab-content">
-<div id="tabset-13-1">
+<div id="tabset-15-1">
 <p><span class="math inline">\(A = \frac{\sqrt{2}}{6} \begin{pmatrix}
 0 &amp; 4 \cr
 6 &amp; 2 \cr
@@ -1344,20 +1383,20 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
   1 &amp; 1
 \end{pmatrix}\)</span></p>
 </div>
-<div id="tabset-13-2">
+<div id="tabset-15-2">
 <p>if <span class="math inline">\(A\)</span> is a <span class="math inline">\(\^{d\timesd}\)</span> symmetric matrix</p>
 <p><span class="math display">\[A = P D P^\intercal.\]</span></p>
 </div>
-<div id="tabset-13-3">
+<div id="tabset-15-3">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a></a>A <span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="sc">-</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">3</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">6</span>), <span class="at">ncol =</span> <span class="dv">2</span>);A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>A <span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="sc">-</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">3</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">6</span>), <span class="at">ncol =</span> <span class="dv">2</span>);A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           [,1]       [,2]
 [1,]  0.0000000  0.9428090
 [2,]  1.4142136  0.4714045
 [3,] -0.7071068 -1.1785113</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a></a><span class="fu">svd</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a></a><span class="fu">svd</span>(A)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$d
 [1] 2 1
@@ -1375,7 +1414,7 @@ $v
 </div>
 </div>
 </div>
-<div id="tabset-13-4">
+<div id="tabset-15-4">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>array([[ 0.        ,  0.94280904],
