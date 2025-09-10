@@ -1505,7 +1505,7 @@ $P = \frac{1}{3} \begin{pmatrix}
 
 ### Remarks
 
-if $A$ is a $\^{d\timesd}$ symmetric matrix
+if $A$ is a ${d\times d}$ symmetric matrix
 
 $$A = P D P^\intercal.$$
 
@@ -1527,6 +1527,9 @@ import math
 
 A = math.sqrt(2)/6 * np.array([[ 0, 4], [ 6, 2], [ -3, -5]]); A.view()
 P, d, QT = svd(A)
+print(P)
+print(d)
+print(QT)
 ```
 :::
 
