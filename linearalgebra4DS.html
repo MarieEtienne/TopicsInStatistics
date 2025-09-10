@@ -1362,13 +1362,13 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 <h2>Gram–Schmidt Orthonormalization</h2>
 <p>The <strong>Gram–Schmidt process</strong> transforms a linearly independent set of vectors <span class="math display">\[\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\]</span> in an inner product space into an <strong>orthonormal basis</strong> <span class="math display">\[\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_n.\]</span></p>
 <div class="panel-tabset">
-<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Step 1. Start with the first vector</a></li><li><a href="#tabset-15-2">Step 2. Orthogonalize and normalize subsequent vectors</a></li><li><a href="#tabset-15-3">Example in (^3)</a></li></ul>
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Step 1. Start with the first vector</a></li><li><a href="#tabset-15-2">Step 2. Orthogonalize and normalize subsequent vectors</a></li><li><a href="#tabset-15-3">Example in <span class="math inline">\(\R^3\)</span></a></li></ul>
 <div class="tab-content">
 <div id="tabset-15-1">
 <p>Normalize the first vector: <span class="math display">\[\mathbf{u}_1 = \frac{\mathbf{v}_1}{\|\mathbf{v}_1\|}.\]</span></p>
 </div>
 <div id="tabset-15-2">
-<p>For (k=2,,n):</p>
+<p>For <span class="math inline">\(k=2,\dots,n\)</span>:</p>
 <ol type="1">
 <li><p><strong>Orthogonalize</strong> <span class="math inline">\(\mathbf{v}_k\)</span> against the previously constructed orthonormal vectors: <span class="math display">\[\mathbf{w}_k = \mathbf{v}_k - \sum_{j=1}^{k-1}
 \langle \mathbf{v}_k, \mathbf{u}_j \rangle \, \mathbf{u}_j .\]</span></p></li>
@@ -1376,9 +1376,9 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </ol>
 </div>
 <div id="tabset-15-3">
-<p>Take the linearly independent vectors <span class="math display">\[\mathbf{v}_1 = \begin{pmatrix}1\\1\\0\end{pmatrix}, \quad
+<p>Take the linearly independent vectors <span class="math inline">\(\mathbf{v}_1 = \begin{pmatrix}1\\1\\0\end{pmatrix}, \quad
 \mathbf{v}_2 = \begin{pmatrix}1\\0\\1\end{pmatrix}, \quad
-\mathbf{v}_3 = \begin{pmatrix}0\\1\\1\end{pmatrix}.\]</span></p>
+\mathbf{v}_3 = \begin{pmatrix}0\\1\\1\end{pmatrix}.\)</span></p>
 <ol type="1">
 <li><p>Normalize the first: <span class="math inline">\(\mathbf{u}_1 = \frac{1}{\sqrt{2}} \begin{pmatrix}1\\1\\0\end{pmatrix}.\)</span></p></li>
 <li><p>Orthogonalize and normalize the second: <span class="math display">\[\mathbf{w}_2 = \mathbf{v}_2 - \langle \mathbf{v}_2, \mathbf{u}_1\rangle \mathbf{u}_1,
