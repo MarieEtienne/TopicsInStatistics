@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2025-09-09">
+  <meta name="dcterms.date" content="2025-09-10">
   <title>The Topics In Statistics Companion website ! – Linear Algebra Survival Kit For Data Science</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -406,7 +406,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2025-09-09</p>
+  <p class="date">2025-09-10</p>
 </section>
 <section class="slide level2">
 
@@ -932,16 +932,12 @@ In other words, if you take some vectors <span class="math inline">\(v_1, v_2, \
 <div id="tabset-8-1">
 <p>A subset <span class="math inline">\(B \subset V\)</span> is a <strong>basis</strong> if it satisfies the two following conditions:</p>
 <ol type="1">
-<li><p><strong>Linear independence</strong><br>
-For every finite subset <span class="math inline">\(\{ \mathbf{v}_1, \dotsc, \mathbf{v}_m \}\)</span> of <span class="math inline">\(B\)</span>,<br>
+<li><p><strong>Linear independence</strong>. For every finite subset <span class="math inline">\(\{ \mathbf{v}_1, \dotsc, \mathbf{v}_m \}\)</span> of <span class="math inline">\(B\)</span>,<br>
 if <span class="math display">\[
-c_{1}\mathbf{v}_{1} + \cdots + c_{m}\mathbf{v}_{m} = \mathbf{0}
-\]</span> for some <span class="math inline">\(c_{1}, \dotsc, c_{m} \in F\)</span>, then necessarily <span class="math display">\[
+c_{1}\mathbf{v}_{1} + \cdots + c_{m}\mathbf{v}_{m} = \mathbf{0} \Longleftrightarrow
 c_{1} = \cdots = c_{m} = 0.
 \]</span></p></li>
-<li><p><strong>Spanning property</strong><br>
-For every vector <span class="math inline">\(\mathbf{v} \in V\)</span>, one can choose <span class="math inline">\(a_{1}, \dotsc, a_{n} \in F\)</span><br>
-and <span class="math inline">\(\mathbf{v}_{1}, \dotsc, \mathbf{v}_{n} \in B\)</span> such that <span class="math display">\[
+<li><p><strong>Spanning property</strong>. For every <span class="math inline">\(\mathbf{v} \in V\)</span>, there exits <span class="math inline">\(a_{1}, \dotsc, a_{n} \in \R\)</span> such that <span class="math display">\[
 \mathbf{v} = a_{1}\mathbf{v}_{1} + \cdots + a_{n}\mathbf{v}_{n}.
 \]</span></p></li>
 </ol>
@@ -950,14 +946,12 @@ and <span class="math inline">\(\mathbf{v}_{1}, \dotsc, \mathbf{v}_{n} \in B\)</
 </div>
 <div id="tabset-8-2">
 <p><span class="math inline">\(\left (\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right )\)</span> is a basis of <span class="math inline">\(\R^2\)</span></p>
-<p>Check whether or not this set of vectors form Orthobormal bases</p>
+<p>Check whether or not these sets of vectors form orthobormal bases</p>
 <ul>
 <li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\(\left(\begin{pmatrix} 2 \\ 0 \end{pmatrix}, \begin{pmatrix} -1 \\ 2 \end{pmatrix}\right )\)</span></p></li>
 <li><p>in <span class="math inline">\(\R^2\)</span> <span class="math inline">\(\left(\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
 <li><p>in <span class="math inline">\(\R^3\)</span> <span class="math inline">\(\left(\begin{pmatrix} \sqrt{2}/2 \\ \sqrt{2}/2 \\ 1\end{pmatrix}, \begin{pmatrix} -\sqrt{2}/2 \\ 1\\ \sqrt{2}/2 \end{pmatrix}\right )\)</span></p></li>
-<li><p>in <span class="math inline">\(\R^3\)</span> <span class="math display">\[{v}_1=\frac{1}{\sqrt{3}}\begin{pmatrix}1\\1\\1\end{pmatrix},\qquad
-v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\\0\end{pmatrix},\qquad
-{v}_3=\frac{1}{\sqrt{6}}\begin{pmatrix}1\\1\\-2\end{pmatrix}.\]</span></p></li>
+<li><p>in <span class="math inline">\(\R^3\)</span> <span class="math display">\[{v}_1=\frac{1}{\sqrt{3}}\begin{pmatrix}1\\1\\1\end{pmatrix},\qquad v_2=\frac{1}{\sqrt{2}}\begin{pmatrix}1\\-1\\0\end{pmatrix},\qquad {v}_3=\frac{1}{\sqrt{6}}\begin{pmatrix}1\\1\\-2\end{pmatrix}.\]</span></p></li>
 </ul>
 </div>
 </div>
@@ -1264,21 +1258,54 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </div>
 </div>
 </section>
-<section id="orthogonal-matrix" class="slide level2">
-<h2>Orthogonal matrix</h2>
-<h3 id="definition-4">Definition</h3>
-<p>An orthogonal matrix, <span class="math inline">\(Q\)</span> or orthonormal matrix, is a real square matrix whose columns and rows are orthonormal vectors and therefore verifies <span class="math display">\[Q^\intercal Q =  Q Q^\intercal = I.\]</span></p>
+<section id="inverse-matrix" class="slide level2">
+<h2>Inverse Matrix</h2>
 <div class="panel-tabset">
-<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Example</a></li><li><a href="#tabset-12-2">Geometrical point of view</a></li></ul>
+<ul id="tabset-12" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-12-1">Definition</a></li><li><a href="#tabset-12-2">Examples</a></li><li><a href="#tabset-12-3">Exercises</a></li></ul>
 <div class="tab-content">
 <div id="tabset-12-1">
+<p>Consider a matrix <span class="math inline">\(A\in\R^{p\times q}\)</span>,</p>
+<ul>
+<li><p>if <span class="math inline">\(rank(A)=p\)</span>, there exists a matrix <span class="math inline">\(A_R^{-1}\in\R^{q\times p}\)</span> called <strong>right inverse</strong> <span class="math inline">\(A_{R}^{-1}\)</span>, such that <span class="math display">\[A A_{R}^{-1} = I_p.\]</span></p></li>
+<li><p>if <span class="math inline">\(rank(A)=q\)</span>, there exists a matrix <span class="math inline">\(A_L^{-1}\in\R^{q\times p}\)</span> called <strong>left inverse</strong> <span class="math inline">\(A_{L}^{-1}\)</span>, such that <span class="math display">\[A_{L}^{-1} A = I_q.\]</span></p></li>
+<li><p>if <span class="math inline">\(rank(A)=q=p\)</span>, there exists an inverse <span class="math inline">\(A^{-1}\)</span> and <span class="math inline">\(A_{R}^{-1}=A_{L}^{-1}=\)</span>A^{-1}$$</p></li>
+</ul>
+</div>
+<div id="tabset-12-2">
+<ul>
+<li><span class="math display">\[A= \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; -1 \\ 2 &amp; 1 \\ \end{pmatrix}\]</span></li>
+</ul>
+<p><span class="math inline">\(rank(A) = 2\)</span> and <span class="math display">\[A_L^{-1}= \begin{pmatrix} 0.5 &amp; 0  &amp; 0 \\ 0 &amp; -1  &amp; 0 \end{pmatrix}\]</span></p>
+<ul>
+<li><span class="math display">\[A= \begin{pmatrix} 2 &amp; 1 \\ 0 &amp; 2  \end{pmatrix}\]</span></li>
+</ul>
+<p><span class="math inline">\(rank(A) = 2\)</span> and <span class="math display">\[A^{-1}= \begin{pmatrix} 0.5 &amp; -0.25 \\ 0 &amp; 0.5 \end{pmatrix}\]</span></p>
+</div>
+<div id="tabset-12-3">
+<ul>
+<li><p><span class="math display">\[A= \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 0.5  \end{pmatrix}\]</span></p></li>
+<li><p><span class="math display">\[A= \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 0.5 \\ 0 &amp; 1  \end{pmatrix}\]</span></p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="orthogonal-matrix" class="slide level2">
+<h2>Orthogonal matrix</h2>
+<h3 id="definition-5">Definition</h3>
+<p>An orthogonal matrix, <span class="math inline">\(Q\)</span> or orthonormal matrix, is a real square matrix whose columns and rows are orthonormal vectors and therefore verifies</p>
+<p><span class="math display">\[Q^\intercal Q =  Q Q^\intercal = I.\]</span></p>
+<div class="panel-tabset">
+<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Example</a></li><li><a href="#tabset-13-2">Geometrical point of view</a></li><li><a href="#tabset-13-3">Useful Remarks</a></li></ul>
+<div class="tab-content">
+<div id="tabset-13-1">
 <p><span class="math inline">\(Q = \begin{pmatrix}\frac{\sqrt{2}}{2} &amp; 0 &amp;  -\frac{\sqrt{2}}{2}\cr
                     \frac{\sqrt{2}}{2} &amp; 0 &amp;  \frac{\sqrt{2}}{2}\cr
                     0 &amp; 1 &amp; 0
                     \end{pmatrix}\)</span> <span class="math display">\[Q  Q^\intercal = I_3\]</span></p>
 <p><span class="math inline">\(D\)</span> transform the vector basis in new orthonormal vectors.</p>
 </div>
-<div id="tabset-12-2">
+<div id="tabset-13-2">
 <div class="columns">
 <div class="column" style="width:35%;">
 <p>Consider <span class="math inline">\(Q = \begin{pmatrix}\frac{\sqrt{2}}{2} &amp;   -\frac{\sqrt{2}}{2}\cr
@@ -1299,6 +1326,9 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </div>
 </div>
 </div>
+<div id="tabset-13-3">
+<p>An orthonormal matrix <span class="math inline">\(A\)</span> admits an inverse and this inverse is simply <span class="math inline">\(A^\intercal\)</span>.</p>
+</div>
 </div>
 </div>
 </section>
@@ -1311,18 +1341,55 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </section>
 <section id="linear-systems" class="slide level2">
 <h2>Linear systems</h2>
-<p>Numerically, linear regression sums up at solving a linear system <span class="math display">\[X \theta = b.\]</span> where <span class="math inline">\(X\in \R^{n\times p}\)</span>, <span class="math inline">\(\theta\in\R^p\)</span> and <span class="math inline">\(b\in \R^n\)</span>. Assume <span class="math inline">\(n&gt;=p\)</span>.</p>
+<p>Numerically, linear regression sums solving a linear system <span class="math display">\[ X \theta =  b.\]</span> where <span class="math inline">\(X\in \R^{n\times p}\)</span>, <span class="math inline">\(\theta\in\R^p\)</span> and <span class="math inline">\(b\in \R^n\)</span>. Assume <span class="math inline">\(n&gt;=p\)</span>.</p>
 <div class="panel-tabset">
-<ul id="tabset-13" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-13-1">Case <span class="math inline">\(rg(X) = p\)</span></a></li><li><a href="#tabset-13-2">Case <span class="math inline">\(rg(X) &lt; p\)</span></a></li><li><a href="#tabset-13-3">Case <span class="math inline">\(rg(X) &gt; p\)</span></a></li></ul>
+<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Case <span class="math inline">\(rg(X) = p\)</span></a></li><li><a href="#tabset-14-2">Case <span class="math inline">\(rg(X) &lt; p\)</span></a></li></ul>
 <div class="tab-content">
-<div id="tabset-13-1">
-
+<div id="tabset-14-1">
+<p>There exists a solution given by <span class="math display">\[\hat{\theta} = X_L^{-1} b, \]</span> <span class="math inline">\(X_L^{-1}\)</span> to be determined.</p>
 </div>
-<div id="tabset-13-2">
-
+<div id="tabset-14-2">
+<p>The model is underdetermined, and admits several solutions. This happens when</p>
+<ul>
+<li><p>the regressors in <span class="math inline">\(X\)</span> are dependent, and in this case this is solved by adding additionnal linear constraint that <span class="math inline">\(\theta\)</span> should respect.</p></li>
+<li><p>too few observations <span class="math inline">\(n&lt;p\)</span>, and this solved by adding penalities terms (LASSO and RIDGE regression for example)</p></li>
+</ul>
 </div>
-<div id="tabset-13-3">
-
+</div>
+</div>
+</section>
+<section id="gramschmidt-orthonormalization" class="slide level2">
+<h2>Gram–Schmidt Orthonormalization</h2>
+<p>The <strong>Gram–Schmidt process</strong> transforms a linearly independent set of vectors <span class="math display">\[\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\]</span> in an inner product space into an <strong>orthonormal basis</strong> <span class="math display">\[\mathbf{u}_1, \mathbf{u}_2, \dots, \mathbf{u}_n.\]</span></p>
+<div class="panel-tabset">
+<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Step 1. Start with the first vector</a></li><li><a href="#tabset-15-2">Step 2. Orthogonalize and normalize subsequent vectors</a></li><li><a href="#tabset-15-3">Example in (^3)</a></li></ul>
+<div class="tab-content">
+<div id="tabset-15-1">
+<p>Normalize the first vector: <span class="math display">\[\mathbf{u}_1 = \frac{\mathbf{v}_1}{\|\mathbf{v}_1\|}.\]</span></p>
+</div>
+<div id="tabset-15-2">
+<p>For (k=2,,n):</p>
+<ol type="1">
+<li><p><strong>Orthogonalize</strong> <span class="math inline">\(\mathbf{v}_k\)</span> against the previously constructed orthonormal vectors: <span class="math display">\[\mathbf{w}_k = \mathbf{v}_k - \sum_{j=1}^{k-1}
+\langle \mathbf{v}_k, \mathbf{u}_j \rangle \, \mathbf{u}_j .\]</span></p></li>
+<li><p><strong>Normalize</strong> the result to obtain <span class="math display">\[\mathbf{u}_k = \frac{\mathbf{w}_k}{\|\mathbf{w}_k\|}.\]</span></p></li>
+</ol>
+</div>
+<div id="tabset-15-3">
+<p>Take the linearly independent vectors <span class="math display">\[\mathbf{v}_1 = \begin{pmatrix}1\\1\\0\end{pmatrix}, \quad
+\mathbf{v}_2 = \begin{pmatrix}1\\0\\1\end{pmatrix}, \quad
+\mathbf{v}_3 = \begin{pmatrix}0\\1\\1\end{pmatrix}.\]</span></p>
+<ol type="1">
+<li><p>Normalize the first: <span class="math inline">\(\mathbf{u}_1 = \frac{1}{\sqrt{2}} \begin{pmatrix}1\\1\\0\end{pmatrix}.\)</span></p></li>
+<li><p>Orthogonalize and normalize the second: <span class="math display">\[\mathbf{w}_2 = \mathbf{v}_2 - \langle \mathbf{v}_2, \mathbf{u}_1\rangle \mathbf{u}_1,
+\qquad
+\mathbf{u}_2 = \frac{\mathbf{w}_2}{\|\mathbf{w}_2\|}.\]</span></p></li>
+<li><p>Orthogonalize and normalize the third: <span class="math display">\[\mathbf{w}_3 = \mathbf{v}_3 - \langle \mathbf{v}_3, \mathbf{u}_1\rangle \mathbf{u}_1
+                            - \langle \mathbf{v}_3, \mathbf{u}_2\rangle \mathbf{u}_2,
+\qquad
+\mathbf{u}_3 = \frac{\mathbf{w}_3}{\|\mathbf{w}_3\|}.\]</span></p></li>
+</ol>
+<p>The resulting set <span class="math inline">\(\{\mathbf{u}_1,\mathbf{u}_2,\mathbf{u}_3\}\)</span> is an orthonormal basis of (^3).</p>
 </div>
 </div>
 </div>
@@ -1331,9 +1398,9 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 <h2>Eigen values, Eigen vectors</h2>
 <p>Consider a square matrix, <span class="math inline">\(A \in \R^{d\times d}\)</span>, and a nonzero vector, <span class="math inline">\(v \in \R^d\)</span>, <span class="math inline">\(v\)</span> is an <strong>eigen vector</strong> for the <strong>eigen value</strong> <span class="math inline">\(\lambda\)</span> if <span class="math display">\[Av = \lambda v.\]</span> If <span class="math inline">\(v\)</span> is an eigen vector for <span class="math inline">\(A\)</span>, applying <span class="math inline">\(A\)</span> to <span class="math inline">\(v\)</span> just consists in multiplying by the corresponding eigen value.</p>
 <div class="panel-tabset">
-<ul id="tabset-14" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-14-1">Geometric interpretation</a></li><li><a href="#tabset-14-2">Exercises</a></li></ul>
+<ul id="tabset-16" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-16-1">Geometric interpretation</a></li><li><a href="#tabset-16-2">Exercises</a></li></ul>
 <div class="tab-content">
-<div id="tabset-14-1">
+<div id="tabset-16-1">
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -1344,7 +1411,7 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 </div>
 </div>
 </div>
-<div id="tabset-14-2">
+<div id="tabset-16-2">
 <ul>
 <li>Identify the eigen values and eigen vectors for <span class="math inline">\(A_1 = \begin{pmatrix}1 &amp; 0 \cr 0 &amp; 2\end{pmatrix}\)</span>, <span class="math inline">\(A_2 = \begin{pmatrix}1 &amp; 3 \cr 0 &amp; 2\end{pmatrix},\)</span> <span class="math inline">\(A_3 = \begin{pmatrix} 2 &amp; 2 \cr -2 &amp; 2 \end{pmatrix}.\)</span></li>
 </ul>
@@ -1360,9 +1427,9 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
     \end{pmatrix} Q^\intercal\]</span></p>
 <p>For a nice and visual course on SVD see the <a href="https://www.youtube.com/playlist?list=PLMrJAkhIeNNSVjnsviglFoY2nXildDCcv">Steve Brunton</a> Youbube Channel on this subject!</p>
 <div class="panel-tabset">
-<ul id="tabset-15" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-15-1">Examples</a></li><li><a href="#tabset-15-2">Remarks</a></li><li><a href="#tabset-15-3">SVD in R</a></li><li><a href="#tabset-15-4">SVD in Python</a></li></ul>
+<ul id="tabset-17" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-17-1">Examples</a></li><li><a href="#tabset-17-2">Remarks</a></li><li><a href="#tabset-17-3">SVD in R</a></li><li><a href="#tabset-17-4">SVD in Python</a></li></ul>
 <div class="tab-content">
-<div id="tabset-15-1">
+<div id="tabset-17-1">
 <p><span class="math inline">\(A = \frac{\sqrt{2}}{6} \begin{pmatrix}
 0 &amp; 4 \cr
 6 &amp; 2 \cr
@@ -1379,11 +1446,11 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
   1 &amp; 1
 \end{pmatrix}\)</span></p>
 </div>
-<div id="tabset-15-2">
+<div id="tabset-17-2">
 <p>if <span class="math inline">\(A\)</span> is a <span class="math inline">\(\^{d\timesd}\)</span> symmetric matrix</p>
 <p><span class="math display">\[A = P D P^\intercal.\]</span></p>
 </div>
-<div id="tabset-15-3">
+<div id="tabset-17-3">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a></a>A <span class="ot">=</span><span class="fu">matrix</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>), <span class="sc">-</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">2</span>, <span class="dv">2</span><span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">3</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">5</span><span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">/</span><span class="dv">6</span>), <span class="at">ncol =</span> <span class="dv">2</span>);A</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1410,7 +1477,7 @@ $v
 </div>
 </div>
 </div>
-<div id="tabset-15-4">
+<div id="tabset-17-4">
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>array([[ 0.        ,  0.94280904],
