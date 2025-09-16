@@ -316,7 +316,7 @@ In the following, we will assume that $X$ is the matrix of centred and scaled va
 :::: {.callout-note icon="false"}
 ### Definition
 Inertia (denomination derived from moments of inertia in Physics) *with respect to a point $a \in R^{d},$* according to metric $M$:
-$$I_a = \sum_{i=1}^n \norm{X_{i,.}^\intercal - a}_M^2$$
+$$I_a = \frac{1}{n}\sum_{i=1}^n \norm{X_{i,.}^\intercal - a}_M^2$$
 
 ::::
 
@@ -328,12 +328,12 @@ $G = (x_{.,1}, \cdots, x_{.,d})^\intercal$ and $I_G = min_{a\in \R^d} I_a$
 ###  Remarks
 Assume, we deal with centred scaled variables:
 
-$I_G = \sum_{i=1}^n \norm{X_{i,.}^\intercal - G}^2 = \sum_{i=1}^n \class{rouge}{\sum_{k=1}^d} (x_{ik} - x_{.,k})^2 = \class{rouge}{\sum_{k=1}^d} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2.$
+$I_G =  \frac{1}{n} \sum_{i=1}^n \norm{X_{i,.}^\intercal - G}^2 =  \frac{1}{n}\sum_{i=1}^n \class{rouge}{\sum_{k=1}^d} (x_{ik} - x_{.,k})^2 = \class{rouge}{\sum_{k=1}^d}  \frac{1}{n} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2.$
 
-As the variables are scaled, $\sum_{i=1}^n  (x_{ik} - x_{.,k})^2 = n s^2_k = n.$ and $I_G=nd.$
+As the variables are scaled, $ \frac{1}{n} \sum_{i=1}^n  (x_{ik} - x_{.,k})^2 =  s^2_k = 1.$ and $I_G=d.$
 
 
-[Total inertia with scaled centred variables is $nd$]{.rouge}
+[Total inertia with scaled centred variables is $d$]{.rouge}
 
 
 
@@ -359,7 +359,7 @@ where $a$ is the orthogonal projection of $G$ on $S$.
 
 ## Inertia Decomposition
 
-Since, variables are centred $G=\mathbb{0}$,  $I=\sum_{i=1}^n d(X_{i,.},0)^2.$
+Since, variables are centred $G=\mathbb{0}$,  $I= \frac{1}{n} \sum_{i=1}^n d(X_{i,.},0)^2.$
 
 Let $S$ be an affine subspace and $U=S^\intercal,$ $X^S_{i,.}$  (recip. $X^S_{i,.})$) the orthogonal projection on $S$ (recip. on $U$).
 
@@ -425,11 +425,11 @@ The projection on $U_1$ is the best projection of the dataset in one dimension, 
 Let $x_i= X_{i,.}^\intercal$, (recall that $X_{i,}$ is a row vector and $x_i$ is the corresponding column vector).
 
 \begin{align}
-I & = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
-& = \sum_{i}^n x_i^\intercal x_i \cr
-& = tr(\sum_{i}^n x_i^\intercal x_i) \cr
-& = tr(\sum_{i}^n x_i x_i^\intercal ) \cr
-& = tr(X^\intercal  X) \cr
+I & =  \frac{1}{n} \sum_{i}^n d^2(X_{i,.}, 0) =  \frac{1}{n} \sum_{i}^n \norm{X_{i,.}}\\
+& =  \frac{1}{n} \sum_{i}^n x_i^\intercal x_i \cr
+& = tr( \frac{1}{n} \sum_{i}^n x_i^\intercal x_i) \cr
+& = tr( \frac{1}{n} \sum_{i}^n x_i x_i^\intercal ) \cr
+& = tr( \frac{1}{n} X^\intercal  X) \cr
 \end{align}
 
 
@@ -440,17 +440,17 @@ I & = \sum_{i}^n d^2(X_{i,.}, 0) = \sum_{i}^n \norm{X_{i,.}}\\
 
 ### Remarks 
 
-* $X^\intercal  X$ is the covariance matrix of the $d$ variables,
+* $ \frac{1}{n} X^\intercal  X$ is the covariance matrix of the $d$ variables,
 
-* $X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD
+* $ \frac{1}{n} X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD
 
-$$X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
+$$ \frac{1}{n} X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
 
 :::
 
 ::: {.column width="45%" }
 
-* $I= tr(X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(Q^\intercal Q D  ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
+* $I= tr( \frac{1}{n} X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(Q^\intercal Q D  ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
 where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
 :::
@@ -499,7 +499,7 @@ under the constraint $\lVert\boldsymbol{u_1}\rVert$ \begin{align}
 #### Remark
 
 -   $\frac{1}{n} X^\top X$ is the covariance matrix, often written as
-    $X^\top W X$ ($W$ is a diagonal matrix, with each diagonal entry
+    $ X^\top W  X$ ($W$ is a diagonal matrix, with each diagonal entry
     equal to $1/n$, $W_{ii}$ is the weight assigned to observation $i$).
 
 -   $X^\top W X$ is [symmetric]{.rouge} and [positive definite]{.rouge},
