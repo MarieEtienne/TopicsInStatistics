@@ -460,72 +460,68 @@ where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
 # Principal Components Construction 
 
-## Identifying $U_1$
+## Identify $\boldsymbol{u_1}$ - Formalization
 
-Consider $I_{\Delta_{U}}$  the inertia with respect to $\Delta_{U}$ affine subspace containing $G$ with directed by the unitary vector $U$. 
+:::::: columns
+::: {.column width="45%"}
+-   We seek $\boldsymbol{u_1}$ such that $I_{u_1}$ is minimal but
+    $I_{u_1} + I_{u_1^\perp}=I$. [Minimizing $I_{u_1}$ is equivalent to
+    maximizing $I_{u_1^\perp}$]{.rouge}, i.e. the inertia of the
+    projected cloud.
 
-$I_{\Delta_{U}}$ is the cost of the projection on $\Delta_{U}$, i.e the loss information. 
+    -   The first individual is projected as
+        $\class{alea}{x_{1}}^\top \boldsymbol{u_1}$ onto
+        $\boldsymbol{u_1}$
+    -   The second individual is projected as
+        $\class{alea}{x_{2}}^\top \boldsymbol{u_1}$ onto
+        $\boldsymbol{u_1}$
+    -   ...
 
-**Minimizing $I_{\Delta_{U}}$** equals **maximizing $I_{\Delta_{U^T}}$**, i.e the dispersion of the projected set of data points. 
+-   Recall that
+    $${\boldsymbol{X}}= \begin{pmatrix} \class{alea}{x_{1}}^\top \\ \vdots \\ \class{alea}{x_{n}}^\top \end{pmatrix}.$$
+    The projection of individual $i$ is obtained by multiplying the row
+    vector $\class{alea}{x_{i}}^\top$ by $\boldsymbol{u_1}$. The vector
+    of coordinates on $\boldsymbol{u_1}$ for each individual is
 
-### Projection on $U$
+$$\begin{pmatrix} \class{alea}{x_{1}}^\top \boldsymbol{u_1} \\ \vdots \\ \class{alea}{x_{n}}^\top \boldsymbol{u_1} \end{pmatrix} = X  \boldsymbol{u_1}.$$
+:::
 
-$d(X_{i,}, U^\intercal)^2= \left ( x_i \dot U^\intercal \right )^2 = \left ( X_i^\intercal U \right )^2 = cos(\theta)^2 \norm{x_i}^2 ,$
+:::: {.column width="45%"}
+### Maximize $I_{u_1^\perp}$
 
-So that 
-\begin{align}
-I_{\Delta_{U^\intercal}} & = \sum_{i=1}^n  d(X_{i,}, U^\intercal)^2 \cr
-                         & = \norm{X U}^2 \cr
-                         & = U^\intercal X^\intercal X  U\cr
-                         & = U^\intercal Q D^2  Q^\intercal   U\cr
+under the constraint $\lVert\boldsymbol{u_1}\rVert$ \begin{align}
+ I_{u_1^\perp} & = \frac{1}{n}\lVert X  \boldsymbol{u_1}\rVert^2 \\
+        & = \frac{1}{n} (X  \boldsymbol{u_1})^\top (X  \boldsymbol{u_1})\\
+        & =   \boldsymbol{u_1}^\top \left (\frac{1}{n} X^\top X \right)  \boldsymbol{u_1}
 \end{align}
 
-But   $U^\intercal Q = \begin{pmatrix} U^\intercal Q_{.,1}, \cdots, U^\intercal Q_{.,d})\end{pmatrix}$  Is the coordinate of the unitary vector $U$ on the basis defined by the eigen vector of $X$: $\omega_1 q_1 +  \cdots +  \omega_d q_d,$ such that $\sum_k \omega_k^2=1$
+::: panel-tabset
+#### Remark
 
+-   $\frac{1}{n} X^\top X$ is the covariance matrix, often written as
+    $X^\top W X$ ($W$ is a diagonal matrix, with each diagonal entry
+    equal to $1/n$, $W_{ii}$ is the weight assigned to observation $i$).
 
+-   $X^\top W X$ is [symmetric]{.rouge} and [positive definite]{.rouge},
+    therefore [diagonalizable]{.rouge}.
 
-$I_{\Delta_{U^\intercal}} = \sum_{k=1}^d \omega_k \sigma^2_k.$
+-   There exists a unitary matrix $P$ with $P^\top P = I_p,$ and a
+    diagonal matrix $D$ such that $$X^\top W X = P D P^\top.$$
 
-Maximizing $I_{\Delta_{U^\intercal}}$, as $\sigma^2_k$ are in decreasing order, consists in choosing $\omega_1=1$ 
+-   The diagonal entries of $D$ are the [eigenvalues, all
+    positive,]{.rouge} of $X^\top W X$, arranged in decreasing order,
+    $\lambda_1 > \lambda_2 \ldots >\lambda_p$, and $U$ is the matrix of
+    the associated eigenvectors.
 
+#### What this means
 
-## Principal Components
+![](change_baseXtX.png)
 
-Consider the sequence of eigen vectors in $Q$, they 
-
-* form an orthonormal basis,
-* are ordered according their corresponding eigen values.
-
-From a mathematical point of view, PCA consist in using this new basis.
-
-### Consequences
-
-* Define $d$ new variables $C_1, \cdots, C_d,$ which are Linear combination of initial variables, i.e 
-$C_j = \sum_{k= 1}^d q_{jk} V_k$
-
-* Quantify the quantity of information captured by each variable,
-
-* Being able to quantify the quality of representation for one individual or one variable
-
-
-## Practical considerations
-
-:::: {.columns}
-
-::: {.column width="45%" }
-
-### Normalizing inertia 
-
-Total Inertia of the scaled dataset depends on the number of individual. 
-
-It is common to define a scaled Inertia to get rid of$n$.
-
-$$I^{s} = \frac{1}{n} I,$$
-
-We also define the Covariance matrix $\Sigma$
-
-$$\Sigma = \frac{1}{n} X^\intercal X,$$
-and we considered the SVD for $\frac{1}{\sqrt{n}} X.$
+$\boldsymbol{b}$ is an orthonormal basis, the basis formed by the
+eigenvectors of $X^\top W X$.
+:::
+::::
+::::::
 
 [This is generally the implemented version.]{.rouge}
 
