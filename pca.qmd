@@ -440,15 +440,20 @@ I & =  \frac{1}{n} \sum_{i}^n d^2(X_{i,.}, 0) =  \frac{1}{n} \sum_{i}^n \norm{X_
 
 ### Remarks 
 
-* $ \frac{1}{n} X^\intercal  X$ is the covariance matrix of the $d$ variables,
+* $\frac{1}{n} X^\intercal  X$ is the covariance matrix of the $d$ variables,
 
-* $ \frac{1}{n} X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD
+* $\frac{1}{n} X^\intercal  X$ is a symmetric $\R^{d\times d}$ matrix, and the corresponding SVD, might be derived from the SVD of $\frac{1}{\sqrt{n}}X$:
 
-$$ \frac{1}{n} X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
+$$ \frac{1}{\sqrt{n}}X = P D Q^\intercal$$
+
+
 
 :::
 
 ::: {.column width="45%" }
+
+* $$\frac{1}{n} X^\intercal  X = \left ( P D Q^\intercal \right )^\intercal \left ( P D Q^\intercal \right ) =  Q D  P^\intercal  P D Q^\intercal = Q D^2 Q^\intercal.$$
+
 
 * $I= tr( \frac{1}{n} X^\intercal X) = tr(Q D^2 Q^\intercal) = tr(Q^\intercal Q D  ) = tr( D ) = \sum_{k=1}^d \sigma^2_k,$  
 where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
@@ -460,10 +465,10 @@ where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
 
 # Principal Components Construction 
 
-## Identify $\boldsymbol{u_1}$ - Formalization
+## Current Objective
 
-:::::: columns
-::: {.column width="45%"}
+::: columns
+:::: {.column width="45%"}
 -   We seek $\boldsymbol{u_1}$ such that $I_{u_1}$ is minimal but
     $I_{u_1} + I_{u_1^\perp}=I$. [Minimizing $I_{u_1}$ is equivalent to
     maximizing $I_{u_1^\perp}$]{.rouge}, i.e. the inertia of the
@@ -484,7 +489,7 @@ where $\sigma^2_k$ stands for the k$^{th}$ eigen value.
     of coordinates on $\boldsymbol{u_1}$ for each individual is
 
 $$\begin{pmatrix} \class{alea}{x_{1}}^\top \boldsymbol{u_1} \\ \vdots \\ \class{alea}{x_{n}}^\top \boldsymbol{u_1} \end{pmatrix} = X  \boldsymbol{u_1}.$$
-:::
+::::
 
 :::: {.column width="45%"}
 ### Maximize $I_{u_1^\perp}$
@@ -495,18 +500,24 @@ under the constraint $\lVert\boldsymbol{u_1}\rVert$ \begin{align}
         & =   \boldsymbol{u_1}^\top \left (\frac{1}{n} X^\top X \right)  \boldsymbol{u_1}
 \end{align}
 
-::: panel-tabset
+
+::::
+
+:::
+
+
+## Formally
+
+
+::::: panel-tabset
 #### Remark
 
 -   $\frac{1}{n} X^\top X$ is the covariance matrix, often written as
-    $ X^\top W  X$ ($W$ is a diagonal matrix, with each diagonal entry
+    $X^\top W  X$ ($W$ is a diagonal matrix, with each diagonal entry
     equal to $1/n$, $W_{ii}$ is the weight assigned to observation $i$).
 
--   $X^\top W X$ is [symmetric]{.rouge} and [positive definite]{.rouge},
-    therefore [diagonalizable]{.rouge}.
-
--   There exists a unitary matrix $P$ with $P^\top P = I_p,$ and a
-    diagonal matrix $D$ such that $$X^\top W X = P D P^\top.$$
+-   Considering the SVD of $X$, we have $X= P^\intercal D Q$ and so 
+       $$\frac{1}{n} X^\top  X =  X^\top W X = Q^\intercal D^2 Q.$$
 
 -   The diagonal entries of $D$ are the [eigenvalues, all
     positive,]{.rouge} of $X^\top W X$, arranged in decreasing order,
@@ -519,18 +530,15 @@ under the constraint $\lVert\boldsymbol{u_1}\rVert$ \begin{align}
 
 $\boldsymbol{b}$ is an orthonormal basis, the basis formed by the
 eigenvectors of $X^\top W X$.
-:::
-::::
-::::::
 
-[This is generally the implemented version.]{.rouge}
+:::::
 
 
 
 
+## Identify $\boldsymbol{u_1}$ - Formalization
 
-
-:::
+:::::: columns
 
 ::: {.column width="45%" }
 
@@ -539,7 +547,9 @@ eigenvectors of $X^\top W X$.
 
 As we are mainly interesting in $Q$, $d\times d$ matrix (not $P$ the $n\times n$ matrix) and the square of the eigen values, it is more efficient to consider the SVD of $\Sigma$ directly.
 
+:::
 
+::: {.column width="45%" }
 
 ### Geometrically
 
@@ -553,6 +563,7 @@ $$ \sum_{j=1}^d \sqrt{\sigma_j^2} q_{kj} v_j = \begin{pmatrix} \sigma_1 q_{1j}, 
 
 ::::
 
+
 ## Palmer Penguins example
 
 ```{r key_ingredients}
@@ -562,7 +573,7 @@ $$ \sum_{j=1}^d \sqrt{\sigma_j^2} q_{kj} v_j = \begin{pmatrix} \sigma_1 q_{1j}, 
 scale2 <- function(x, na.rm = FALSE) (x - mean(x, na.rm = na.rm)) / ( sqrt((length(x)-1) / length(x)) *sd(x, na.rm) )
 
 X <- penguins |> 
-  mutate(year = as.factor(year))|>  ## year willnot be considered as numerical variable
+  mutate(year = as.factor(year))|>  ## year will not be considered as numerical variable
   select(where(is.numeric)) |>      ## select all numeric columns
   mutate_all(list(scale2))          ## and scale them
 
@@ -572,15 +583,11 @@ d <- ncol(X)
 X_mat <- X |>  as.matrix()          ## the data point matrix 
 X_norm_mat <- 1/sqrt(n) * X_mat     ## the version considered to get rid of the number of individuals
 
-X_mat_trace <- sum( diag(t(X_mat)%*% X_mat) )  # n d 
-X_norm_mat_trace <- sum( diag( t( X_norm_mat)%*% X_norm_mat ) )  # d
+X_norm_mat_trace <- sum( diag( t( X_norm_mat)%*% X_norm_mat ) )  # the trace of the covariance matrix
 
-penguins_svd <- svd( t(X_mat)%*% X_mat )
 penguins_norm_svd <- svd( t(X_norm_mat)%*% X_norm_mat )
 
 ## eigenvalues
-penguins_eigenvalue <- penguins_svd$d
-sum(penguins_eigenvalue)
 penguins_norm_eigenvalue <- penguins_norm_svd$d
 sum(penguins_norm_eigenvalue)
 ```
@@ -595,7 +602,6 @@ sum(penguins_norm_eigenvalue)
 #| output-location: column
 #| results: hold
 
-penguins_Q <- penguins_svd$u
 penguins_norm_Q <- penguins_norm_svd$u
 
 ## From orginal variable to new basis
@@ -603,8 +609,7 @@ penguins_norm_Q <- penguins_norm_svd$u
 ## t(Q) %*% t(X) for all individuals, or in order to keep individual in lines
 ## X %*% Q 
 
-coord_newbasis <- X_mat %*% (penguins_Q) 
-coord_norm_newbasis <- X_norm_mat %*% (penguins_Q) 
+coord_newbasis <- X_mat %*% (penguins_norm_Q) 
 
 coord_newbasis <- coord_newbasis |> 
   as_tibble() |> 
@@ -637,8 +642,6 @@ I_{C_{12}^\perp} & = \sum_{i=1}^n \left ( \left(x^{C}_{i1)}\right)^2 + \left(x^{
 ```{r overall_penguins quality}
 #| echo: true
 #| results: hold
-
-cat("On plan 12: ", sum(penguins_eigenvalue[1:2]), ".\n")
 cat("Working with the correlation matrix (/n), sum of eigenvalues is ", sum(penguins_norm_eigenvalue[1:2]), ". \n This has to be multiply by the size of the dataset to get inertia:", sum(penguins_norm_eigenvalue[1:2]) * n, "\n")
 
 cat("This is easier to appreciate when expressed  as a propotion of total inertia:",  round(sum(penguins_norm_eigenvalue[1:2])/sum(penguins_norm_eigenvalue)*100,2),"%. \n")
@@ -754,7 +757,10 @@ You can have a look at the book `r Citet(myBib, "husson2011exploratory")` and vi
 # install.packages('FactoShiny')
 library(FactoMineR)
 
-penguins_pca <- PCA(X, ncp = ncol(X), graph = FALSE)
+dta <- penguins |> drop_na() |> select_if(where(is.numeric)) |> select(!year)
+
+
+penguins_pca <- PCA(dta, ncp = ncol(X), graph = FALSE, scale.unit = TRUE)
 
 penguins_pca$eig
 
@@ -764,7 +770,7 @@ penguins_pca$ind
 
 plot(penguins_pca, axes = c(1,2), choix = "ind")
 
-plot(penguins_pca, axes = c(3,4) , choix = "var")
+plot(penguins_pca, axes = c(1,2) , choix = "var")
 
 
 
