@@ -1183,7 +1183,7 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 
 ### Image of  $A$ or Column space of A 
 
-$Im(A) = \left \lbrace y \in \R^d; \exists c\in R^d, y = \sum_{l=1}^d c_l A_{., l} \right \rbrace$ 
+$Im(A) = \left \lbrace y \in \R^n; \exists c\in R^d, y = \sum_{l=1}^d c_l A_{., l} \right \rbrace$ 
 
 [Remarks]{.rouge}  
 
@@ -1265,7 +1265,7 @@ Consider a matrix $A\in\R^{p\times q}$,
 
 * if $rank(A)=q$, there exists a matrix $A_L^{-1}\in\R^{q\times p}$  called **left inverse** $A_{L}^{-1}$, such that $$A_{L}^{-1} A = I_q.$$
 
-* if $rank(A)=q=p$, there exists an inverse $A^{-1}$  and $A_{R}^{-1}=A_{L}^{-1}=$A^{-1}$$
+* if $rank(A)=q=p$, there exists an inverse $A^{-1}$  and $A_{R}^{-1}=A_{L}^{-1}=A^{-1}$
 
 ### Examples
 
