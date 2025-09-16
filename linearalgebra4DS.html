@@ -1212,7 +1212,7 @@ c_1 a_{11} + c_2 a_{12} + \cdots + c_d a_{1d} \cr
 c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 \end{pmatrix} = c_1 A_{.,1} + c_2  A_{.,2} + \cdots + c_d  A_{.,d}\]</span></p>
 <h3 id="image-of-a-or-column-space-of-a">Image of <span class="math inline">\(A\)</span> or Column space of A</h3>
-<p><span class="math inline">\(Im(A) = \left \lbrace y \in \R^d; \exists c\in R^d, y = \sum_{l=1}^d c_l A_{., l} \right \rbrace\)</span></p>
+<p><span class="math inline">\(Im(A) = \left \lbrace y \in \R^n; \exists c\in R^d, y = \sum_{l=1}^d c_l A_{., l} \right \rbrace\)</span></p>
 <p><span class="rouge">Remarks</span></p>
 <ul>
 <li>If <span class="math inline">\(A_{.,1}\)</span> and <span class="math inline">\(A_{,2}\)</span> are linearly dependant, <span class="math inline">\(A_{,1} = \lambda A_{,2}\)</span> and <span class="math inline">\(Ac = ( c_1 \lambda + c_2)  A_{.,2} + \cdots + c_d  A_{.,d}\)</span>. The rank is the minimal number of vector to generate <span class="math inline">\(Im(A)\)</span>, that is the dimension of <span class="math inline">\(Im(A)\)</span>.</li>
@@ -1268,7 +1268,7 @@ c_1 a_{n1} + c_2 a_{n2} + \cdots + c_d a_{nd} \cr
 <ul>
 <li><p>if <span class="math inline">\(rank(A)=p\)</span>, there exists a matrix <span class="math inline">\(A_R^{-1}\in\R^{q\times p}\)</span> called <strong>right inverse</strong> <span class="math inline">\(A_{R}^{-1}\)</span>, such that <span class="math display">\[A A_{R}^{-1} = I_p.\]</span></p></li>
 <li><p>if <span class="math inline">\(rank(A)=q\)</span>, there exists a matrix <span class="math inline">\(A_L^{-1}\in\R^{q\times p}\)</span> called <strong>left inverse</strong> <span class="math inline">\(A_{L}^{-1}\)</span>, such that <span class="math display">\[A_{L}^{-1} A = I_q.\]</span></p></li>
-<li><p>if <span class="math inline">\(rank(A)=q=p\)</span>, there exists an inverse <span class="math inline">\(A^{-1}\)</span> and <span class="math inline">\(A_{R}^{-1}=A_{L}^{-1}=\)</span>A^{-1}$$</p></li>
+<li><p>if <span class="math inline">\(rank(A)=q=p\)</span>, there exists an inverse <span class="math inline">\(A^{-1}\)</span> and <span class="math inline">\(A_{R}^{-1}=A_{L}^{-1}=A^{-1}\)</span></p></li>
 </ul>
 </div>
 <div id="tabset-12-2">
