@@ -457,7 +457,14 @@ Marie-Pierre Etienne
 <section id="multiple-linear-regression-model" class="slide level2">
 <h2>Multiple Linear Regression Model</h2>
 <p><span class="math display">\[Y_{k} = \beta_0 +\beta_1 x_{k}^{1}  + \beta_2 x_{k}^{2} + \ldots +  \beta_p x_{k}^{p}  +  E_{k},\quad E_{k}\overset{ind}{\sim}\mathcal{N}(0, \sigma^2),\]</span></p>
-<p>Where: - <span class="math inline">\(x_{k}^{l}\)</span> is the value of explanatory variable <span class="math inline">\(l\)</span> for observation <span class="math inline">\(k\)</span>, - <span class="math inline">\(k=1,\ldots,n\)</span> is the index of the individual, and <span class="math inline">\(n\)</span> is the total number of individuals, - <span class="math inline">\(\beta_0\)</span> is the intercept, - <span class="math inline">\(\beta_l\)</span> represents the effect of variable <span class="math inline">\(X^{l}\)</span> on the dependent variable, - <span class="math inline">\(\sigma^2\)</span> is the variance.</p>
+<p>Where:</p>
+<ul>
+<li><p><span class="math inline">\(x_{k}^{l}\)</span> is the value of explanatory variable <span class="math inline">\(l\)</span> for observation <span class="math inline">\(k\)</span>,</p></li>
+<li><p><span class="math inline">\(k=1,\ldots,n\)</span> is the index of the individual, and <span class="math inline">\(n\)</span> is the total number of individuals,</p></li>
+<li><p><span class="math inline">\(\beta_0\)</span> is the intercept,</p></li>
+<li><p><span class="math inline">\(\beta_l\)</span> represents the effect of variable <span class="math inline">\(X^{l}\)</span> on the dependent variable,</p></li>
+<li><p><span class="math inline">\(\sigma^2\)</span> is the variance.</p></li>
+</ul>
 <h3 id="equivalent-notation">Equivalent Notation</h3>
 <p><span class="math display">\[Y_{k} \overset{ind}{\sim}\mathcal{N}(\beta_0 +\beta_1 x_{k}^{1}  + \beta_2 x_{k}^{2} + \ldots +  \beta_p x_{k}^{p} , \sigma^2).\]</span></p>
 <h3 id="number-of-parameters">Number of Parameters</h3>
@@ -757,7 +764,7 @@ Dep. Variable:      flipper_length_mm   R-squared:                       0.791
 Model:                            OLS   Adj. R-squared:                  0.790
 Method:                 Least Squares   F-statistic:                     626.3
 Date:                Wed, 24 Sep 2025   Prob (F-statistic):          4.51e-113
-Time:                        07:34:44   Log-Likelihood:                -1090.1
+Time:                        15:46:12   Log-Likelihood:                -1090.1
 No. Observations:                 333   AIC:                             2186.
 Df Residuals:                     330   BIC:                             2198.
 Df Model:                           2                                         
@@ -943,7 +950,7 @@ Dep. Variable:      flipper_length_mm   R-squared:                       0.775
 Model:                            OLS   Adj. R-squared:                  0.773
 Method:                 Least Squares   F-statistic:                     567.4
 Date:                Wed, 24 Sep 2025   Prob (F-statistic):          1.59e-107
-Time:                        07:34:45   Log-Likelihood:                -1103.0
+Time:                        15:46:13   Log-Likelihood:                -1103.0
 No. Observations:                 333   AIC:                             2212.
 Df Residuals:                     330   BIC:                             2223.
 Df Model:                           2                                         
@@ -981,20 +988,92 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
 </div>
 </div>
 </section>
-<section id="quality-of-the-estimation" class="slide level2">
-<h2>Quality of the estimation</h2>
+<section id="theoretical-quality-of-the-prediction" class="slide level2">
+<h2>Theoretical quality of the prediction</h2>
 <h3 id="condidence-interval">Condidence interval</h3>
 <p><span class="math display">\[\hat{\beta} \sim \mathcal{N}(\beta, \sigma^2 \left ( X^\intercal X\right )^{-1} ),\]</span></p>
 <p>So that <span class="math display">\[  \sigma^{-1} \left ( X^\intercal X\right )^{1/2} (\hat{\beta}-\beta) \sim \mathcal{N}(0, I_p)\]</span></p>
 <h3 id="prediction-interval">Prediction interval</h3>
-<p>This the confidence interval for <span class="math inline">\(X \hat{\beta} + E\)</span> <!-- # Diagnostic --></p>
-<!-- ## Diagnosing Multicollinearity -->
-<!--         Eigenvalues, condition number, and rank deficiency -->
-<!--         Variance inflation factors (VIF) -->
-<!-- ## Residual Analysis -->
-<!--         Residuals as vectors -->
-<!-- ## Leverage, Cook’s distance, and influence diagnostics using linear algebra -->
-<!-- # Conclusion  -->
+<p>This the confidence interval for a new observation <span class="math inline">\(i_0,\)</span> with covariate <span class="math inline">\(x_{i_0}^\intercal = (1,  x_{i_0}^1, \ldots,  x_{i_0}^p)^\intercal\)</span>,</p>
+<p><span class="math inline">\(W_{i_0} = x_{i_0}^\intercal \hat{\beta} + E\)</span></p>
+<p><span class="math display">\[W\mathcal{N}(\mu_W, \sigma_W),\]</span> with</p>
+<ul>
+<li><span class="math inline">\(\mu_W = \E(W) = x_{i_0}^\intercal {\beta}\)</span> and <span class="math inline">\(\Sigma_W  = \sigma^2 x_{i_0}^\intercal (X X^\intercal)^{-1} x_{i_0} +1\)</span></li>
+</ul>
+</section>
+<section id="coefficient-of-determination" class="slide level2">
+<h2>Coefficient of determination</h2>
+<p><span class="math display">\[R^2 = \frac{\norm{X\hat{\beta} - \bar{Y} }^2}{\norm {Y - \bar{Y} }^2}\]</span> It represents the proportion of the toal variance explained by the model.</p>
+<p><span class="care">Remarks</span></p>
+<ul>
+<li><p>Model prediction is precise if <span class="math inline">\(R^2\)</span> is closer to one</p></li>
+<li><p>Adding new variables, increase the span of <span class="math inline">\(X\)</span> and therefore increase <span class="math inline">\(R^2\)</span>. This known as over adjustment. Be careful using <span class="math inline">\(R^2\)</span> because it is defined on the same data use to fit the model.</p></li>
+</ul>
+</section></section>
+<section>
+<section id="overview-of-diagnostic-tools" class="title-slide slide level1 center">
+<h1>Overview of Diagnostic tools</h1>
+
+</section>
+<section id="diagnosing-multicollinearity" class="slide level2">
+<h2>Diagnosing Multicollinearity</h2>
+<h3 id="perfect-multicollinearity">Perfect Multicollinearity</h3>
+<p>If one covariate might be represented as linear combination of the others.</p>
+<p>Example : $X^3= X^1 + 3 X^2 $</p>
+<p>Matrix <span class="math inline">\(X\)</span> is not full rank, and <span class="math inline">\(X^\intercal X\)</span> is not invertible</p>
+<h3 id="imperfect-multicollinearity">Imperfect Multicollinearity</h3>
+<p>If one covariate is highly correlated with some linear combination of the others.</p>
+<p>Example : <span class="math inline">\(X^3= X^1 + 3 X^2 + \nu\)</span> with $a small noise</p>
+<h3 id="consequences">Consequences</h3>
+<p>The variance associated to <span class="math inline">\(\hat{\beta}\)</span> is large or even <span class="math inline">\(\hat{\beta}\)</span> is not uniquely defined</p>
+<h3 id="diagnosis-variance-inflation-factor">Diagnosis : Variance inflation factor</h3>
+<p><span class="math display">\[Var(\hat{\beta_j}) = \frac{\hat{\sigma}^2}}{ \norm{X^j -\bar{X^j}}^2}\frac{1}{1-R^2_j},\]</span> where <span class="math inline">\(R^2_j\)</span> is the determination coefficient of variable <span class="math inline">\(j\)</span> explained by all others.</p>
+</section>
+<section id="solutions-to-multicollinearity" class="slide level2">
+<h2>Solutions to Multicollinearity</h2>
+<ul>
+<li><p>Remove redundant covariates</p></li>
+<li><p>Perform a PCA on the covariates and use Principal components ase covariates</p></li>
+<li><p>Apply regularization techniques like ridge or lasso regression (explore in the smart data program)</p></li>
+</ul>
+</section>
+<section id="other-classical-diagnosis-in-linear-modelling" class="slide level2">
+<h2>Other classical diagnosis in linear modelling</h2>
+<p>To be explored during the lab session :</p>
+<ul>
+<li><p>Check the residuals to check whheter or not there is a structure in the residuals.</p></li>
+<li><p>Cook’s distance to identify atypical individuals</p></li>
+</ul>
+</section></section>
+<section>
+<section id="conclusion" class="title-slide slide level1 center">
+<h1>Conclusion</h1>
+
+</section>
+<section id="linear-algebra-and-data-science" class="slide level2">
+<h2>Linear algebra and Data science</h2>
+<ul>
+<li><p>Linear algebra is the main mathematical tool used in Data science combined with a bit of optimisation</p></li>
+<li><p>Should be at ease with linear algebra concepts</p></li>
+</ul>
+</section>
+<section id="linear-regression" class="slide level2">
+<h2>Linear regression</h2>
+<ul>
+<li><p>This is a fundamental tool for data scientist as the basis of different method</p>
+<ul>
+<li><p>very useful for well designed experiment,</p></li>
+<li><p>the basis of the DL methods, (a perceptron model is mostly a regression model)</p></li>
+<li><p>still central in many studies</p></li>
+</ul></li>
+<li><p>But some limitations, new methods to</p>
+<ul>
+<li><p>to avoid overfitting</p></li>
+<li><p>handle multicolinearity</p></li>
+<li><p>handle non linearity</p></li>
+</ul></li>
+</ul>
+<p><span class="care">A whole program to be discovered during this year. Enjoy!</span></p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
