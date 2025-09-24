@@ -96,10 +96,15 @@ Focus on a quantitative variable $Y$ and interesting in
 $$Y_{k} = \beta_0 +\beta_1 x_{k}^{1}  + \beta_2 x_{k}^{2} + \ldots +  \beta_p x_{k}^{p}  +  E_{k},\quad E_{k}\overset{ind}{\sim}\mathcal{N}(0, \sigma^2),$$
 
 Where:
+
 - $x_{k}^{l}$ is the value of explanatory variable $l$ for observation $k$,
+
 - $k=1,\ldots,n$ is the index of the individual, and $n$ is the total number of individuals,
+
 - $\beta_0$ is the intercept, 
+
 - $\beta_l$ represents the effect of variable $X^{l}$ on the dependent variable,
+
 - $\sigma^2$ is the variance.
 
 ### Equivalent Notation
@@ -571,7 +576,7 @@ print(anova_table)
 ::: 
 
 
-## Quality of the estimation
+## Theoretical quality of the prediction
 
 ### Condidence interval
 
@@ -583,20 +588,101 @@ $$  \sigma^{-1} \left ( X^\intercal X\right )^{1/2} (\hat{\beta}-\beta) \sim \ma
 
 ### Prediction interval
 
-This the confidence interval for $X \hat{\beta} + E$
-<!-- # Diagnostic -->
+This the confidence interval for a new observation $i_0,$  with covariate $x_{i_0}^\intercal = (1,  x_{i_0}^1, \ldots,  x_{i_0}^p)^\intercal$,
 
-<!-- ## Diagnosing Multicollinearity -->
-<!--         Eigenvalues, condition number, and rank deficiency -->
-<!--         Variance inflation factors (VIF) -->
+$W_{i_0} = x_{i_0}^\intercal \hat{\beta} + E$
 
-<!-- ## Residual Analysis -->
-<!--         Residuals as vectors -->
+$$W\mathcal{N}(\mu_W, \sigma_W),$$ 
+with
 
-<!-- ## Leverage, Cook’s distance, and influence diagnostics using linear algebra -->
+* $\mu_W = \E(W) = x_{i_0}^\intercal {\beta}$ and 
+$\Sigma_W  = \sigma^2 x_{i_0}^\intercal (X X^\intercal)^{-1} x_{i_0} +1$
 
-<!-- # Conclusion  -->
 
+## Coefficient of determination
+
+$$R^2 = \frac{\norm{X\hat{\beta} - \bar{Y} }^2}{\norm {Y - \bar{Y} }^2}$$
+It represents the proportion of the toal variance explained by the model. 
+
+[Remarks]{.care}
+
+* Model prediction is precise  if $R^2$ is closer to one
+
+* Adding new variables, increase the span of $X$ and therefore increase $R^2$. This known as over adjustment. Be careful using $R^2$ because it is defined on the same data use to fit the model.
+
+
+
+# Overview of Diagnostic tools
+
+## Diagnosing Multicollinearity
+
+### Perfect Multicollinearity 
+If one covariate might be represented as linear combination of the others. 
+
+Example : $X^3= X^1 + 3 X^2 $
+
+Matrix $X$ is not full rank, and $X^\intercal X$ is not invertible 
+
+### Imperfect Multicollinearity 
+If one covariate is highly correlated with some linear combination of the others. 
+
+Example : $X^3= X^1 + 3 X^2 + \nu$ with $\nu a small noise
+
+### Consequences 
+
+The variance associated to $\hat{\beta}$ is large or even $\hat{\beta}$ is not uniquely defined
+
+### Diagnosis : Variance inflation factor
+
+$$Var(\hat{\beta_j}) = \frac{\hat{\sigma}^2}}{ \norm{X^j -\bar{X^j}}^2}\frac{1}{1-R^2_j},$$
+where $R^2_j$ is the determination coefficient of variable $j$ explained by all others.
+
+
+## Solutions to  Multicollinearity
+
+* Remove redundant covariates
+
+* Perform a PCA on the covariates and use Principal components ase covariates
+
+* Apply regularization techniques like ridge or lasso regression (explore in the smart data program)
+
+
+## Other classical diagnosis in linear modelling 
+
+To be explored during the lab session : 
+
+* Check the residuals to check whheter or not there is a structure in the residuals.
+
+* Cook's distance to identify atypical individuals
+
+
+# Conclusion
+
+## Linear algebra and Data science
+
+* Linear algebra is the main mathematical tool used in Data science combined with a bit of optimisation
+
+* Should be at ease with linear algebra concepts
+
+## Linear regression 
+
+* This is a fundamental tool for data scientist as the basis of different method
+
+   - very useful for well designed experiment,
+   
+   - the basis of the DL methods, (a perceptron model is mostly a regression model)
+   
+   - still central in many studies
+
+* But some limitations, new methods to 
+
+   - to avoid overfitting
+   
+   - handle multicolinearity
+   
+   - handle non linearity
+
+[A whole program to be discovered during this year. Enjoy!]{.care}
 
 ```{r ggplot_back, echo = FALSE, eval = TRUE}
 ggplot <- function(...) ggplot2::ggplot(...) 
