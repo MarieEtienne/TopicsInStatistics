@@ -41,10 +41,6 @@ library(reticulate)
 library(tidyverse)
 ```
 
-# ```{r xaringanExtra-share-again, echo=FALSE}
-# xaringanExtra::use_share_again()
-# ```
-
 ```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
 BibOptions(check.entries = FALSE,
            bib.style = "authoryear",
@@ -116,7 +112,7 @@ $$Y_{k} \overset{ind}{\sim}\mathcal{N}(\beta_0 +\beta_1 x_{k}^{1}  + \beta_2 x_{
 - 1 parameter for the variance $\sigma^2$ (the noise).
 
 
-## Sous forme matricielle
+## Matricial form
  $$\bf{Y = X\beta + E}$$
 
 $$Y=\begin{pmatrix}
@@ -281,7 +277,9 @@ Then $Q_1, \cdots, Q_k$ are independently distributed as  $\chi^2$ with $r_1, \c
 ### Useful Application
 
 Consider $P$ the projector on some subspace $V \subset \R^n$ of dimension $p$, so that $P=P^\intercal$ and $P^2=P$. 
+
 * $(X-PX) \perp PX$, since $P (X-PX) = PX - P^2 X = 0,$
+
 * \begin{align}
  X^\intercal X & = \left ((X-PX) + PX \right)^\intercal  \left ((X-PX) + PX \right) = (X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX) +  (X-PX)^\intercal  PX + (PX)^\intercal (X-PX)\cr
   & =(X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX),
@@ -573,9 +571,9 @@ print(anova_table)
 ::: 
 
 
-### Quality of the estimation
+## Quality of the estimation
 
-## Condidence interval
+### Condidence interval
 
 $$\hat{\beta} \sim \mathcal{N}(\beta, \sigma^2 \left ( X^\intercal X\right )^{-1} ),$$
 
@@ -583,9 +581,9 @@ So that
 $$  \sigma^{-1} \left ( X^\intercal X\right )^{1/2} (\hat{\beta}-\beta) \sim \mathcal{N}(0, I_p)$$
 
 
-## Prediction interval
+### Prediction interval
 
- 
+This the confidence interval for $X \hat{\beta} + E$
 <!-- # Diagnostic -->
 
 <!-- ## Diagnosing Multicollinearity -->
