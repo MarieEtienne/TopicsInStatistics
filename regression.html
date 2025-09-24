@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Marie-Pierre Etienne">
-  <meta name="dcterms.date" content="2025-09-16">
+  <meta name="dcterms.date" content="2025-09-24">
   <title>The Topics In Statistics Companion website ! – Linear Regression</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -406,7 +406,7 @@ Marie-Pierre Etienne
     </div>
 </div>
 
-  <p class="date">2025-09-16</p>
+  <p class="date">2025-09-24</p>
 </section>
 <section class="slide level2">
 
@@ -418,11 +418,6 @@ Marie-Pierre Etienne
 \]</span> </p>
 </div>
 </section>
-<section id="r-xaringanextra-share-again-echofalse-xaringanextrause_share_again" class="title-slide slide level1 center">
-<h1><code>{r xaringanExtra-share-again, echo=FALSE} # xaringanExtra::use_share_again() #</code></h1>
-
-</section>
-
 <section>
 <section id="introduction" class="title-slide slide level1 center">
 <h1>Introduction</h1>
@@ -471,8 +466,8 @@ Marie-Pierre Etienne
 <li>1 parameter for the variance <span class="math inline">\(\sigma^2\)</span> (the noise).</li>
 </ul>
 </section>
-<section id="sous-forme-matricielle" class="slide level2">
-<h2>Sous forme matricielle</h2>
+<section id="matricial-form" class="slide level2">
+<h2>Matricial form</h2>
 <p><span class="math display">\[\bf{Y = X\beta + E}\]</span></p>
 <p><span class="math display">\[Y=\begin{pmatrix}
 Y_{1}\\
@@ -649,10 +644,14 @@ E_{n}\\
 </div>
 </div>
 <h3 id="useful-application">Useful Application</h3>
-<p>Consider <span class="math inline">\(P\)</span> the projector on some subspace <span class="math inline">\(V \subset \R^n\)</span> of dimension <span class="math inline">\(p\)</span>, so that <span class="math inline">\(P=P^\intercal\)</span> and <span class="math inline">\(P^2=P\)</span>. * <span class="math inline">\((X-PX) \perp PX\)</span>, since <span class="math inline">\(P (X-PX) = PX - P^2 X = 0,\)</span> * <span class="math display">\[\begin{align}
+<p>Consider <span class="math inline">\(P\)</span> the projector on some subspace <span class="math inline">\(V \subset \R^n\)</span> of dimension <span class="math inline">\(p\)</span>, so that <span class="math inline">\(P=P^\intercal\)</span> and <span class="math inline">\(P^2=P\)</span>.</p>
+<ul>
+<li><p><span class="math inline">\((X-PX) \perp PX\)</span>, since <span class="math inline">\(P (X-PX) = PX - P^2 X = 0,\)</span></p></li>
+<li><p><span class="math display">\[\begin{align}
 X^\intercal X &amp; = \left ((X-PX) + PX \right)^\intercal  \left ((X-PX) + PX \right) = (X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX) +  (X-PX)^\intercal  PX + (PX)^\intercal (X-PX)\cr
-  &amp; =(X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX),
-  \end{align}\]</span> and <span class="math inline">\(rank(P^\intercal P)=p\)</span> <span class="math inline">\(rank((I-P)^\intercal (I-P))=n-p,\)</span> so that <span class="math display">\[\norm{PX}^2 \sim \chi^2(p), \norm{X-PX}^2 \sim \chi^2(n-p),  \quad \norm{PX}^2 \indep  \norm{X-PX}^2.\]</span></p>
+&amp; =(X-PX)^\intercal(X-PX) +  (PX)^\intercal (PX),
+\end{align}\]</span> and <span class="math inline">\(rank(P^\intercal P)=p\)</span> <span class="math inline">\(rank((I-P)^\intercal (I-P))=n-p,\)</span> so that <span class="math display">\[\norm{PX}^2 \sim \chi^2(p), \norm{X-PX}^2 \sim \chi^2(n-p),  \quad \norm{PX}^2 \indep  \norm{X-PX}^2.\]</span></p></li>
+</ul>
 </section></section>
 <section>
 <section id="statistical-inference" class="title-slide slide level1 center">
@@ -757,8 +756,8 @@ X^\intercal Y &amp; = X^\intercal X\hat{\beta}\cr
 Dep. Variable:      flipper_length_mm   R-squared:                       0.791
 Model:                            OLS   Adj. R-squared:                  0.790
 Method:                 Least Squares   F-statistic:                     626.3
-Date:                Tue, 16 Sep 2025   Prob (F-statistic):          4.51e-113
-Time:                        13:19:15   Log-Likelihood:                -1090.1
+Date:                Wed, 24 Sep 2025   Prob (F-statistic):          4.51e-113
+Time:                        07:34:44   Log-Likelihood:                -1090.1
 No. Observations:                 333   AIC:                             2186.
 Df Residuals:                     330   BIC:                             2198.
 Df Model:                           2                                         
@@ -943,8 +942,8 @@ Length: 333, dtype: float64</code></pre>
 Dep. Variable:      flipper_length_mm   R-squared:                       0.775
 Model:                            OLS   Adj. R-squared:                  0.773
 Method:                 Least Squares   F-statistic:                     567.4
-Date:                Tue, 16 Sep 2025   Prob (F-statistic):          1.59e-107
-Time:                        13:19:16   Log-Likelihood:                -1103.0
+Date:                Wed, 24 Sep 2025   Prob (F-statistic):          1.59e-107
+Time:                        07:34:45   Log-Likelihood:                -1103.0
 No. Observations:                 333   AIC:                             2212.
 Df Residuals:                     330   BIC:                             2223.
 Df Model:                           2                                         
@@ -981,16 +980,14 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
 </div>
 </div>
 </div>
-<h3 id="quality-of-the-estimation">Quality of the estimation</h3>
 </section>
-<section id="condidence-interval" class="slide level2">
-<h2>Condidence interval</h2>
+<section id="quality-of-the-estimation" class="slide level2">
+<h2>Quality of the estimation</h2>
+<h3 id="condidence-interval">Condidence interval</h3>
 <p><span class="math display">\[\hat{\beta} \sim \mathcal{N}(\beta, \sigma^2 \left ( X^\intercal X\right )^{-1} ),\]</span></p>
 <p>So that <span class="math display">\[  \sigma^{-1} \left ( X^\intercal X\right )^{1/2} (\hat{\beta}-\beta) \sim \mathcal{N}(0, I_p)\]</span></p>
-</section>
-<section id="prediction-interval" class="slide level2">
-<h2>Prediction interval</h2>
-<!-- # Diagnostic -->
+<h3 id="prediction-interval">Prediction interval</h3>
+<p>This the confidence interval for <span class="math inline">\(X \hat{\beta} + E\)</span> <!-- # Diagnostic --></p>
 <!-- ## Diagnosing Multicollinearity -->
 <!--         Eigenvalues, condition number, and rank deficiency -->
 <!--         Variance inflation factors (VIF) -->
