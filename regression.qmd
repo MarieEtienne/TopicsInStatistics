@@ -504,7 +504,7 @@ where $s$ stands for the species.
 
 ### Model { .smaller}
 
-* Transform into dummies variables:
+* Transform into dummies variables (one hot encoding):
 
 ```{python python_dummies}
 #| echo: true
@@ -595,7 +595,7 @@ $W_{i_0} = x_{i_0}^\intercal \hat{\beta} + E$
 $$W\mathcal{N}(\mu_W, \sigma_W),$$ 
 with
 
-* $\mu_W = \E(W) = x_{i_0}^\intercal {\beta}$ and 
+* $\mu_W = \mathbb{E}(W) = x_{i_0}^\intercal {\beta}$ and 
 $\Sigma_W  = \sigma^2 x_{i_0}^\intercal (X X^\intercal)^{-1} x_{i_0} +1$
 
 
@@ -619,7 +619,7 @@ It represents the proportion of the toal variance explained by the model.
 ### Perfect Multicollinearity 
 If one covariate might be represented as linear combination of the others. 
 
-Example : $X^3= X^1 + 3 X^2 $
+Example : $X^3= X^1 + 3 X^2$
 
 Matrix $X$ is not full rank, and $X^\intercal X$ is not invertible 
 
@@ -634,7 +634,7 @@ The variance associated to $\hat{\beta}$ is large or even $\hat{\beta}$ is not u
 
 ### Diagnosis : Variance inflation factor
 
-$$Var(\hat{\beta_j}) = \frac{\hat{\sigma}^2}}{ \norm{X^j -\bar{X^j}}^2}\frac{1}{1-R^2_j},$$
+$$Var(\hat{\beta_j}) = \frac{\hat{\sigma}^2}{ \norm{X^j -\bar{X^j}}^2}\frac{1}{1-R^2_j},$$
 where $R^2_j$ is the determination coefficient of variable $j$ explained by all others.
 
 
