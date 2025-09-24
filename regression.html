@@ -764,7 +764,7 @@ Dep. Variable:      flipper_length_mm   R-squared:                       0.791
 Model:                            OLS   Adj. R-squared:                  0.790
 Method:                 Least Squares   F-statistic:                     626.3
 Date:                Wed, 24 Sep 2025   Prob (F-statistic):          4.51e-113
-Time:                        15:46:12   Log-Likelihood:                -1090.1
+Time:                        15:56:46   Log-Likelihood:                -1090.1
 No. Observations:                 333   AIC:                             2186.
 Df Residuals:                     330   BIC:                             2198.
 Df Model:                           2                                         
@@ -881,7 +881,7 @@ Length: 333, dtype: float64</code></pre>
 <div class="tab-content">
 <div id="tabset-6-1">
 <ul>
-<li>Transform into dummies variables:</li>
+<li>Transform into dummies variables (one hot encoding):</li>
 </ul>
 <div class="cell columns column-output-location">
 <div class="column">
@@ -950,7 +950,7 @@ Dep. Variable:      flipper_length_mm   R-squared:                       0.775
 Model:                            OLS   Adj. R-squared:                  0.773
 Method:                 Least Squares   F-statistic:                     567.4
 Date:                Wed, 24 Sep 2025   Prob (F-statistic):          1.59e-107
-Time:                        15:46:13   Log-Likelihood:                -1103.0
+Time:                        15:56:46   Log-Likelihood:                -1103.0
 No. Observations:                 333   AIC:                             2212.
 Df Residuals:                     330   BIC:                             2223.
 Df Model:                           2                                         
@@ -998,7 +998,7 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
 <p><span class="math inline">\(W_{i_0} = x_{i_0}^\intercal \hat{\beta} + E\)</span></p>
 <p><span class="math display">\[W\mathcal{N}(\mu_W, \sigma_W),\]</span> with</p>
 <ul>
-<li><span class="math inline">\(\mu_W = \E(W) = x_{i_0}^\intercal {\beta}\)</span> and <span class="math inline">\(\Sigma_W  = \sigma^2 x_{i_0}^\intercal (X X^\intercal)^{-1} x_{i_0} +1\)</span></li>
+<li><span class="math inline">\(\mu_W = \mathbb{E}(W) = x_{i_0}^\intercal {\beta}\)</span> and <span class="math inline">\(\Sigma_W  = \sigma^2 x_{i_0}^\intercal (X X^\intercal)^{-1} x_{i_0} +1\)</span></li>
 </ul>
 </section>
 <section id="coefficient-of-determination" class="slide level2">
@@ -1019,7 +1019,7 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
 <h2>Diagnosing Multicollinearity</h2>
 <h3 id="perfect-multicollinearity">Perfect Multicollinearity</h3>
 <p>If one covariate might be represented as linear combination of the others.</p>
-<p>Example : $X^3= X^1 + 3 X^2 $</p>
+<p>Example : <span class="math inline">\(X^3= X^1 + 3 X^2\)</span></p>
 <p>Matrix <span class="math inline">\(X\)</span> is not full rank, and <span class="math inline">\(X^\intercal X\)</span> is not invertible</p>
 <h3 id="imperfect-multicollinearity">Imperfect Multicollinearity</h3>
 <p>If one covariate is highly correlated with some linear combination of the others.</p>
@@ -1027,7 +1027,7 @@ Residual    14692.753022  330.0         NaN            NaN</code></pre>
 <h3 id="consequences">Consequences</h3>
 <p>The variance associated to <span class="math inline">\(\hat{\beta}\)</span> is large or even <span class="math inline">\(\hat{\beta}\)</span> is not uniquely defined</p>
 <h3 id="diagnosis-variance-inflation-factor">Diagnosis : Variance inflation factor</h3>
-<p><span class="math display">\[Var(\hat{\beta_j}) = \frac{\hat{\sigma}^2}}{ \norm{X^j -\bar{X^j}}^2}\frac{1}{1-R^2_j},\]</span> where <span class="math inline">\(R^2_j\)</span> is the determination coefficient of variable <span class="math inline">\(j\)</span> explained by all others.</p>
+<p><span class="math display">\[Var(\hat{\beta_j}) = \frac{\hat{\sigma}^2}{ \norm{X^j -\bar{X^j}}^2}\frac{1}{1-R^2_j},\]</span> where <span class="math inline">\(R^2_j\)</span> is the determination coefficient of variable <span class="math inline">\(j\)</span> explained by all others.</p>
 </section>
 <section id="solutions-to-multicollinearity" class="slide level2">
 <h2>Solutions to Multicollinearity</h2>
