@@ -24,7 +24,7 @@ This course is specifically tailored for those who are stepping into data scienc
 
 **What You Will Learn**
 
-1. **Linear Surival Kit**:
+1. **Linear Algebra Surival Kit**:
    - Vectors and matrices: Definitions, operations, and properties
    - Systems of linear equations
    - Matrix decomposition and eigenvalues

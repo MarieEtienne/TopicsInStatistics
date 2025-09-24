@@ -168,8 +168,8 @@ countries_comp %>%
 #|eval: false
 
 # library(Factoshiny)
-# PCAshiny(countries_comp)
-# res.PCA<-PCA(countries_comp,quali.sup=c(4,5),graph=FALSE)
+#  PCAshiny(countries_comp)
+# res.PCA<-PCA(countries_comp,quali.sup=c(4,7),graph=FALSE)
 # plot.PCA(res.PCA,choix='var')
 # plot.PCA(res.PCA)
 ```
