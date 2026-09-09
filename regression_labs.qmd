@@ -34,9 +34,7 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-```{r xaringanExtra-share-again, echo=FALSE}
-xaringanExtra::use_share_again()
-```
+
 
 ```{r reference,  include=FALSE, cache=FALSE, eval = TRUE}
 BibOptions(check.entries = FALSE,
