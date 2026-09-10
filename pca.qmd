@@ -348,7 +348,7 @@ Inertia *with respect to an affine subspace $S$* according to metric $M$: $I_S =
 
 
 Huygens theorem states that if $S^G$ stands for  the affine subspace containing $G$ and parallel to $S$ then
-$$I_S = I_{S^G} + d_M^2(a, G),$$
+$$I_G = I_{S} + I_{S^\perp},$$
 where $a$ is the orthogonal projection of $G$ on $S$.
 
 [The affine subspace $S$ which minimizes inertia is $S^G$.]{.rouge}
